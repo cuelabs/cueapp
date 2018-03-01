@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+  app:
+    build:
+      context: app
+      dockerfile: Dockerfile
+    container_name: app_0
+    restart: always
+    ports:
+      - 7000
+    environment:
+      - CUEAPP_VERSION="0.0.1"
+      - CUEAPP_DEVELOPMENT=True
+      - CUEAPP_TESTING=False
+  tests:
+    build:
+      context: app
+      dockerfile: Dockerfile-tests
+    container_name: tests_0
+    environment:
+      - CUEAPP_TESTING=True
+  openresty:
+    container_name: openresty_local_0
+    build: openresty
+      context: openresty
+      dockerfile: Dockerfile-local
+    links:
+      - app
+    ports:
+      - 80:8080
