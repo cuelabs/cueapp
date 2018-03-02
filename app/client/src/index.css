@@ -1,5 +1,74 @@
-body {
+html, body {
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
+  pading: 0;
+  font-family: "Ubuntu", sans-serif;
+  background: #29292D;
+  -webkit-font-smoothing: antialiased; }
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; }
+
+nav {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  background: #29292D;
+  clear: both; }
+
+h1 {
+  box-sizing: border-box;
+  font-size: calc(56px + (56 - 32) * (100vw - 240px)/(960-240));
+  font-family: "Ubuntu", sans-serif;
+  padding-top: calc(16px + (16 - 8) * (100vw - 240px)/(960-240));
+  padding-bottom: calc(16px + (16 - 8) * (100vw - 240px)/(960-240));
+  font-weight: 700;
+  color: #7F1AE5;
+  margin-left: calc(16px + (16 - 8) * (100vw - 240px)/(960-240)); }
+
+main {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(480px + (480 - 320) * (100vw - 240px)/(960-240));
+  top: calc(50vh - ((480px + (480 - 320) * (100vw - 240px)/(960-240)) / 2)); }
+
+button {
+  margin-top: calc(40px + (40 - 32) * (100vw - 240px)/(960-240));
+  margin-bottom: calc(40px + (40 - 32) * (100vw - 240px)/(960-240));
+  padding: calc(16px + (16 - 8) * (100vw - 240px)/(960-240));
+  font-size: calc(32px + (40 - 16) * (100vw - 240px)/(960-240));
+  font-family: "Ubuntu", sans-serif;
+  background: none;
+  color: #F5F5F5;
+  min-width: 320px;
+  max-width: 560px;
+  width: 66vw;
+  border-radius: 6px;
+  transition: all .2s ease-out;
+  outline: none; }
+
+button:hover {
+  cursor: pointer;
+  box-shadow: 10px 10px 37px 5px rgba(0, 0, 0, 0.4);
+  transition: all .2s easeInOutCirc;
+  transform: translateX(-2px);
+  ransform: translateY(-2px); }
+
+button:active {
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.1);
+  transform: translateX(0px);
+  transform: translateY(0px);
+  transition: all .2s easeInOutCirc; }
+
+/*# sourceMappingURL=index.css.map */
