@@ -1,0 +1,96 @@
+$cue-header-font-size: calc(56px + (56 - 32) * (100vw - 240px)/(960-240));
+$cue-button-font-size: calc(32px + (40 - 16) * (100vw - 240px)/(960-240));
+$cue-font-primary: 'Ubuntu', sans-serif;
+$cue-font-secondary: 'Helvetica', sans-serif;
+$cue-black: #29292D;
+$cue-white: #F5F5F5;
+$cue-blue: cornflowerblue;
+$cue-purple: #7F1AE5;
+$cue-spacing-tiny: calc(2px + (2 - 1) * (100vw - 240px)/(960-240));
+$cue-spacing-half: calc(8px + (8 - 4) * (100vw - 240px)/(960-240));
+$cue-spacing: calc(16px + (16 - 8) * (100vw - 240px)/(960-240));
+$cue-spacing-bigger: calc(40px + (40 - 32) * (100vw - 240px)/(960-240));
+$cue-main-height: calc(480px + (480 - 320) * (100vw - 240px)/(960-240));
+$cue-main-offset-top: calc(50vh - ((480px + (480 - 320) * (100vw - 240px)/(960-240)) / 2));
+
+html, body {
+  margin: 0;
+  pading: 0;
+  font-family: $cue-font-primary;
+  background: $cue-black;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+nav {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  background: $cue-black;
+  clear: both;
+}
+
+h1 {
+  box-sizing: border-box;
+  font-size: $cue-header-font-size;
+  font-family: $cue-font-primary;
+  padding-top: $cue-spacing;
+  padding-bottom: $cue-spacing;
+  font-weight: 700;
+  color: $cue-purple;
+  margin-left: $cue-spacing; 
+}
+
+main {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: $cue-main-height;
+  top: $cue-main-offset-top;
+}
+
+button {
+  margin-top: $cue-spacing-bigger;
+  margin-bottom: $cue-spacing-bigger;
+  padding: $cue-spacing;
+  font-size: $cue-button-font-size;
+  font-family: $cue-font-primary;
+  background: none;
+  color: $cue-white;
+  min-width: 320px;
+  max-width: 560px;
+  width: 66vw;
+  border-radius: 6px;
+  transition: all .2s ease-out;
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+  box-shadow: 10px 10px 37px 5px rgba(0,0,0,0.4);
+  transition: all .2s easeInOutCirc;
+  transform: translateX(-2px);
+  ransform: translateY(-2px);
+}
+
+button:active {
+  box-shadow: 0px 0px 20px 5px rgba(0,0,0,.1);
+  transform: translateX(0px);
+  transform: translateY(0px);
+  transition: all .2s easeInOutCirc;
+}
+
