@@ -1,17 +1,20 @@
-$cue-header-font-size: calc(56px + (56 - 32) * (100vw - 240px)/(960-240));
-$cue-button-font-size: calc(32px + (40 - 16) * (100vw - 240px)/(960-240));
 $cue-font-primary: 'Ubuntu', sans-serif;
 $cue-font-secondary: 'Helvetica', sans-serif;
 $cue-black: #29292D;
 $cue-white: #F5F5F5;
-$cue-blue: cornflowerblue;
 $cue-purple: #7F1AE5;
-$cue-spacing-tiny: calc(2px + (2 - 1) * (100vw - 240px)/(960-240));
-$cue-spacing-half: calc(8px + (8 - 4) * (100vw - 240px)/(960-240));
-$cue-spacing: calc(16px + (16 - 8) * (100vw - 240px)/(960-240));
-$cue-spacing-bigger: calc(40px + (40 - 32) * (100vw - 240px)/(960-240));
-$cue-main-height: calc(480px + (480 - 320) * (100vw - 240px)/(960-240));
-$cue-main-offset-top: calc(50vh - ((480px + (480 - 320) * (100vw - 240px)/(960-240)) / 2));
+$cue-shadow: #222225;
+$cue-brighter: #2C2C30;
+$cue-nav-height: 16vh;
+$cue-logo-font-size: calc(56px + (56 - 24) * (100vw - 360px)/(960-360));
+$cue-button-font-size: calc(32px + (32 - 16) * (100vw - 360px)/(960-360));
+$cue-button-width: calc(296px + (592 - 296) * (100vw - 360px)/(960-360));
+$cue-input-width: calc(256px + (480 - 256) * (100vw - 360px)/(960-360));
+$cue-input-height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
+$negative-cue-input-height: calc((32px + (56 - 32) * (100vw - 360px)/(960-360)) * -1);
+$cue-input-font-size: calc(16px + (40 - 20) * (100vw - 360px)/(960-360));
+$cue-logo-offset-left: 1.3vw;
+$cue-logo-offset-top: 1.3vw;
 
 html, body {
   margin: 0;
@@ -35,48 +38,137 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin: 0 auto;
+  height: $cue-nav-height;
   width: 100%;
   background: $cue-black;
   clear: both;
+  z-index: 2;
+}
+
+nav > div {
+  height: 100%;
+  width: 200px;
+  background: $cue-black;
+  position: relative;
+  left: 20vw;
 }
 
 h1 {
   box-sizing: border-box;
-  font-size: $cue-header-font-size;
+  font-size: $cue-logo-font-size;
   font-family: $cue-font-primary;
-  padding-top: $cue-spacing;
-  padding-bottom: $cue-spacing;
   font-weight: 700;
+  position: absolute;
+  top: $cue-logo-offset-top;
+  left: $cue-logo-offset-left;
+  margin-top: -6px;
   color: $cue-purple;
-  margin-left: $cue-spacing; 
 }
 
 main {
-  position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  height: $cue-main-height;
-  top: $cue-main-offset-top;
+  height: 66vh;
+  z-index: 5;
+}
+
+.page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page.home {
+  justify-content: space-around;
+}
+
+.page.join {
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  color: $cue-white;
+}
+
+h1 > a {
+  color: $cue-purple;
+}
+
+input {
+  width: $cue-input-width;
+  height: $cue-input-height;
+  margin-top: -4vh;
+  font-family: $cue-font-secondary;
+  border: 1px solid rgba(256, 256, 256, .1);
+  border-radius: 4px;
+  text-indent: 4px;
+  background-color: $cue-brighter;
+  color: $cue-white;
+  font-size: $cue-input-font-size;
+  outline: none;
+  z-index: 7;
+}
+
+.search-results {
+  transform: translateY($negative-cue-input-height);
+  height: $cue-input-height;
+  margin: 0 auto;
+  width: 100%;
+  background: $cue-purple;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  transition: all .1s ease;
+  opacity: 0;
+  z-index: 5;
+}
+
+.search-results.show {
+  height: auto;
+  min-height: $cue-input-height;
+  transform: translateY(0);
+  transition: all .1s ease;
+  opacity: 1;
+}
+
+.search-result {
+  margin: 0 auto;
+  height: $cue-input-height;
+  width: calc(100% - 8px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: $cue-white;
+}
+
+.search-result-event-title {
+  font-size: $cue-input-font-size;
+  font-family: $cue-font-secondary;
 }
 
 button {
-  margin-top: $cue-spacing-bigger;
-  margin-bottom: $cue-spacing-bigger;
-  padding: $cue-spacing;
+  background: none;
   font-size: $cue-button-font-size;
   font-family: $cue-font-primary;
-  background: none;
   color: $cue-white;
-  min-width: 320px;
-  max-width: 560px;
-  width: 66vw;
+  width: $cue-button-width;
+  padding: 2.7vh 0;
   border-radius: 6px;
   transition: all .2s ease-out;
   outline: none;
+}
+
+button:nth-child(1) {
+  margin-bottom: -4vh;
+}
+
+button:nth-child(2) {
+  margin-top: -4vh;
 }
 
 button:hover {
@@ -85,12 +177,34 @@ button:hover {
   transition: all .2s easeInOutCirc;
   transform: translateX(-2px);
   transform: translateY(-2px);
+  background: rgba(256, 256, 256, .01);
 }
 
 button:active {
-  box-shadow: 0px 0px 20px 5px rgba(0,0,0,.1);
+  box-shadow: 0px 0px 20px 5px rgba(0,0,0,.09);
   transform: translateX(0px);
   transform: translateY(0px);
   transition: all .2s easeInOutCirc;
+}
+
+@media screen and (max-width: 400px) {
+  h1 {
+    transform: translateY(.2vw);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  h1 {
+    transform: translateX(-.1vw);
+  }
+  input {
+    margin-top: -6vh;
+  }
+}
+
+@media screen and (min-width: 401px) {
+  input {
+    margin-top: -4vh;
+  }
 }
 

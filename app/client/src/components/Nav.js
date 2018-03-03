@@ -4,6 +4,7 @@ import Logo from './Logo'
 const Nav = () => (
   <nav>
     <Logo />
+    <div />
   </nav>
 )
 
