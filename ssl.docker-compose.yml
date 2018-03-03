@@ -12,24 +12,13 @@ services:
       - CUEAPP_VERSION="0.0.1"
       - CUEAPP_DEVELOPMENT=True
       - CUEAPP_TESTING=False
-  #tests:
-  #  build:
-  #    context: app
-  #   dockerfile: Dockerfile-tests
-  #  container_name: tests_0
-  #  environment:
-  #    - CUEAPP_TESTING=True
-  auth:
-    container_name: auth_0
-    build: auth
-    expose:
-      - 4180
-  openresty:
-    container_name: openresty_local_0
+  openresty-ssl:
+    container_name: openresty_0
     build:
       context: openresty
-      dockerfile: Dockerfile-local
+      dockerfile: Dockerfile-ssl
     links:
       - app
     ports:
       - 80:80
+      - 443:443

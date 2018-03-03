@@ -1,0 +1,8 @@
+FROM openresty/openresty:alpine
+MAINTAINER 'Leland Later'
+RUN apk add --no-cache curl ca-certficates wget
+RUN mkdir -p /data/letsencrypt /etc/letsencrypt
+COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
+RUN rm /etc/nginx/conf.d/default.conf
+COPY simple.webelk.nginx.conf /etc/nginx/conf.d/
+COPY proxy_params /etc/nginx/proxy_params
