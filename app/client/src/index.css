@@ -71,6 +71,15 @@ a {
 h1 > a {
   color: #7F1AE5; }
 
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; }
+
+form > label {
+  color: #F5F5F5; }
+
 input {
   width: calc(256px + (480 - 256) * (100vw - 360px)/(960-360));
   height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
@@ -119,14 +128,23 @@ input {
 
 button {
   background: none;
-  font-size: calc(32px + (32 - 16) * (100vw - 360px)/(960-360));
   font-family: "Ubuntu", sans-serif;
   color: #F5F5F5;
-  width: calc(296px + (592 - 296) * (100vw - 360px)/(960-360));
-  padding: 2.7vh 0;
   border-radius: 6px;
   transition: all .2s ease-out;
   outline: none; }
+
+.btn-home {
+  font-size: calc(32px + (32 - 16) * (100vw - 360px)/(960-360));
+  width: calc(296px + (592 - 296) * (100vw - 360px)/(960-360));
+  padding: 2.7vh 0; }
+
+.btn-create {
+  font-size: 14px;
+  padding: 8px 16px;
+  align-self: flex-end;
+  height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
+  margin-top: 8px; }
 
 button:nth-child(1) {
   margin-bottom: -4vh; }
