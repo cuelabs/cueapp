@@ -18,12 +18,12 @@ class CreateEvent extends Component {
     }
   }
 
-  render() {
+  render () {
     return (
       <div className='page create'>
         <form onSubmit={this.handleSubmit}>
-          <input 
-            type='text' 
+          <input
+            type='text'
             ref={
               node => {
                 this.eventName = node

@@ -8,11 +8,10 @@ export const handleNewEvent = (name, user) => {
 
     axios.post('http://localhost:8080/events/create', {
       HostId: user,
-      CueId: 99,
       EventName: name
     })
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   }
 }
 
@@ -30,7 +29,7 @@ export const handleSearch = e => {
       axios.get('http://localhost:8080/events/read/all')
         .then(res => {
           const { Data } = res.data
-          
+
           results = Data
             .filter(item => {
               return item.EventName
@@ -45,7 +44,6 @@ export const handleSearch = e => {
             value,
             results
           })
-
         })
         .catch(err => {
           dispatch({
@@ -62,4 +60,3 @@ export const handleSearch = e => {
     }
   }
 }
-
