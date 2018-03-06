@@ -14,7 +14,8 @@ CREATE DATABASE cuetestdb;
 CREATE TABLE events (
   evid SERIAL PRIMARY KEY,
   hostid int not null,
-  cueid int not null UNIQUE,
+  cueid SERIAL,
+  eventname varchar(100) not null,
   createdAt TIMESTAMP DEFAULT NOW(),
   updatedAt TIMESTAMP DEFAULT NOW()
 );

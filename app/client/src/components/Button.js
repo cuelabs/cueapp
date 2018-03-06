@@ -2,10 +2,10 @@ import React from 'react'
 
 const Button = ({
   home,
-  create, 
+  create,
   children
 }) => (
-  <button 
+  <button
     className={
       `${home ? 'btn-home' : ''}
       ${create ? 'btn-create' : ''}`

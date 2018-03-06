@@ -22,7 +22,7 @@ class App extends Component {
             <Route
               path='/join'
               component={JoinEvent} />
-            <Route 
+            <Route
               path='/create'
               component={CreateEvent} />
           </Main>
