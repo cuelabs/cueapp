@@ -5,7 +5,8 @@ $cue-white: #F5F5F5;
 $cue-purple: #7F1AE5;
 $cue-shadow: #222225;
 $cue-brighter: #2C2C30;
-$cue-nav-height: 16vh;
+$cue-nav-height: calc((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px);
+$cue-main-height: calc(100vh - (((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px) * 2));
 $cue-logo-font-size: calc(56px + (56 - 24) * (100vw - 360px)/(960-360));
 $cue-button-font-size: calc(32px + (32 - 16) * (100vw - 360px)/(960-360));
 $cue-button-width: calc(296px + (592 - 296) * (100vw - 360px)/(960-360));
@@ -60,10 +61,11 @@ h1 {
   font-size: $cue-logo-font-size;
   font-family: $cue-font-primary;
   font-weight: 700;
-  position: absolute;
-  top: $cue-logo-offset-top;
-  left: $cue-logo-offset-left;
-  margin-top: -6px;
+  // position: absolute;
+  // top: $cue-logo-offset-top;
+  // left: $cue-logo-offset-left;
+  // margin-top: -6px;
+  margin: 8px;
   color: $cue-purple;
 }
 
@@ -72,7 +74,7 @@ main {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 66vh;
+  height: $cue-main-height;
   z-index: 5;
 }
 
@@ -88,7 +90,7 @@ main {
 }
 
 .page.join {
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 a {
@@ -100,10 +102,21 @@ h1 > a {
   color: $cue-purple;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+}
+
+form > label {
+  color: $cue-white;
+}
+
 input {
   width: $cue-input-width;
   height: $cue-input-height;
-  margin-top: -4vh;
   font-family: $cue-font-secondary;
   border: 1px solid rgba(256, 256, 256, .1);
   border-radius: 4px;
@@ -153,21 +166,32 @@ input {
 
 button {
   background: none;
-  font-size: $cue-button-font-size;
   font-family: $cue-font-primary;
   color: $cue-white;
-  width: $cue-button-width;
-  padding: 2.7vh 0;
   border-radius: 6px;
   transition: all .2s ease-out;
   outline: none;
 }
 
-button:nth-child(1) {
+.btn-home {
+  font-size: $cue-button-font-size;
+  width: $cue-button-width;
+  padding: 2.7vh 0;
+}
+
+.btn-create {
+  font-size: 14px;
+  padding: 8px 16px;
+  align-self: flex-end;
+  height: $cue-input-height;
+  margin-top: 8px;
+}
+
+button.btn-home:nth-child(1) {
   margin-bottom: -4vh;
 }
 
-button:nth-child(2) {
+button.btn-home:nth-child(2) {
   margin-top: -4vh;
 }
 
@@ -195,16 +219,16 @@ button:active {
 
 @media screen and (min-width: 768px) {
   h1 {
-    transform: translateX(-.1vw);
+    transform: translateX(.3vw);
   }
-  input {
-    margin-top: -6vh;
-  }
+  // input {
+  //   margin-top: -6vh;
+  // }
 }
 
 @media screen and (min-width: 401px) {
-  input {
-    margin-top: -4vh;
-  }
+  // input {
+  //   margin-top: -4vh;
+  // }
 }
 

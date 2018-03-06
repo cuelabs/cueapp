@@ -20,7 +20,7 @@ nav {
   justify-content: space-between;
   align-items: flex-start;
   margin: 0 auto;
-  height: 16vh;
+  height: calc((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px);
   width: 100%;
   background: #29292D;
   clear: both;
@@ -38,10 +38,7 @@ h1 {
   font-size: calc(56px + (56 - 24) * (100vw - 360px)/(960-360));
   font-family: "Ubuntu", sans-serif;
   font-weight: 700;
-  position: absolute;
-  top: 1.3vw;
-  left: 1.3vw;
-  margin-top: -6px;
+  margin: 8px;
   color: #7F1AE5; }
 
 main {
@@ -49,7 +46,7 @@ main {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 66vh;
+  height: calc(100vh - (((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px) * 2));
   z-index: 5; }
 
 .page {
@@ -62,7 +59,7 @@ main {
   justify-content: space-around; }
 
 .page.join {
-  justify-content: center; }
+  justify-content: flex-start; }
 
 a {
   text-decoration: none;
@@ -71,10 +68,19 @@ a {
 h1 > a {
   color: #7F1AE5; }
 
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%; }
+
+form > label {
+  color: #F5F5F5; }
+
 input {
   width: calc(256px + (480 - 256) * (100vw - 360px)/(960-360));
   height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
-  margin-top: -4vh;
   font-family: "Helvetica", sans-serif;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
@@ -119,19 +125,28 @@ input {
 
 button {
   background: none;
-  font-size: calc(32px + (32 - 16) * (100vw - 360px)/(960-360));
   font-family: "Ubuntu", sans-serif;
   color: #F5F5F5;
-  width: calc(296px + (592 - 296) * (100vw - 360px)/(960-360));
-  padding: 2.7vh 0;
   border-radius: 6px;
   transition: all .2s ease-out;
   outline: none; }
 
-button:nth-child(1) {
+.btn-home {
+  font-size: calc(32px + (32 - 16) * (100vw - 360px)/(960-360));
+  width: calc(296px + (592 - 296) * (100vw - 360px)/(960-360));
+  padding: 2.7vh 0; }
+
+.btn-create {
+  font-size: 14px;
+  padding: 8px 16px;
+  align-self: flex-end;
+  height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
+  margin-top: 8px; }
+
+button.btn-home:nth-child(1) {
   margin-bottom: -4vh; }
 
-button:nth-child(2) {
+button.btn-home:nth-child(2) {
   margin-top: -4vh; }
 
 button:hover {
@@ -153,12 +168,6 @@ button:active {
     transform: translateY(0.2vw); } }
 @media screen and (min-width: 768px) {
   h1 {
-    transform: translateX(-0.1vw); }
-
-  input {
-    margin-top: -6vh; } }
-@media screen and (min-width: 401px) {
-  input {
-    margin-top: -4vh; } }
+    transform: translateX(0.3vw); } }
 
 /*# sourceMappingURL=index.css.map */

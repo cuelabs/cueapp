@@ -7,6 +7,7 @@ import Nav from './components/Nav'
 import Main from './components/Main'
 import Home from './pages/Home'
 import JoinEvent from './pages/JoinEvent'
+import CreateEvent from './pages/CreateEvent'
 
 class App extends Component {
   render () {
@@ -21,6 +22,9 @@ class App extends Component {
             <Route
               path='/join'
               component={JoinEvent} />
+            <Route 
+              path='/create'
+              component={CreateEvent} />
           </Main>
         </div>
       </Router>
