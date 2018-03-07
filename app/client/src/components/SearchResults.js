@@ -7,9 +7,10 @@ const SearchResults = ({data, display}) => (
   }>
     {
       data.map(event => (
-        <li className='search-result'>
+        <li className='search-result'
+          key={event.EvID}>
           <span className='search-result-event-title'>
-            {event.name}
+            {event.EventName}
           </span>
         </li>
       ))

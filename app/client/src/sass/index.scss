@@ -61,10 +61,6 @@ h1 {
   font-size: $cue-logo-font-size;
   font-family: $cue-font-primary;
   font-weight: 700;
-  // position: absolute;
-  // top: $cue-logo-offset-top;
-  // left: $cue-logo-offset-left;
-  // margin-top: -6px;
   margin: 8px;
   color: $cue-purple;
 }
@@ -221,14 +217,4 @@ button:active {
   h1 {
     transform: translateX(.3vw);
   }
-  // input {
-  //   margin-top: -6vh;
-  // }
 }
-
-@media screen and (min-width: 401px) {
-  // input {
-  //   margin-top: -4vh;
-  // }
-}
-
