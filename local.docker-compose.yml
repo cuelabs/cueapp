@@ -9,9 +9,17 @@ services:
     expose:
       - 6000
     environment:
-      - CUEAPP_VERSION="0.0.1"
-      - CUEAPP_DEVELOPMENT=True
-      - CUEAPP_TESTING=False
+      - CUEAPP_VERSION=0.0.1
+      - CUEAPP_DEVELOPMENT=true
+      - CUEAPP_TESTING=false
+  cueclient:
+    build: cueclient
+    container_name: cueclient_0
+    expose:
+      - 4000
+    environment:
+      - CUECLIENT_VERSION=0.0.1
+      - CUECLIENT_TESTING=true
   #tests:
   #  build:
   #    context: app
