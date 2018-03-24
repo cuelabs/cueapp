@@ -1,5 +1,23 @@
 import axios from 'axios'
 
+export const selectEvent = (eventId, eventName) => {
+  return dispatch => {
+    dispatch({
+      type: 'EVENT_SELECT',
+      eventId,
+      eventName
+    })
+  }
+}
+
+export const closeModal = () => {
+  return dispatch => {
+    dispatch({
+      type: 'MODAL_CLOSE'
+    })
+  }
+}
+
 export const handleNewEvent = (name, user) => {
   return dispatch => {
     dispatch({

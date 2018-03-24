@@ -148,16 +148,68 @@ input {
 .search-result {
   margin: 0 auto;
   height: $cue-input-height;
-  width: calc(100% - 8px);
+  width: calc(100% - 16px);
   display: flex;
   flex-direction: row;
   align-items: center;
   color: $cue-white;
+  padding: 0 8px;
+}
+
+.search-result:hover {
+  background-color: $cue-shadow;
+  cursor: pointer;
 }
 
 .search-result-event-title {
   font-size: $cue-input-font-size;
   font-family: $cue-font-secondary;
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 80vw;
+  left: 10vw;
+  height: 300px;
+  background-color: $cue-brighter;
+  z-index: 10;
+  animation-name: comeInModal;
+  animation-iteration-count: 1;
+  animation-duration: .3s;
+  animation-timing-function: easeInOutCubic;
+  box-shadow: 0px 0px 20px 5px rgba(0,0,0,.09);
+  border-radius: 4px;
+  border: 1px solid $cue-white;
+}
+
+.modal p {
+  text-align: center;
+  font-size: 24px;
+  color: $cue-white;
+}
+
+.modal-inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+
+@keyframes comeInModal {
+  0% {
+    transform: translateY(calc(100vh - 300px));
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 button {
@@ -181,6 +233,12 @@ button {
   align-self: flex-end;
   height: $cue-input-height;
   margin-top: 8px;
+}
+
+.btn-join {
+  font-size: 14px;
+  padding: 8px 16px;
+  height: $cue-input-height;
 }
 
 button.btn-home:nth-child(1) {

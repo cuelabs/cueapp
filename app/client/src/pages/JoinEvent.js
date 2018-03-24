@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SearchResults from '../components/SearchResults'
+import JoinEventModal from '../components/JoinEventModal'
 import { handleSearch } from '../actions'
 
 class JoinEvent extends Component {
@@ -8,8 +9,11 @@ class JoinEvent extends Component {
     const {
       query,
       events,
-      dispatch
+      dispatch,
+      selectedEventId,
+      selectedEventName
     } = this.props
+
     return (
       <div className='page join'>
         <input
@@ -19,8 +23,15 @@ class JoinEvent extends Component {
             dispatch(handleSearch(e))
           }} />
         <SearchResults
-          data={events}
-          display={query !== ''} />
+          display={query !== ''}
+          {...this.props} />
+        { 
+          selectedEventId > -1 
+          && <JoinEventModal 
+                id={selectedEventId}
+                name={selectedEventName}
+                dispatch={dispatch} /> 
+        }
       </div>
     )
   }
