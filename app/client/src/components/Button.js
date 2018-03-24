@@ -3,12 +3,16 @@ import React from 'react'
 const Button = ({
   home,
   create,
-  children
+  children,
+  join,
+  handler
 }) => (
   <button
+    onClick={!!handler && handler}
     className={
       `${home ? 'btn-home' : ''}
-      ${create ? 'btn-create' : ''}`
+      ${create ? 'btn-create' : ''}
+      ${join ? 'btn-join' : ''}`
     }
     type={create ? 'submit' : 'button'}>
     {children}

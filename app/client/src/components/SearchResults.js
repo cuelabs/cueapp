@@ -1,21 +1,28 @@
 import React from 'react'
+import SearchResult from './SearchResult'
 
-const SearchResults = ({data, display}) => (
-  <ul className={
-    `search-results 
-    ${display ? 'show' : ''}`
-  }>
-    {
-      data.map(event => (
-        <li className='search-result'
-          key={event.EvID}>
-          <span className='search-result-event-title'>
+const SearchResults = props => {
+  const {
+    display,
+    events
+  } = props
+  return (
+    <ul className={
+      `search-results 
+      ${display ? 'show' : ''}`
+    }>
+      {
+        events.map(event => (
+          <SearchResult 
+            key={event.EvID}
+            id={event.EvID}
+            {...props}> 
             {event.EventName}
-          </span>
-        </li>
-      ))
-    }
-  </ul>
-)
+          </SearchResult>
+        ))
+      }
+    </ul>
+  )
+}
 
 export default SearchResults

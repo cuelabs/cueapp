@@ -1,6 +1,8 @@
 const initialState = {
   query: '',
   events: [],
+  selectedEventId: -1,
+  selectedEventName: '',
   searchLoading: false,
   userId: 1
 }
@@ -26,6 +28,18 @@ const cueReducer = (state = initialState, action) => {
         query: action.value,
         events: [],
         searchLoading: false
+      }
+    case 'EVENT_SELECT':
+      return {
+        ...state,
+        selectedEventId: action.eventId,
+        selectedEventName: action.eventName
+      }
+    case 'MODAL_CLOSE':
+      return {
+        ...state,
+        selectedEventName: '',
+        selectedEventId: -1
       }
 
     default:
