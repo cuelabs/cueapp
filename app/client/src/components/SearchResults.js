@@ -13,10 +13,10 @@ const SearchResults = props => {
     }>
       {
         events.map(event => (
-          <SearchResult 
+          <SearchResult
             key={event.EvID}
             id={event.EvID}
-            {...props}> 
+            {...props}>
             {event.EventName}
           </SearchResult>
         ))

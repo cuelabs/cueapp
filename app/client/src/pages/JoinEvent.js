@@ -25,12 +25,12 @@ class JoinEvent extends Component {
         <SearchResults
           display={query !== ''}
           {...this.props} />
-        { 
-          selectedEventId > -1 
-          && <JoinEventModal 
-                id={selectedEventId}
-                name={selectedEventName}
-                dispatch={dispatch} /> 
+        {
+          selectedEventId > -1 &&
+          <JoinEventModal
+            id={selectedEventId}
+            name={selectedEventName}
+            dispatch={dispatch} />
         }
       </div>
     )

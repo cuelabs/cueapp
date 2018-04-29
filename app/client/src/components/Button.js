@@ -8,7 +8,7 @@ const Button = ({
   handler
 }) => (
   <button
-    onClick={!!handler && handler}
+    onClick={() => handler ? handler() : null}
     className={
       `${home ? 'btn-home' : ''}
       ${create ? 'btn-create' : ''}

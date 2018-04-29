@@ -1,30 +1,39 @@
 import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { loadUser } from './actions'
 import Nav from './components/Nav'
 import Main from './components/Main'
 import Home from './pages/Home'
 import JoinEvent from './pages/JoinEvent'
 import CreateEvent from './pages/CreateEvent'
+import EventHost from './pages/EventHost'
 
 class App extends Component {
+  componentDidMount () {
+    const { dispatch } = this.props
+    if (window.localStorage.getItem('uid') != null) {
+      dispatch(loadUser(localStorage.getItem('uid')))
+    }
+  }
+
   render () {
+    const { isActive, eventName } = this.props
+    console.log(isActive)
+
     return (
       <Router>
         <div className='container'>
           <Nav />
           <Main>
-            <Route
-              exact path='/'
-              component={Home} />
-            <Route
-              path='/join'
-              component={JoinEvent} />
-            <Route
-              path='/create'
-              component={CreateEvent} />
+            { !isActive
+              ? <Home />
+              : <EventHost title={eventName} />
+            }
           </Main>
         </div>
       </Router>
@@ -32,4 +41,6 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = state => state 
+
+export default connect(mapStateToProps)(App)
