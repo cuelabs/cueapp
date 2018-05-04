@@ -1,20 +1,25 @@
 const initialState = {
   query: '',
   events: [],
+  requests: [],
   selectedEventId: -1,
   selectedEventName: '',
   searchLoading: false,
   userId: -1,
+  displayName: '',
+  isHost: false,
   hostId: -1,
   isActive: false,
   eventId: null,
   eventName: '',
   userAuthorized: false,
   awaitingAuth: false,
-  authPage: null
+  authPage: null,
+  joinRequestPending: false
 }
 
 const cueReducer = (state = initialState, action) => {
+  const { requests } = state
   switch (action.type) {
     case 'AUTH_CODE_REQUEST':
       return {
@@ -35,6 +40,26 @@ const cueReducer = (state = initialState, action) => {
         ...state,
         userId: action.id
       }
+    case 'JOIN_REQUEST': {
+      return {
+        ...state,
+        joinRequestPending: true
+      }
+    }
+    case 'HOST_NEW_REQUEST': {
+      console.log('hello')
+      return {
+        ...state,
+        requests: [
+          ...requests, 
+          {
+            type: 'JOIN_REQUEST',
+            userId: action.userId,
+            username: action.username
+          }
+        ]
+      }
+    }
     case 'LOAD_USER_REQUEST':
       return {
         ...state
@@ -43,6 +68,7 @@ const cueReducer = (state = initialState, action) => {
       return {
         ...state,
         userId: action.id,
+        displayName: action.username,
         isActive: action.isActive,
         eventId: action.eventId,
         eventName: action.eventName

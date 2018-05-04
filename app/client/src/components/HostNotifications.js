@@ -8,10 +8,10 @@ const HostNotifications = ({data}) => (
         data.map(item => (
           <li key={item.id}
             style={{flexDirection: `${item.type === 'JOIN_REQUEST' ? 'column' : 'row'}`}}>
-            <p style={{alignSelf: `${item.type === 'JOIN_REQUEST' ? 'flex-start' : 'center'}`}}>{item.message}</p>
+            <p style={{alignSelf: `${item.type === 'JOIN_REQUEST' ? 'flex-start' : 'center'}`}}>{item.username} wants to join your event!</p>
             {
-              item.type === 'JOIN_REQUEST'
-              && (
+              item.type === 'JOIN_REQUEST' &&
+              (
                 <div className='host-request-options'>
                   <button style={{padding: '2vh'}}>Accept</button>
                   <button style={{padding: '2vh'}}>Reject</button>

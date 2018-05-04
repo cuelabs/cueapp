@@ -4,11 +4,11 @@ import data from '../data'
 import GuestList from '../components/GuestList'
 import HostNotifications from '../components/HostNotifications'
 import HostSettings from '../components/HostSettings'
-import { handleNewEvent, loadEventInfo } from '../actions'
+import { handleNewEvent, loadEventInfo, incomingJoinRequest } from '../actions'
 
 class EventHost extends Component {
   constructor () {
-    super() 
+    super()
     this.state = {
       selected: 0
     }
@@ -16,9 +16,23 @@ class EventHost extends Component {
   }
 
   componentDidMount () {
-    const { dispatch, eventId } = this.props
+    const { dispatch, eventId, isActive, userId, hostId } = this.props
     dispatch(loadEventInfo(eventId))
+  }
 
+  componentWillReceiveProps (nextProps) {
+    const { dispatch, isActive, hostId, userId } = this.props
+    if (nextProps.hostId > this.props.hostId) {
+      console.log('yo')
+      const ws2 = new WebSocket('ws://localhost:8080/ws')
+      ws2.addEventListener('message', e => {
+        const stuff = JSON.parse(e.data)
+        console.log(isActive, hostId, userId)
+        if (isActive && nextProps.hostId === userId) {
+          dispatch(incomingJoinRequest(stuff.user_id, stuff.username))
+        }
+      })
+    }
   }
 
   circleChange (num) {
@@ -29,7 +43,7 @@ class EventHost extends Component {
   }
 
   render () {
-    const { title } = this.props
+    const { title, requests } = this.props
     const { selected } = this.state
     return (
       <div className='page event-host'>
@@ -45,16 +59,16 @@ class EventHost extends Component {
             onClick={() => this.circleChange(2)} />
         </div>
         {
-          selected === 0 
-          && <GuestList users={data.fakeUsers} />
+          selected === 0 &&
+          <GuestList users={data.fakeUsers} />
         }
         {
-          selected === 1 
-          && <HostNotifications data={data.fakeNotifications} />
+          selected === 1 &&
+          <HostNotifications data={requests} />
         }
         {
-          selected === 2 
-          && <HostSettings />
+          selected === 2 &&
+          <HostSettings />
         }
       </div>
     )

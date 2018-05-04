@@ -17,4 +17,4 @@ const GuestList = ({users}) => (
   </div>
 )
 
-export default GuestList 
+export default GuestList
