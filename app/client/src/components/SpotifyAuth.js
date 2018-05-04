@@ -8,13 +8,12 @@ const SpotifyAuth = ({ content }) => (
         () => {
           console.log('hello')
           axios.get('http://localhost:8080/login')
-          .then(res => console.log(res))
-          .catch(err => (console.log('err', err)))
+            .then(res => console.log(res))
+            .catch(err => (console.log('err', err)))
         }
       }>Log in</button>
     }
   </div>
 )
-
 
 export default SpotifyAuth

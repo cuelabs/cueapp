@@ -231,6 +231,29 @@ input {
   align-items: center;
 }
 
+.modal-loading {
+  background-color: $cue-white;
+}
+
+.loader {
+  height: 72px;
+  width: 72px;
+  animation-name: theLoader;
+  animation-duration: 1.5s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
+@keyframes theLoader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 // HOST VIEW
 .event-host {
   width: 90vw;

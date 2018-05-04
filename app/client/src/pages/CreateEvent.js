@@ -36,7 +36,7 @@ class CreateEvent extends Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type='text'
-            onChange={this.handleChange}/>
+            onChange={this.handleChange} />
           <button type='submit'>Create</button>
         </form>
       </div>

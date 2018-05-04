@@ -1,5 +1,9 @@
 import axios from 'axios'
 
+const ws = new WebSocket('ws://localhost:8080/ws')
+
+ws.onopen = () => console.log('ello')
+
 export const initAuth = () => {
   return dispatch => {
     dispatch({
@@ -7,13 +11,13 @@ export const initAuth = () => {
     })
 
     axios.get('http://localhost:8080/auth/code')
-    .then(response => {
-      dispatch({
-        type: 'AUTH_PAGE_LOADED',
-        content: response.data
+      .then(response => {
+        dispatch({
+          type: 'AUTH_PAGE_LOADED',
+          content: response.data
+        })
       })
-    })
-    .catch(err => console.log(err))
+      .catch(err => console.log(err))
   }
 }
 
@@ -26,14 +30,14 @@ export const tempLogin = name => {
     axios.post('http://localhost:8080/users/create', {
       Username: name
     })
-    .then(res => {
-      window.localStorage.setItem('uid', res.data.UserId)
-      dispatch({
-        type: 'TEMP_LOGIN_SUCCESS',
-        id: res.data.UserId
+      .then(res => {
+        window.localStorage.setItem('uid', res.data.UserId)
+        dispatch({
+          type: 'TEMP_LOGIN_SUCCESS',
+          id: res.data.UserId
+        })
       })
-    })
-    .catch(err => console.log(err))
+      .catch(err => console.log(err))
   }
 }
 
@@ -46,29 +50,20 @@ export const loadUser = id => {
     axios.post('http://localhost:8080/users/load', {
       Uid: id
     })
-    .then(res => {
-      console.log('ay', res.data)
-      dispatch({
-        type: 'LOAD_USER_SUCCESS',
-        id: res.data.UserId,
-        isActive: res.data.IsActive,
-        eventId: res.data.EventId ? res.data.EventId : null,
-        eventName: res.data.EventName ? res.data.EventName : null
+      .then(res => {
+        console.log('ay', res.data)
+        dispatch({
+          type: 'LOAD_USER_SUCCESS',
+          id: res.data.UserId,
+          username: res.data.DisplayName,
+          isActive: res.data.IsActive,
+          eventId: res.data.EventId ? res.data.EventId : null,
+          eventName: res.data.EventName ? res.data.EventName : null
+        })
       })
-      // const {
-      //   isActive,
-      //   eventId
-      // } = res
-      // if (isActive) {
-      //   dispatch({
-      //     type: 'LOAD_USER_EVENT',
-      //     name: eventName
-      //   })
-      // }
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 
@@ -81,14 +76,14 @@ export const loadEventInfo = id => {
     axios.post('http://localhost:8080/events/read/one', {
       ID: id
     })
-    .then(res => {
-      dispatch({
-        type: 'LOAD_EVENT_SUCCESS',
-        hostId: res.data.HostID,
-        name: res.data.EventName,
+      .then(res => {
+        dispatch({
+          type: 'LOAD_EVENT_SUCCESS',
+          hostId: res.data.HostID,
+          name: res.data.EventName
+        })
       })
-    })
-    .catch(err => console.log(err))
+      .catch(err => console.log(err))
   }
 }
 
@@ -98,6 +93,31 @@ export const selectEvent = (eventId, eventName) => {
       type: 'EVENT_SELECT',
       eventId,
       eventName
+    })
+  }
+}
+
+export const sendJoinRequest = (userId, username, eventId) => {
+  return dispatch => {
+    dispatch({
+      type: 'JOIN_REQUEST'
+    })
+    ws.send(
+      JSON.stringify({
+        user_id: userId,
+        username: username,
+      }
+    ))
+  }
+}
+
+export const incomingJoinRequest = (userId, username, hostId) => {
+  console.log('this', userId, username)
+  return dispatch => {
+    dispatch({
+      type: 'HOST_NEW_REQUEST',
+      userId,
+      username
     })
   }
 }

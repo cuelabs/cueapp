@@ -5,7 +5,7 @@ import {
   Redirect
 } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { loadUser } from './actions'
+import { loadUser, incomingJoinRequest } from './actions'
 import Nav from './components/Nav'
 import Main from './components/Main'
 import Home from './pages/Home'
@@ -15,15 +15,17 @@ import EventHost from './pages/EventHost'
 
 class App extends Component {
   componentDidMount () {
-    const { dispatch } = this.props
+    const { dispatch, isActive, userId, hostId } = this.props
     if (window.localStorage.getItem('uid') != null) {
       dispatch(loadUser(localStorage.getItem('uid')))
     }
   }
 
   render () {
-    const { isActive, eventName } = this.props
-    console.log(isActive)
+    const { 
+      isActive, 
+      eventName 
+    } = this.props
 
     return (
       <Router>
@@ -41,6 +43,6 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => state 
+const mapStateToProps = state => state
 
 export default connect(mapStateToProps)(App)

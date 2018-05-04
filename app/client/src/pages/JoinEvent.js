@@ -8,10 +8,14 @@ class JoinEvent extends Component {
   render () {
     const {
       query,
+      userId,
+      displayName,
       events,
       dispatch,
       selectedEventId,
-      selectedEventName
+      selectedEventName,
+      joinRequestPending
+
     } = this.props
 
     return (
@@ -29,8 +33,11 @@ class JoinEvent extends Component {
           selectedEventId > -1 &&
           <JoinEventModal
             id={selectedEventId}
+            uid={userId}
             name={selectedEventName}
-            dispatch={dispatch} />
+            dispatch={dispatch}
+            pending={joinRequestPending}
+            uname={displayName} />
         }
       </div>
     )

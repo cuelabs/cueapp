@@ -7,6 +7,7 @@ import { initAuth, tempLogin } from '../actions'
 import spotifyKeys from '../keys'
 import SpotifyAuth from '../components/SpotifyAuth'
 import CreateEvent from '../pages/CreateEvent'
+import JoinEvent from '../pages/JoinEvent'
 import Button from '../components/Button'
 
 class Home extends Component {
@@ -14,11 +15,13 @@ class Home extends Component {
     super()
     this.state = {
       tempUsername: '',
-      create: false
+      create: false,
+      join: false
     }
     this.handleNameChange = this.handleNameChange.bind(this)
     this.login = this.login.bind(this)
     this.createEvent = this.createEvent.bind(this)
+    this.joinEvent = this.joinEvent.bind(this)
   }
 
   handleNameChange (e) {
@@ -35,24 +38,33 @@ class Home extends Component {
     }
   }
 
+  joinEvent () {
+    this.setState({
+      join: true
+    })
+  }
+
   createEvent () {
     this.setState({
-      create: true,
+      create: true
     })
   }
 
   render () {
     const { userId } = this.props
-    const { create } = this.state
+    const { create, join } = this.state
 
     let content
     if (userId > 0) {
       if (create) {
         content = <CreateEvent />
+      } else if (join) {
+        content = <JoinEvent />
       } else {
         content = (
           <div className='page home'>
-            <Button home>
+            <Button home
+              handler={this.joinEvent}>
               Join An Event
             </Button>
             <Button home
@@ -74,7 +86,7 @@ class Home extends Component {
       )
     }
 
-   return content
+    return content
   }
 }
 
