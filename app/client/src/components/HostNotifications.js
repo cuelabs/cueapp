@@ -1,22 +1,35 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { loadRequests } from '../actions'
+import { loadRequests, acceptRequest } from '../actions'
 
 class HostNotifications extends Component {
+  constructor () {
+    super()
+    this.handleAccept = this.handleAccept.bind(this)
+  }
+
   componentDidMount () {
     const { dispatch, eventId } = this.props
     dispatch(loadRequests(eventId))
   }
 
+  handleAccept (id) {
+    const { dispatch, eventId } = this.props
+    dispatch(acceptRequest(id, eventId))
+  }
+
   render () {
     const { guests } = this.props
+    const { data } = this.props
     const pendingGuests = guests
       .filter(g => {
         if (g.IsActive) {
+          return false
         } else {
           return true
         }
       })
+
     return (
       <div className='view'>
         <h3 className='host-view-page-title'>Notifications</h3>
@@ -29,7 +42,8 @@ class HostNotifications extends Component {
                   {item.DisplayName} wants to join your event!
                 </p>
                 <div className='host-request-options'>
-                  <button style={{padding: '2vh'}}>Accept</button>
+                  <button style={{padding: '2vh'}}
+                    onClick={() => this.handleAccept(item.UserID)}>Accept</button>
                   <button style={{padding: '2vh'}}>Reject</button>
                 </div>
               </li>

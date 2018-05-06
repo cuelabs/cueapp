@@ -20,6 +20,8 @@ class App extends Component {
   render () {
     const {
       isActive,
+      hostId,
+      userId,
       eventName
     } = this.props
 

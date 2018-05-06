@@ -76,7 +76,6 @@ func ReadOneEvent (dbCon *sql.DB) http.HandlerFunc {
     if err != nil {
       panic(err)
     }
-
     err, event = db.FindOneEvent(dbCon, eventID.ID)
     if err != nil {
       panic(err)

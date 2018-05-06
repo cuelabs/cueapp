@@ -40,6 +40,5 @@ CREATE TABLE events_cues (
 CREATE TABLE events_users (
   eu_evid INTEGER REFERENCES events(evid),
   eu_uid INTEGER REFERENCES users(uid),
-  pending BOOLEAN DEFAULT TRUE,
   CONSTRAINT events_users_pkey PRIMARY KEY(eu_evid, eu_uid)
 );

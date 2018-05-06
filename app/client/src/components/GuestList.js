@@ -1,20 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { loadRequests } from '../actions'
 
-const GuestList = ({users}) => (
-  <div className='view'>
-    <h3 className='host-view-page-title'>Guest List</h3>
-    <ul className='host-view-page-list'>
-      {
-        users.map(item => (
-          <li key={item.id}>
-            <div className='guest-photo'
-              style={{backgroundImage: `url(${item.img})`}} />
-            <p>{item.name}</p>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-)
+class GuestList extends Component {
+  componentDidMount () {
+    const { dispatch, eventId } = this.props
+    if (this.props.evId && (this.props.evId > eventId)) {
+      dispatch(loadRequests(this.props.evId))
+    } else {
+      dispatch(loadRequests(eventId))
+    }
+  }
 
-export default GuestList
+  render () {
+    const { users } = this.props
+    return (
+      <div className='view'>
+        <h3 className='host-view-page-title'>Guests</h3>
+        <ul className='host-view-page-list'>
+          {
+            users.map(item => (
+              <li key={item.UserID}>
+                <p>{item.DisplayName}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = state => state 
+
+export default connect(mapStateToProps)(GuestList)

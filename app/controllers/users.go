@@ -84,8 +84,9 @@ func LoadUser(dbCon *sql.DB) http.HandlerFunc {
       panic(userErr)
     }
 
-    if userData.IsActive {
-      userErr, userData.EventId, userData.EventName = db.FindCurrentUserEvent(dbCon, userData.UserId)
+    userErr, userData.EventId, userData.EventName = db.FindCurrentUserEvent(dbCon, userData.UserId)
+    if userErr != nil {
+      panic(userErr)
     }
 
     userDataJson, err := json.Marshal(userData)
