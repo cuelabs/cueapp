@@ -18,12 +18,27 @@ type Event struct {
 }
 
 type User struct {
-  UserId int
+  Uid int
+}
+
+type Guest struct {
+  UserID int
+  DisplayName string
+  IsActive bool 
+}
+
+type Guests struct {
+  Data []Guest
 }
 
 type NewUser struct {
   Username string
   CreatedAt time.Time
+}
+
+type NewUserInfo struct {
+  UserID int
+  Username string
 }
 
 type UserData struct {

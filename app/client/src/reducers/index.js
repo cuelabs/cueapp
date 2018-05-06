@@ -1,7 +1,7 @@
 const initialState = {
   query: '',
   events: [],
-  requests: [],
+  guests: [],
   selectedEventId: -1,
   selectedEventName: '',
   searchLoading: false,
@@ -19,7 +19,7 @@ const initialState = {
 }
 
 const cueReducer = (state = initialState, action) => {
-  const { requests } = state
+  const { guests } = state
   switch (action.type) {
     case 'AUTH_CODE_REQUEST':
       return {
@@ -38,7 +38,8 @@ const cueReducer = (state = initialState, action) => {
     case 'TEMP_LOGIN_SUCCESS':
       return {
         ...state,
-        userId: action.id
+        userId: action.id,
+        displayName: action.username
       }
     case 'JOIN_REQUEST': {
       return {
@@ -47,15 +48,14 @@ const cueReducer = (state = initialState, action) => {
       }
     }
     case 'HOST_NEW_REQUEST': {
-      console.log('hello')
       return {
         ...state,
-        requests: [
-          ...requests, 
+        guests: [
+          ...guests,
           {
             type: 'JOIN_REQUEST',
             userId: action.userId,
-            username: action.username
+            DisplayName: action.username
           }
         ]
       }
@@ -72,6 +72,15 @@ const cueReducer = (state = initialState, action) => {
         isActive: action.isActive,
         eventId: action.eventId,
         eventName: action.eventName
+      }
+    case 'LOADING_REQUESTS':
+      return {
+        ...state
+      }
+    case 'LOAD_REQUESTS_SUCCESS':
+      return {
+        ...state,
+        guests: action.data
       }
     case 'NEW_EVENT_SUCCESS':
       return {

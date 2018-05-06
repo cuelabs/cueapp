@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Button from '../components/Button'
-import { Link } from 'react-router-dom'
 import { handleNewEvent } from '../actions'
 
 class CreateEvent extends Component {

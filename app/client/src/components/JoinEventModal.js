@@ -3,12 +3,12 @@ import Button from './Button'
 import { sendJoinRequest, closeModal } from '../actions'
 
 const JoinEventModal = ({
-  name, 
+  name,
   dispatch,
   id,
   uid,
   uname,
-  pending 
+  pending
 }) => {
   if (!pending) {
     return (
@@ -29,7 +29,7 @@ const JoinEventModal = ({
   } else {
     return (
       <div className='modal modal-loading'>
-        <img 
+        <img
           className='loader'
           src='https://www.iconfinder.com/icons/113196/235402/128/raster?token=1525402996-cdcVN2Llh07OXXuQIyhgfNBxqqz8vwlV-pYdTbyWlSATBIYxJNnoN%2BXGxxQU%3D' />
       </div>

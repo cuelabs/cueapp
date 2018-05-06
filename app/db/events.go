@@ -2,8 +2,36 @@ package db
 
 import (
   "database/sql"
-  "fmt"
 )
+
+func FindUsersAtEvent(db *sql.DB, id int) (error, Guests) {
+  query := `
+    SELECT uid, displayName, isActive FROM
+      (SELECT * FROM events_users WHERE eu_evid=$1
+    ) AS e
+    INNER JOIN users
+    ON uid=e.eu_uid
+  `
+
+  allGuests := Guests{}
+  g := Guest{}
+
+  rows, err := db.Query(query, id)
+  if err != nil {
+    return err, allGuests
+  }
+
+  for rows.Next() {
+    rows.Scan(
+      &g.UserID,
+      &g.DisplayName, 
+      &g.IsActive)
+    
+    allGuests.Data = append(allGuests.Data, g)
+  }
+
+  return nil, allGuests
+}
 
 func JoinEventCue(db *sql.DB, evcue *EventIDWithCueID) (error) {
   query := `  
@@ -62,8 +90,6 @@ func InsertEvent(db *sql.DB, event *Event) (error, int) {
     return err, -1
   }
 
-  fmt.Println("New event created!")
-
   return nil, id
 }
 
@@ -96,8 +122,6 @@ func FindOneEvent(db *sql.DB, id int) (error, Event) {
   query := "SELECT * FROM events WHERE evid=$1"
 
   e := Event{}
-
-  fmt.Println(id)
 
   rows, err := db.Query(query, id)
   if err != nil {

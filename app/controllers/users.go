@@ -6,15 +6,41 @@ import (
   "database/sql"
   "time"
   "github.com/mattcarpowich1/cueapp/app/db"
-  // "fmt"
 )
 
 var (
   user db.User 
+  userInfo db.NewUserInfo
   newUser db.NewUser 
   userData db.UserData
+  evId db.EventId
+  guests db.Guests
   userErr error
 )
+
+func ReadAllUsersEvent(dbCon *sql.DB) http.HandlerFunc {
+  fn := func(w http.ResponseWriter, r *http.Request) {
+    userErr = json.NewDecoder(r.Body).Decode(&evId)
+    if userErr != nil {
+      panic(userErr)
+    }
+
+    userErr, guests = db.FindUsersAtEvent(dbCon, evId.ID)
+    if userErr != nil {
+      panic(userErr)
+    }
+
+    guestsJson, err := json.Marshal(guests)
+    if err != nil {
+      panic(err)
+    }
+
+    w.Header().Set("Content-Type", "application/json")
+    w.WriteHeader(http.StatusOK)
+    w.Write(guestsJson)
+  }
+  return fn
+}
 
 // controller for temp login
 func CreateUser(dbCon *sql.DB) http.HandlerFunc {
@@ -25,12 +51,12 @@ func CreateUser(dbCon *sql.DB) http.HandlerFunc {
     }
 
     newUser.CreatedAt = time.Now()
-    userErr, user.UserId = db.InsertUser(dbCon, &newUser)
+    userErr, userInfo = db.InsertUser(dbCon, &newUser)
     if userErr != nil {
       panic(userErr)
     }
 
-    userIdJson, err := json.Marshal(user)
+    userIdJson, err := json.Marshal(userInfo)
     if err != nil {
       panic(err)
     }
@@ -50,6 +76,8 @@ func LoadUser(dbCon *sql.DB) http.HandlerFunc {
     if userErr != nil {
       panic(userErr)
     }
+
+    // fmt.Println(user.Uid)
 
     userErr, userData = db.FindUser(dbCon, &user)
     if userErr != nil {
