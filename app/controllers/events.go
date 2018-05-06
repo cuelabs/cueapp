@@ -6,7 +6,6 @@ import (
   "database/sql"
   "time"
   "github.com/mattcarpowich1/cueapp/app/db"
-  "fmt"
 )
 
 var (
@@ -113,12 +112,5 @@ func ReadAllEvents (dbCon *sql.DB) http.HandlerFunc {
     w.Write(eventsJson)
   }
 
-  return fn
-}
-
-func JoinEventRequest(dbCon *sql.DB) http.HandlerFunc {
-  fn := func(w http.ResponseWriter, r * http.Request) {
-    
-  }
   return fn
 }

@@ -10,7 +10,6 @@ class JoinEvent extends Component {
       query,
       userId,
       displayName,
-      events,
       dispatch,
       selectedEventId,
       selectedEventName,

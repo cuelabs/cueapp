@@ -4,7 +4,7 @@ import data from '../data'
 import GuestList from '../components/GuestList'
 import HostNotifications from '../components/HostNotifications'
 import HostSettings from '../components/HostSettings'
-import { handleNewEvent, loadEventInfo, incomingJoinRequest } from '../actions'
+import { loadEventInfo, incomingJoinRequest } from '../actions'
 
 class EventHost extends Component {
   constructor () {
@@ -16,7 +16,7 @@ class EventHost extends Component {
   }
 
   componentDidMount () {
-    const { dispatch, eventId, isActive, userId, hostId } = this.props
+    const { dispatch, eventId } = this.props
     dispatch(loadEventInfo(eventId))
   }
 
@@ -43,7 +43,7 @@ class EventHost extends Component {
   }
 
   render () {
-    const { title, requests } = this.props
+    const { title } = this.props
     const { selected } = this.state
     return (
       <div className='page event-host'>
@@ -64,7 +64,7 @@ class EventHost extends Component {
         }
         {
           selected === 1 &&
-          <HostNotifications data={requests} />
+          <HostNotifications data={[]} />
         }
         {
           selected === 2 &&

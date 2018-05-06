@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import axios from 'axios'
-import SpotifyWebApi from 'spotify-web-api-node'
-import { initAuth, tempLogin } from '../actions'
-import spotifyKeys from '../keys'
-import SpotifyAuth from '../components/SpotifyAuth'
+import { tempLogin } from '../actions'
 import CreateEvent from '../pages/CreateEvent'
 import JoinEvent from '../pages/JoinEvent'
 import Button from '../components/Button'
@@ -33,7 +28,7 @@ class Home extends Component {
 
   login () {
     const { dispatch } = this.props
-    if (this.value != '') {
+    if (this.value !== '') {
       dispatch(tempLogin(this.state.tempUsername))
     }
   }

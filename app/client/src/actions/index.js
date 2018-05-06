@@ -31,10 +31,11 @@ export const tempLogin = name => {
       Username: name
     })
       .then(res => {
-        window.localStorage.setItem('uid', res.data.UserId)
+        window.localStorage.setItem('uid', res.data.UserID)
         dispatch({
           type: 'TEMP_LOGIN_SUCCESS',
-          id: res.data.UserId
+          id: res.data.UserID,
+          username: res.data.Username
         })
       })
       .catch(err => console.log(err))
@@ -46,9 +47,8 @@ export const loadUser = id => {
     dispatch({
       type: 'LOAD_USER_REQUEST'
     })
-
     axios.post('http://localhost:8080/users/load', {
-      Uid: id
+      Uid: parseInt(id)
     })
       .then(res => {
         console.log('ay', res.data)
@@ -106,8 +106,9 @@ export const sendJoinRequest = (userId, username, eventId) => {
       JSON.stringify({
         user_id: userId,
         username: username,
+        event_id: eventId
       }
-    ))
+      ))
   }
 }
 
@@ -117,8 +118,29 @@ export const incomingJoinRequest = (userId, username, hostId) => {
     dispatch({
       type: 'HOST_NEW_REQUEST',
       userId,
-      username
+      username,
+      isActive: false
     })
+  }
+}
+
+export const loadRequests = evId => {
+  return dispatch => {
+    dispatch({
+      type: 'LOADING_REQUESTS'
+    })
+
+    axios.post('http://localhost:8080/events/guests', {
+      ID: evId
+    })
+      .then(res => {
+        const { Data } = res.data
+        dispatch({
+          type: 'LOAD_REQUESTS_SUCCESS',
+          data: Data
+        })
+      })
+      .catch(err => console.log(err))
   }
 }
 
@@ -185,7 +207,7 @@ export const handleSearch = e => {
         .catch(err => {
           dispatch({
             type: 'SEARCH_EVENTS_FAILURE',
-            value
+            value: err
           })
         })
     } else {

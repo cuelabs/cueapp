@@ -21,30 +21,30 @@ func JoinEventUser(db *sql.DB, evId int, uId int) (error) {
   return nil
 }
 
-func InsertUser(db *sql.DB, user *NewUser) (error, int) {
+func InsertUser(db *sql.DB, user *NewUser) (error, NewUserInfo) {
   query := `  
     INSERT INTO users (displayName, createdAt)  
     VALUES ($1, $2)
-    RETURNING uid`
+    RETURNING uid, displayName`
 
-  id := 0
+  newUser := NewUserInfo{}
 
   err := db.QueryRow(
     query,  
     user.Username, 
-    user.CreatedAt).Scan(&id)
+    user.CreatedAt).Scan(&newUser.UserID, &newUser.Username)
 
   if err != nil {
-    return err, -1
+    return err, newUser
   }
 
-  return nil, id
+  return nil, newUser
 }
 
 func FindUser(db *sql.DB, user *User) (error, UserData) {
   u := UserData{}
 
-  rows, err := db.Query("SELECT * FROM users WHERE uid=$1", user.UserId)
+  rows, err := db.Query("SELECT * FROM users WHERE uid=$1", user.Uid)
   if err != nil {
     return err, u
   }
