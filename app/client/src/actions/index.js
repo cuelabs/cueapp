@@ -157,6 +157,25 @@ export const incomingJoinRequest = (userId, username, hostId) => {
   }
 }
 
+export const rejectRequest = (uid, eventId) => {
+  return dispatch => {
+    ws.send(
+        JSON.stringify({
+          user_id: uid,
+          username: '',
+          event_id: eventId,
+          is_accept: false,
+          is_reject: true
+        })
+      )
+    console.log('u', uid)
+    dispatch({
+      type: 'HOST_JUST_REJECTED',
+      id: uid
+    })
+  }
+}
+
 export const acceptRequest = (uid, eventId) => {
   return dispatch => {
     ws.send(
@@ -164,7 +183,8 @@ export const acceptRequest = (uid, eventId) => {
           user_id: uid,
           username: '',
           event_id: -1,
-          is_accept: true
+          is_accept: true,
+          is_reject: false
         })
       )
     dispatch({

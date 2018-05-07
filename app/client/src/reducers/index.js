@@ -71,7 +71,7 @@ const cueReducer = (state = initialState, action) => {
           {
             UserID: action.userId,
             DisplayName: action.username,
-            isActive: action.isActive
+            IsActive: action.isActive
           }
         ]
       }
@@ -116,6 +116,20 @@ const cueReducer = (state = initialState, action) => {
           })
       }
     }
+    case 'HOST_JUST_REJECTED': {
+      return {
+        ...state,
+        guests: guests
+          .filter(g => {
+            if (g.UserID === action.id) {
+              console.log('ey')
+              return false
+            } else {
+              return true
+            }
+          })
+      }
+    }
     case 'GUEST_ACCEPTANCE':
       return {
         ...state,
@@ -123,6 +137,14 @@ const cueReducer = (state = initialState, action) => {
         eventId: state.selectedEventId,
         eventName: state.selectedEventName,
         isActive: true
+      }
+    case 'GUEST_REJECTION':
+      return {
+        ...state,
+        joinRequestPending: false,
+        selectedEventName: '',
+        selectedEventId: -1,
+        query: ''
       }
     case 'LOAD_REQUESTS_SUCCESS':
       return {

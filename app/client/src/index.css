@@ -236,7 +236,7 @@ h3.host-view-page-title {
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   border-bottom: 2px solid #222225; }
 
 ul.host-view-page-list > li {

@@ -12,7 +12,7 @@ import (
   _ "github.com/lib/pq"
   "os"
   "log"
-  "fmt"
+  // "fmt"
 )
 
 const connectionString = `
@@ -30,6 +30,7 @@ type JoinRequest struct {
   Username string `json:"username"`
   EventID int `json:"event_id"`
   IsAccept bool `json:"is_accept"`
+  IsReject bool `json:"is_reject"`
 }
 
 func main() {
@@ -38,7 +39,6 @@ func main() {
     panic(err)
   }
 
-  // Start listening for incoming chat messages
   go handleMessages()
 
   router := mux.NewRouter()
@@ -71,8 +71,6 @@ func handleConnections(dbCon *sql.DB) http.HandlerFunc {
     // Register our new client
     Clients[ws] = true
 
-    // fmt.Println("oy")
-
     for {
       var jreq JoinRequest
       // Read in a new message as JSON and map it to a Message object
@@ -82,11 +80,18 @@ func handleConnections(dbCon *sql.DB) http.HandlerFunc {
         delete(Clients, ws)
         break
       }
-      if jreq.IsAccept != true {
+      if jreq.IsAccept != true && jreq.IsReject != true {
         err = db.JoinEventUser(dbCon, jreq.EventID, jreq.UserID)
       } else {
-        fmt.Println(jreq.UserID)
-        err = db.ActivateUser(dbCon, jreq.UserID)
+        if jreq.IsAccept == true {
+          err = db.ActivateUser(dbCon, jreq.UserID)
+        } else if jreq.IsReject == true {
+          err = db.DeleteEventUser(dbCon, jreq.EventID, jreq.UserID)
+          if err != nil {
+            panic(err)
+          }
+          err = db.DeactivateUser(dbCon, jreq.UserID)
+        }
       }
       
       if err != nil {

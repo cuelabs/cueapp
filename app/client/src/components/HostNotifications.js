@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { loadRequests, acceptRequest } from '../actions'
+import { loadRequests, acceptRequest, rejectRequest } from '../actions'
 
 class HostNotifications extends Component {
   constructor () {
@@ -18,17 +18,23 @@ class HostNotifications extends Component {
     dispatch(acceptRequest(id, eventId))
   }
 
+  handleReject (id) {
+    const { dispatch, eventId } = this.props
+    dispatch(rejectRequest(id, eventId))
+  }
+
   render () {
     const { guests } = this.props
     const { data } = this.props
     const pendingGuests = guests
       .filter(g => {
-        if (g.IsActive) {
+        if (g.IsActive || g.DisplayName === '') {
           return false
         } else {
           return true
         }
       })
+    console.log(pendingGuests)
 
     return (
       <div className='view'>
@@ -44,7 +50,8 @@ class HostNotifications extends Component {
                 <div className='host-request-options'>
                   <button style={{padding: '2vh'}}
                     onClick={() => this.handleAccept(item.UserID)}>Accept</button>
-                  <button style={{padding: '2vh'}}>Reject</button>
+                  <button style={{padding: '2vh'}}
+                    onClick={() => this.handleReject(item.UserID)}>Reject</button>
                 </div>
               </li>
             )).reverse()

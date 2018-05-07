@@ -24,9 +24,14 @@ class JoinEvent extends Component {
       const ws2 = new WebSocket('ws://localhost:8080/ws')
       ws2.addEventListener('message', e => {
         const stuff = JSON.parse(e.data)
+        console.log(stuff)
         if (stuff.is_accept) {
           nextProps.dispatch({
             type: 'GUEST_ACCEPTANCE'
+          })
+        } else if (stuff.is_reject) {
+          nextProps.dispatch({
+            type: 'GUEST_REJECTION'
           })
         }
       })

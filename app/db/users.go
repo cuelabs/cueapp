@@ -21,6 +21,24 @@ func JoinEventUser(db *sql.DB, evId int, uId int) (error) {
   return nil
 }
 
+func DeleteEventUser(db *sql.DB, evId int, uId int) (error) {
+  query := `  
+    DELETE FROM events_users
+    WHERE eu_evid=$1 AND eu_uid=$2
+  `
+
+  _, err := db.Query(
+    query,
+    evId,
+    uId)
+
+  if err != nil {
+    return err
+  }
+
+  return nil
+}
+
 func InsertUser(db *sql.DB, user *NewUser) (error, NewUserInfo) {
   query := `  
     INSERT INTO users (displayName, createdAt)  
@@ -84,6 +102,15 @@ func FindCurrentUserEvent(db *sql.DB, uid int) (error, int, string) {
 
 func ActivateUser(db *sql.DB, userId int) error {
   _, err := db.Exec("UPDATE users SET isActive=TRUE WHERE uid=$1", userId)
+  if err != nil {
+    return err
+  }
+
+  return nil
+}
+
+func DeactivateUser(db *sql.DB, userId int) error {
+  _, err := db.Exec("UPDATE users SET isActive=FALSE WHERE uid=$1", userId)
   if err != nil {
     return err
   }
