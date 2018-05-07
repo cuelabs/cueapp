@@ -4,6 +4,15 @@ const ws = new WebSocket('ws://localhost:8080/ws')
 
 ws.onopen = () => console.log('ello')
 
+export const changeHostView = num => {
+  return dispatch => {
+    dispatch({
+      type: 'CHANGE_HOST_VIEW', 
+      num
+    })
+  }
+}
+
 export const initAuth = () => {
   return dispatch => {
     dispatch({
@@ -18,6 +27,14 @@ export const initAuth = () => {
         })
       })
       .catch(err => console.log(err))
+  }
+}
+
+export const guestAcceptance = () => {
+  return dispatch => {
+    dispatch({
+      type: 'GUEST_ACCEPTANCE'
+    })
   }
 }
 
@@ -51,7 +68,6 @@ export const loadUser = id => {
       Uid: parseInt(id)
     })
       .then(res => {
-        console.log('ay', res.data)
         dispatch({
           type: 'LOAD_USER_SUCCESS',
           id: res.data.UserId,
@@ -80,10 +96,21 @@ export const loadEventInfo = id => {
         dispatch({
           type: 'LOAD_EVENT_SUCCESS',
           hostId: res.data.HostID,
-          name: res.data.EventName
+          name: res.data.EventName,
+          eventId: res.data.EvID
         })
       })
       .catch(err => console.log(err))
+  }
+}
+
+export const resumePending = (eventId, eventName) => {
+  return dispatch => {
+    dispatch({
+      type: 'RESUME_PENDING',
+      eventId,
+      eventName
+    })
   }
 }
 
@@ -106,20 +133,43 @@ export const sendJoinRequest = (userId, username, eventId) => {
       JSON.stringify({
         user_id: userId,
         username: username,
-        event_id: eventId
-      }
-      ))
+        event_id: eventId,
+        is_accept: false
+      })
+    )
   }
 }
 
 export const incomingJoinRequest = (userId, username, hostId) => {
-  console.log('this', userId, username)
   return dispatch => {
+    if (userId > 0) {
+      dispatch({
+        type: 'HOST_NEW_REQUEST',
+        userId,
+        username,
+        isActive: false
+      })
+    } else {
+      dispatch({
+        type: 'USER_JOIN_EVENT'
+      })
+    }
+  }
+}
+
+export const acceptRequest = (uid, eventId) => {
+  return dispatch => {
+    ws.send(
+        JSON.stringify({
+          user_id: uid,
+          username: '',
+          event_id: -1,
+          is_accept: true
+        })
+      )
     dispatch({
-      type: 'HOST_NEW_REQUEST',
-      userId,
-      username,
-      isActive: false
+      type: 'HOST_JUST_ACCEPTED',
+      id: uid
     })
   }
 }
@@ -137,7 +187,7 @@ export const loadRequests = evId => {
         const { Data } = res.data
         dispatch({
           type: 'LOAD_REQUESTS_SUCCESS',
-          data: Data
+          data: Data ? Data : []
         })
       })
       .catch(err => console.log(err))

@@ -213,15 +213,19 @@ h2.host-view-event-title {
   border-bottom: 1px solid #7F1AE5;
   width: 100%;
   margin: 0;
-  margin-bottom: 16px; }
+  margin-bottom: 24px; }
 
 h3.host-view-page-title {
-  color: #F5F5F5;
+  color: #7F1AE5;
+  background-color: #222225;
   align-self: flex-start;
   margin: 0;
   font-size: calc(32px + (32 - 16) * (100vw - 360px)/(960-360));
+  width: calc(100% - 12px);
   font-weight: 300;
-  margin-bottom: 12px; }
+  padding-bottom: 16px;
+  padding-top: 16px;
+  padding-left: 12px; }
 
 .host-view-page-list {
   margin: 0;
@@ -233,18 +237,31 @@ h3.host-view-page-title {
   justify-content: flex-start;
   width: 100%;
   flex-wrap: wrap;
-  border-bottom: 1px solid #F5F5F5; }
+  border-bottom: 2px solid #222225; }
 
 ul.host-view-page-list > li {
   margin: 0;
-  width: 100%;
+  width: calc(100% - 12px);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  border-top: 1px solid #F5F5F5;
+  border-top: 1px solid #222225;
   color: #F5F5F5;
-  padding: 2vh 0; }
+  padding: 2vh 0;
+  padding-left: 12px;
+  animation-name: elEye;
+  animation-duration: .4s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1; }
+
+@keyframes elEye {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+ul.host-view-page-list > li:nth-child(1) {
+  border-top: none; }
 
 .host-request-options {
   align-self: flex-end; }

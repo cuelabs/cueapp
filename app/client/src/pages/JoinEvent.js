@@ -2,9 +2,37 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SearchResults from '../components/SearchResults'
 import JoinEventModal from '../components/JoinEventModal'
-import { handleSearch } from '../actions'
+import { handleSearch, incomingJoinRequest } from '../actions'
 
 class JoinEvent extends Component {
+  componentWillMount () {
+    const { dispatch, isActive, hostId, userId } = this.props
+    const ws2 = new WebSocket('ws://localhost:8080/ws')
+      ws2.addEventListener('message', e => {
+        const stuff = JSON.parse(e.data)
+        if (stuff.is_accept) {
+          this.props.dispatch({
+            type: 'GUEST_ACCEPTANCE'
+          })
+        }
+      })
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { dispatch, isActive, hostId, userId } = this.props
+    if (nextProps.joinRequestPending) {
+      const ws2 = new WebSocket('ws://localhost:8080/ws')
+      ws2.addEventListener('message', e => {
+        const stuff = JSON.parse(e.data)
+        if (stuff.is_accept) {
+          nextProps.dispatch({
+            type: 'GUEST_ACCEPTANCE'
+          })
+        }
+      })
+    }
+  }
+
   render () {
     const {
       query,

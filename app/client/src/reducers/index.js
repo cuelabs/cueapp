@@ -9,13 +9,16 @@ const initialState = {
   displayName: '',
   isHost: false,
   hostId: -1,
+  hostView: 0,
   isActive: false,
   eventId: null,
   eventName: '',
   userAuthorized: false,
   awaitingAuth: false,
   authPage: null,
-  joinRequestPending: false
+  joinRequestPending: false,
+  eventLoading: false,
+  acceptedGuest: -1
 }
 
 const cueReducer = (state = initialState, action) => {
@@ -30,6 +33,11 @@ const cueReducer = (state = initialState, action) => {
       return {
         ...state,
         authPage: action.content
+      }
+    case 'CHANGE_HOST_VIEW':
+      return {
+        ...state,
+        hostView: action.num
       }
     case 'TEMP_LOGIN_REQUEST':
       return {
@@ -47,15 +55,23 @@ const cueReducer = (state = initialState, action) => {
         joinRequestPending: true
       }
     }
+    case 'RESUME_PENDING': {
+      return {
+        ...state,
+        joinRequestPending: true,
+        selectedEventId: action.eventId,
+        selectedEventName: action.eventName
+      }
+    }
     case 'HOST_NEW_REQUEST': {
       return {
         ...state,
         guests: [
           ...guests,
           {
-            type: 'JOIN_REQUEST',
-            userId: action.userId,
-            DisplayName: action.username
+            UserID: action.userId,
+            DisplayName: action.username,
+            isActive: action.isActive
           }
         ]
       }
@@ -73,9 +89,40 @@ const cueReducer = (state = initialState, action) => {
         eventId: action.eventId,
         eventName: action.eventName
       }
+    case 'RESUME_PENDING':
+      return {
+        ...state,
+        joinRequestPending: true,
+        selectedEventId: action.eventId,
+        selectedEventName: action.eventName,
+      }
     case 'LOADING_REQUESTS':
       return {
         ...state
+      }
+    case 'HOST_JUST_ACCEPTED': {
+      return {
+        ...state,
+        guests: guests
+          .map(g => {
+            if (g.UserID === action.id) {
+              return {
+                ...g,
+                IsActive: true
+              }
+            } else {
+              return g
+            }
+          })
+      }
+    }
+    case 'GUEST_ACCEPTANCE':
+      return {
+        ...state,
+        joinRequestPending: false,
+        eventId: state.selectedEventId,
+        eventName: state.selectedEventName,
+        isActive: true
       }
     case 'LOAD_REQUESTS_SUCCESS':
       return {
@@ -91,13 +138,16 @@ const cueReducer = (state = initialState, action) => {
       }
     case 'LOAD_EVENT_REQUEST':
       return {
-        ...state
+        ...state,
+        eventLoading: true
       }
     case 'LOAD_EVENT_SUCCESS':
       return {
         ...state,
         hostId: action.hostId,
-        eventName: action.name
+        eventName: action.name,
+        eventLoading: false,
+        eventId: action.eventId
       }
     case 'SEARCH_EVENTS_REQUEST':
       return {

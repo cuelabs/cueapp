@@ -2,6 +2,7 @@ package db
 
 import (
   "database/sql"
+  "fmt"
 )
 
 func FindUsersAtEvent(db *sql.DB, id int) (error, Guests) {
@@ -120,6 +121,7 @@ func FindAllEvents(db *sql.DB) (error, Events) {
 
 func FindOneEvent(db *sql.DB, id int) (error, Event) {
   query := "SELECT * FROM events WHERE evid=$1"
+  fmt.Println(id)
 
   e := Event{}
 

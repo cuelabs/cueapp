@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { tempLogin } from '../actions'
+import { tempLogin, resumePending } from '../actions'
 import CreateEvent from '../pages/CreateEvent'
 import JoinEvent from '../pages/JoinEvent'
 import Button from '../components/Button'
@@ -17,6 +17,29 @@ class Home extends Component {
     this.login = this.login.bind(this)
     this.createEvent = this.createEvent.bind(this)
     this.joinEvent = this.joinEvent.bind(this)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { dispatch } = nextProps
+    if (nextProps.eventName && (nextProps.eventName.length > this.props.eventName.length)) {
+      if (!nextProps.isActive) {
+        dispatch(resumePending(nextProps.eventId, nextProps.eventName))
+      }
+    }
+    if (nextProps.joinRequestPending) {
+      this.setState({
+        join: true
+      })
+    }
+    // console.log('isActive', eventName)
+    // if (!isActive && eventId > 0) {
+    //     console.log('balooga')
+    //     dispatch({
+    //       type: 'RESUME_PENDING',
+    //       eventId, 
+    //       eventName
+    //     })
+    //   }
   }
 
   handleNameChange (e) {
