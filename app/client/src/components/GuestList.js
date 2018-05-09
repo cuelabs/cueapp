@@ -16,7 +16,6 @@ class GuestList extends Component {
     const { users } = this.props
     return (
       <div className='view'>
-        <h3 className='host-view-page-title'>Guests</h3>
         <ul className='host-view-page-list'>
           {
             users.map(item => (
@@ -31,6 +30,6 @@ class GuestList extends Component {
   }
 }
 
-const mapStateToProps = state => state 
+const mapStateToProps = state => state
 
 export default connect(mapStateToProps)(GuestList)

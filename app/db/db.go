@@ -13,6 +13,7 @@ type Event struct {
   EvID int
   HostID int
   EventName string
+  IsActive bool
   CreatedAt time.Time
   UpdatedAt time.Time
 }

@@ -29,9 +29,29 @@ const JoinEventModal = ({
   } else {
     return (
       <div className='modal modal-loading'>
-        <img
-          className='loader'
-          src='https://www.iconfinder.com/icons/113196/235402/128/raster?token=1525402996-cdcVN2Llh07OXXuQIyhgfNBxqqz8vwlV-pYdTbyWlSATBIYxJNnoN%2BXGxxQU%3D' />
+        <small>Requesting to join {name.split('').map((val, i, arr) => {
+          if (i === 0) {
+            return val.toUpperCase()
+          } else if (arr[i - 1] === ' ') {
+            return val.toUpperCase()
+          } else {
+            return val
+          }
+        }).join('')}...</small>
+        <div className='sk-circle'>
+          <div className='sk-circle1 sk-child' />
+          <div className='sk-circle2 sk-child' />
+          <div className='sk-circle3 sk-child' />
+          <div className='sk-circle4 sk-child' />
+          <div className='sk-circle5 sk-child' />
+          <div className='sk-circle6 sk-child' />
+          <div className='sk-circle7 sk-child' />
+          <div className='sk-circle8 sk-child' />
+          <div className='sk-circle9 sk-child' />
+          <div className='sk-circle10 sk-child' />
+          <div className='sk-circle11 sk-child' />
+          <div className='sk-circle12 sk-child' />
+        </div>
       </div>
     )
   }

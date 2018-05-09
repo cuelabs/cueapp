@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import data from '../data'
 import GuestList from '../components/GuestList'
 import HostNotifications from '../components/HostNotifications'
 import HostSettings from '../components/HostSettings'
-import { loadEventInfo, incomingJoinRequest, changeHostView } from '../actions'
+import {
+  loadEventInfo,
+  incomingJoinRequest,
+  changeHostView,
+  endEvent
+} from '../actions'
 
 class EventHost extends Component {
   constructor () {
@@ -13,6 +17,7 @@ class EventHost extends Component {
       selected: 0
     }
     this.circleChange = this.circleChange.bind(this)
+    this.handleEnd = this.handleEnd.bind(this)
   }
 
   componentDidMount () {
@@ -21,13 +26,30 @@ class EventHost extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const { dispatch, isActive, hostId, userId } = this.props
-    if (nextProps.hostId > this.props.hostId) {
+    const { dispatch, isActive, hostId, userId, done } = this.props
+    console.log('hello?', this.props, 'yo', nextProps)
+    if ((nextProps.hostId > this.props.hostId) && (!done)) {
+      console.log('HELLO')
       const ws2 = new WebSocket('ws://localhost:8080/ws')
       ws2.addEventListener('message', e => {
         const stuff = JSON.parse(e.data)
-        if (isActive && nextProps.hostId === userId && !stuff.is_accept) {
+        if (isActive && nextProps.hostId === userId && !stuff.is_accept && !stuff.is_end_event) {
           dispatch(incomingJoinRequest(stuff.user_id, stuff.username))
+        }
+        if (stuff.is_end_event) {
+          if (hostId !== userId) {
+            setTimeout(() => {
+              dispatch({
+                type: 'USER_REMOVED_FROM_EVENT'
+              }, 1800)
+            })
+          } else {
+            setTimeout(() => {
+              dispatch({
+                type: 'HOST_END_EVENT'
+              })
+            })
+          }
         }
       })
     }
@@ -38,20 +60,26 @@ class EventHost extends Component {
     dispatch(changeHostView(num))
   }
 
+  handleEnd () {
+    const { dispatch, eventId } = this.props
+    dispatch(endEvent(eventId))
+  }
+
   render () {
-    const { 
-      title, 
-      guests, 
-      eventId, 
-      userId, 
-      hostId, 
-      eventName, 
-      eventLoading, 
-      hostView 
+    const {
+      title,
+      guests,
+      eventId,
+      userId,
+      hostId,
+      eventName,
+      eventLoading,
+      hostView,
+      counter
     } = this.props
-    
-    const activeGuests = guests.
-      filter(g => {
+
+    const activeGuests = guests
+      .filter(g => {
         if (g.IsActive && (g.UserID !== userId)) {
           return true
         } else {
@@ -70,17 +98,20 @@ class EventHost extends Component {
     return !eventLoading ? (
       <div className='page event-host'>
         <h2 className='host-view-event-title'>
-          { title.toUpperCase() }
+          { title }
         </h2>
         {
           hostId === userId &&
           (
             <div className='host-circles'>
-              <div className={`circle ${hostView === 0 && 'circle-selected'}`}
+              { counter > 0 && hostView !== 1 &&
+                <div className='notifications'>{counter}</div>
+              }
+              <i className={`fa fa-users ${hostView === 0 && 'selected'}`}
                 onClick={() => this.circleChange(0)} />
-              <div className={`circle ${hostView === 1 && 'circle-selected'}`}
+              <i className={`fa fa-envelope ${hostView === 1 && 'selected'}`}
                 onClick={() => this.circleChange(1)} />
-              <div className={`circle ${hostView === 2 && 'circle-selected'}`}
+              <i className={`fa fa-sliders ${hostView === 2 && 'selected'}`}
                 onClick={() => this.circleChange(2)} />
             </div>
           )
@@ -93,19 +124,19 @@ class EventHost extends Component {
         {
           hostView === 1 &&
           hostId === userId &&
-          <HostNotifications data={pendingGuests}/>
+          <HostNotifications data={pendingGuests} />
         }
         {
           hostView === 2 &&
           hostId === userId &&
-          <HostSettings />
+          <HostSettings handler={this.handleEnd} />
         }
         {
           hostId !== userId &&
           <div>Welcome to { eventName }!</div>
         }
       </div>
-    ) : <div></div>
+    ) : <div />
   }
 }
 

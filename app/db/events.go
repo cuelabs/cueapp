@@ -110,6 +110,7 @@ func FindAllEvents(db *sql.DB) (error, Events) {
       &e.EvID, 
       &e.HostID, 
       &e.EventName,
+      &e.IsActive,
       &e.CreatedAt, 
       &e.UpdatedAt)
     
@@ -135,9 +136,48 @@ func FindOneEvent(db *sql.DB, id int) (error, Event) {
       &e.EvID, 
       &e.HostID, 
       &e.EventName,
+      &e.IsActive,
       &e.CreatedAt, 
       &e.UpdatedAt)
   }
 
   return nil, e
+}
+
+func DeactivateAllUsersAtEvent(db *sql.DB, id int) (error) {
+  query := `
+  UPDATE users as u
+  SET isActive=FALSE
+  FROM (
+    SELECT * FROM users 
+      INNER JOIN (
+        SELECT * FROM events_users
+          INNER JOIN (
+            SELECT evid FROM events WHERE evid=$1
+            ) as ev
+          ON ev.evid=eu_evid
+        ) as evusers
+      ON evusers.eu_uid=uid
+  ) as u2
+  WHERE u2.uid=u.uid;`
+
+  _, err := db.Exec(query, id)
+
+  if err != nil {
+    return err
+  }
+
+  return nil
+}
+
+func DeactivateEvent(db *sql.DB, id int) (error) {
+  query := "UPDATE events SET isActive=FALSE WHERE evid=$1"
+
+  _, err := db.Exec(query, id)
+  
+  if err != nil {
+    return err
+  }
+
+  return nil
 }

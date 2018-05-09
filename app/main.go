@@ -31,6 +31,7 @@ type JoinRequest struct {
   EventID int `json:"event_id"`
   IsAccept bool `json:"is_accept"`
   IsReject bool `json:"is_reject"`
+  IsEndEvent bool `json:"is_end_event"`
 }
 
 func main() {
@@ -81,7 +82,15 @@ func handleConnections(dbCon *sql.DB) http.HandlerFunc {
         break
       }
       if jreq.IsAccept != true && jreq.IsReject != true {
-        err = db.JoinEventUser(dbCon, jreq.EventID, jreq.UserID)
+        if jreq.IsEndEvent != true {
+          err = db.JoinEventUser(dbCon, jreq.EventID, jreq.UserID)
+        } else {
+          err = db.DeactivateAllUsersAtEvent(dbCon, jreq.EventID)
+          if err != nil {
+            panic(err)
+          }
+          err = db.DeactivateEvent(dbCon, jreq.EventID)
+        }
       } else {
         if jreq.IsAccept == true {
           err = db.ActivateUser(dbCon, jreq.UserID)

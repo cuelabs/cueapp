@@ -7,7 +7,7 @@ ws.onopen = () => console.log('ello')
 export const changeHostView = num => {
   return dispatch => {
     dispatch({
-      type: 'CHANGE_HOST_VIEW', 
+      type: 'CHANGE_HOST_VIEW',
       num
     })
   }
@@ -68,17 +68,22 @@ export const loadUser = id => {
       Uid: parseInt(id)
     })
       .then(res => {
-        dispatch({
-          type: 'LOAD_USER_SUCCESS',
-          id: res.data.UserId,
-          username: res.data.DisplayName,
-          isActive: res.data.IsActive,
-          eventId: res.data.EventId ? res.data.EventId : null,
-          eventName: res.data.EventName ? res.data.EventName : null
-        })
+        setTimeout(() => {
+          dispatch({
+            type: 'LOAD_USER_SUCCESS',
+            id: res.data.UserId,
+            username: res.data.DisplayName,
+            isActive: res.data.IsActive,
+            eventId: res.data.EventId ? res.data.EventId : null,
+            eventName: res.data.EventName ? res.data.EventName : null
+          })
+        }, 1000)
       })
       .catch(err => {
         console.log(err)
+        dispatch({
+          type: 'STOP_LOADING'
+        })
       })
   }
 }
@@ -86,7 +91,8 @@ export const loadUser = id => {
 export const loadEventInfo = id => {
   return dispatch => {
     dispatch({
-      type: 'LOAD_EVENT_REQUEST'
+      type: 'LOAD_EVENT_REQUEST',
+      done: false
     })
 
     axios.post('http://localhost:8080/events/read/one', {
@@ -140,14 +146,15 @@ export const sendJoinRequest = (userId, username, eventId) => {
   }
 }
 
-export const incomingJoinRequest = (userId, username, hostId) => {
+export const incomingJoinRequest = (userId, username, onPage) => {
   return dispatch => {
     if (userId > 0) {
       dispatch({
         type: 'HOST_NEW_REQUEST',
         userId,
         username,
-        isActive: false
+        isActive: false,
+        updateCounter: true
       })
     } else {
       dispatch({
@@ -160,15 +167,14 @@ export const incomingJoinRequest = (userId, username, hostId) => {
 export const rejectRequest = (uid, eventId) => {
   return dispatch => {
     ws.send(
-        JSON.stringify({
-          user_id: uid,
-          username: '',
-          event_id: eventId,
-          is_accept: false,
-          is_reject: true
-        })
-      )
-    console.log('u', uid)
+      JSON.stringify({
+        user_id: uid,
+        username: '',
+        event_id: eventId,
+        is_accept: false,
+        is_reject: true
+      })
+    )
     dispatch({
       type: 'HOST_JUST_REJECTED',
       id: uid
@@ -179,14 +185,14 @@ export const rejectRequest = (uid, eventId) => {
 export const acceptRequest = (uid, eventId) => {
   return dispatch => {
     ws.send(
-        JSON.stringify({
-          user_id: uid,
-          username: '',
-          event_id: -1,
-          is_accept: true,
-          is_reject: false
-        })
-      )
+      JSON.stringify({
+        user_id: uid,
+        username: '',
+        event_id: -1,
+        is_accept: true,
+        is_reject: false
+      })
+    )
     dispatch({
       type: 'HOST_JUST_ACCEPTED',
       id: uid
@@ -207,7 +213,7 @@ export const loadRequests = evId => {
         const { Data } = res.data
         dispatch({
           type: 'LOAD_REQUESTS_SUCCESS',
-          data: Data ? Data : []
+          data: Data || []
         })
       })
       .catch(err => console.log(err))
@@ -241,6 +247,24 @@ export const handleNewEvent = (name, user) => {
         })
       })
       .catch(err => console.log(err))
+  }
+}
+
+export const endEvent = id => {
+  return dispatch => {
+    dispatch({
+      type: 'EVENT_ENDING'
+    })
+    ws.send(
+      JSON.stringify({
+        user_id: -1,
+        username: '',
+        event_id: id,
+        is_accept: false,
+        is_reject: false,
+        is_end_event: true
+      })
+    )
   }
 }
 

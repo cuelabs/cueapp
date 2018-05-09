@@ -36,7 +36,7 @@ class Home extends Component {
     //     console.log('balooga')
     //     dispatch({
     //       type: 'RESUME_PENDING',
-    //       eventId, 
+    //       eventId,
     //       eventName
     //     })
     //   }
@@ -98,6 +98,7 @@ class Home extends Component {
           <input type='text'
             onChange={this.handleNameChange} />
           <button type='button'
+            className='btn-login'
             style={{padding: '12px'}}
             onClick={this.login}>Login</button>
         </div>

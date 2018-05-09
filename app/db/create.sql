@@ -14,6 +14,7 @@ CREATE TABLE events (
   evid SERIAL PRIMARY KEY,
   hostid int not null,
   eventname varchar(100) not null,
+  isActive BOOLEAN DEFAULT TRUE,
   createdAt TIMESTAMP DEFAULT NOW(),
   updatedAt TIMESTAMP DEFAULT NOW()
 );

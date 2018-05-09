@@ -25,7 +25,6 @@ class HostNotifications extends Component {
 
   render () {
     const { guests } = this.props
-    const { data } = this.props
     const pendingGuests = guests
       .filter(g => {
         if (g.IsActive || g.DisplayName === '') {
@@ -38,7 +37,6 @@ class HostNotifications extends Component {
 
     return (
       <div className='view'>
-        <h3 className='host-view-page-title'>Notifications</h3>
         <ul className='host-view-page-list'>
           {
             pendingGuests.map(item => (
@@ -49,8 +47,10 @@ class HostNotifications extends Component {
                 </p>
                 <div className='host-request-options'>
                   <button style={{padding: '2vh'}}
+                    className='button-host'
                     onClick={() => this.handleAccept(item.UserID)}>Accept</button>
                   <button style={{padding: '2vh'}}
+                    className='button-host'
                     onClick={() => this.handleReject(item.UserID)}>Reject</button>
                 </div>
               </li>

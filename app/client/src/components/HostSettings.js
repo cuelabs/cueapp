@@ -1,10 +1,13 @@
 import React from 'react'
 
-const HostSettings = () => (
+const HostSettings = props => (
   <div className='view'>
-    <h3 className='host-view-page-title'>Settings</h3>
     <div className='inner-right-column'>
-      <button>End Event</button>
+      <button className='button-host please-fade'
+        style={{marginTop: '4vh'}}
+        onClick={props.handler}>
+        End Event
+      </button>
     </div>
   </div>
 )
