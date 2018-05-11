@@ -25,35 +25,33 @@ class EventHost extends Component {
     dispatch(loadEventInfo(eventId))
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { dispatch, isActive, hostId, userId, done } = this.props
-    console.log('hello?', this.props, 'yo', nextProps)
-    if ((nextProps.hostId > this.props.hostId) && (!done)) {
-      console.log('HELLO')
-      const ws2 = new WebSocket('ws://localhost:8080/ws')
-      ws2.addEventListener('message', e => {
-        const stuff = JSON.parse(e.data)
-        if (isActive && nextProps.hostId === userId && !stuff.is_accept && !stuff.is_end_event) {
-          dispatch(incomingJoinRequest(stuff.user_id, stuff.username))
-        }
-        if (stuff.is_end_event) {
-          if (hostId !== userId) {
-            setTimeout(() => {
-              dispatch({
-                type: 'USER_REMOVED_FROM_EVENT'
-              }, 1800)
-            })
-          } else {
-            setTimeout(() => {
-              dispatch({
-                type: 'HOST_END_EVENT'
-              })
-            })
-          }
-        }
-      })
-    }
-  }
+  // componentWillReceiveProps (nextProps) {
+  //   const { dispatch, isActive, hostId, userId, done } = this.props
+  //   if ((nextProps.hostId > this.props.hostId) && (!done)) {
+  //     const ws2 = new WebSocket('ws://localhost:8080/ws')
+  //     ws2.addEventListener('message', e => {
+  //       const stuff = JSON.parse(e.data)
+  //       if (isActive && nextProps.hostId === userId && !stuff.is_accept && !stuff.is_end_event) {
+  //         dispatch(incomingJoinRequest(stuff.user_id, stuff.username))
+  //       }
+  //       if (stuff.is_end_event) {
+  //         if (hostId !== userId) {
+  //           setTimeout(() => {
+  //             dispatch({
+  //               type: 'USER_REMOVED_FROM_EVENT'
+  //             }, 1800)
+  //           })
+  //         } else {
+  //           setTimeout(() => {
+  //             dispatch({
+  //               type: 'HOST_END_EVENT'
+  //             })
+  //           })
+  //         }
+  //       }
+  //     })
+  //   }
+  // }
 
   circleChange (num) {
     const { dispatch } = this.props

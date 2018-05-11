@@ -1,8 +1,0 @@
-FROM openresty/openresty:alpine
-MAINTAINER 'llater'
-RUN apk add --no-cache curl ca-certificates wget
-COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
-RUN rm /etc/nginx/conf.d/default.conf
-COPY local.cueapp.nginx.conf /etc/nginx/conf.d
-RUN curl -s https://api.github.com/repos/auth0/nginx-jwt/releases/latest | grep browser_download_url | cut -d '"' -f 4 | wget -qi -
-RUN tar xf nginx-jwt.tar.gz

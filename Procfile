@@ -1,1 +1,0 @@
-web: cd app && go build main.go && ./main

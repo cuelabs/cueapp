@@ -31,15 +31,6 @@ class Home extends Component {
         join: true
       })
     }
-    // console.log('isActive', eventName)
-    // if (!isActive && eventId > 0) {
-    //     console.log('balooga')
-    //     dispatch({
-    //       type: 'RESUME_PENDING',
-    //       eventId,
-    //       eventName
-    //     })
-    //   }
   }
 
   handleNameChange (e) {
