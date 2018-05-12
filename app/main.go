@@ -4,7 +4,7 @@ import (
   "net/http"
   "database/sql"
   "github.com/mattcarpowich1/cueapp/app/controllers"
-  "github.com/mattcarpowich1/cueapp/app/db"
+  "github.com/mattcarpowich1/cueapp/app/models"
   "github.com/gorilla/handlers"
   "github.com/gorilla/mux"
   "github.com/gorilla/websocket"
@@ -35,7 +35,7 @@ type JoinRequest struct {
 }
 
 func main() {
-  db.DBCon, err = sql.Open("postgres", connectionString)
+  models.DBCon, err = sql.Open("postgres", connectionString)
   if err != nil {
     panic(err)
   }
@@ -43,13 +43,13 @@ func main() {
   go handleMessages()
 
   router := mux.NewRouter()
-  router.HandleFunc("/events/read/all", controllers.ReadAllEvents(db.DBCon)).Methods("GET")
-  router.HandleFunc("/events/read/one", controllers.ReadOneEvent(db.DBCon)).Methods("POST")
-  router.HandleFunc("/events/create", controllers.CreateEvent(db.DBCon)).Methods("POST")
-  router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent(db.DBCon)).Methods("POST")
-  router.HandleFunc("/users/create", controllers.CreateUser(db.DBCon)).Methods("POST")
-  router.HandleFunc("/users/load", controllers.LoadUser(db.DBCon)).Methods("POST")
-  router.HandleFunc("/ws", handleConnections(db.DBCon))
+  router.HandleFunc("/events/read/all", controllers.ReadAllEvents(models.DBCon)).Methods("GET")
+  router.HandleFunc("/events/read/one", controllers.ReadOneEvent(models.DBCon)).Methods("POST")
+  router.HandleFunc("/events/create", controllers.CreateEvent(models.DBCon)).Methods("POST")
+  router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent(models.DBCon)).Methods("POST")
+  router.HandleFunc("/users/create", controllers.CreateUser(models.DBCon)).Methods("POST")
+  router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
+  router.HandleFunc("/ws", handleConnections(models.DBCon))
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
@@ -83,23 +83,23 @@ func handleConnections(dbCon *sql.DB) http.HandlerFunc {
       }
       if jreq.IsAccept != true && jreq.IsReject != true {
         if jreq.IsEndEvent != true {
-          err = db.JoinEventUser(dbCon, jreq.EventID, jreq.UserID)
+          err = models.JoinEventUser(dbCon, jreq.EventID, jreq.UserID)
         } else {
-          err = db.DeactivateAllUsersAtEvent(dbCon, jreq.EventID)
+          err = models.DeactivateAllUsersAtEvent(dbCon, jreq.EventID)
           if err != nil {
             panic(err)
           }
-          err = db.DeactivateEvent(dbCon, jreq.EventID)
+          err = models.DeactivateEvent(dbCon, jreq.EventID)
         }
       } else {
         if jreq.IsAccept == true {
-          err = db.ActivateUser(dbCon, jreq.UserID)
+          err = models.ActivateUser(dbCon, jreq.UserID)
         } else if jreq.IsReject == true {
-          err = db.DeleteEventUser(dbCon, jreq.EventID, jreq.UserID)
+          err = models.DeleteEventUser(dbCon, jreq.EventID, jreq.UserID)
           if err != nil {
             panic(err)
           }
-          err = db.DeactivateUser(dbCon, jreq.UserID)
+          err = models.DeactivateUser(dbCon, jreq.UserID)
         }
       }
       

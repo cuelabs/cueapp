@@ -5,15 +5,15 @@ import (
   "encoding/json"
   "database/sql"
   "time"
-  "github.com/mattcarpowich1/cueapp/app/db"
+  "github.com/mattcarpowich1/cueapp/app/models"
 )
 
 var (
-  event db.Event
-  events db.Events
-  eventId db.EventIDWithCueID
-  eventID db.EventId
-  cue db.Cue
+  event models.Event
+  events models.Events
+  eventId models.EventIDWithCueID
+  eventID models.EventId
+  cue models.Cue
   err error
 )
 
@@ -28,12 +28,12 @@ func CreateEvent(dbCon *sql.DB) http.HandlerFunc {
     event.CreatedAt = rightNow
     event.UpdatedAt = rightNow
 
-    err, eventId.EvID = db.InsertEvent(dbCon, &event)
+    eventId.EvID, err = models.InsertEvent(dbCon, &event)
     if err != nil {
       panic(err)
     }
 
-    err = db.JoinEventUser(dbCon, eventId.EvID, event.HostID)
+    err = models.JoinEventUser(dbCon, eventId.EvID, event.HostID)
     if err != nil {
       panic(err)
     }
@@ -41,17 +41,17 @@ func CreateEvent(dbCon *sql.DB) http.HandlerFunc {
     cue.CreatedAt = rightNow
     cue.UpdatedAt = rightNow
 
-    err, eventId.CueID = db.CreateCue(dbCon, &cue)
+    eventId.CueID, err = models.CreateCue(dbCon, &cue)
     if err != nil {
       panic(err)
     }
 
-    err = db.JoinEventCue(dbCon, &eventId)
+    err = models.JoinEventCue(dbCon, &eventId)
     if err != nil {
       panic(err)
     }
 
-    err = db.ActivateUser(dbCon, event.HostID)
+    err = models.ActivateUser(dbCon, event.HostID)
     if err != nil {
       panic(err)
     }
@@ -76,7 +76,7 @@ func ReadOneEvent (dbCon *sql.DB) http.HandlerFunc {
     if err != nil {
       panic(err)
     }
-    err, event = db.FindOneEvent(dbCon, eventID.ID)
+    event, err = models.FindOneEvent(dbCon, eventID.ID)
     if err != nil {
       panic(err)
     }
@@ -96,7 +96,7 @@ func ReadOneEvent (dbCon *sql.DB) http.HandlerFunc {
 
 func ReadAllEvents (dbCon *sql.DB) http.HandlerFunc {
   fn := func(w http.ResponseWriter, r *http.Request) {
-    err, events = db.FindAllEvents(dbCon)
+    events, err = models.FindAllEvents(dbCon)
     if err != nil {
       panic(err)
     }

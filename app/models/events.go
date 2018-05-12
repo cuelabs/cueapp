@@ -1,11 +1,11 @@
-package db
+package models
 
 import (
   "database/sql"
   "fmt"
 )
 
-func FindUsersAtEvent(db *sql.DB, id int) (error, Guests) {
+func FindUsersAtEvent(db *sql.DB, id int) (Guests, error) {
   query := `
     SELECT uid, displayName, isActive FROM
       (SELECT * FROM events_users WHERE eu_evid=$1
@@ -19,7 +19,7 @@ func FindUsersAtEvent(db *sql.DB, id int) (error, Guests) {
 
   rows, err := db.Query(query, id)
   if err != nil {
-    return err, allGuests
+    return allGuests, err
   }
 
   for rows.Next() {
@@ -31,10 +31,10 @@ func FindUsersAtEvent(db *sql.DB, id int) (error, Guests) {
     allGuests.Data = append(allGuests.Data, g)
   }
 
-  return nil, allGuests
+  return allGuests, nil
 }
 
-func JoinEventCue(db *sql.DB, evcue *EventIDWithCueID) (error) {
+func JoinEventCue(db *sql.DB, evcue *EventIDWithCueID) error {
   query := `  
     INSERT INTO events_cues (ec_evid, ec_cueid)  
     VALUES ($1, $2)`
@@ -51,7 +51,7 @@ func JoinEventCue(db *sql.DB, evcue *EventIDWithCueID) (error) {
   return nil
 }
 
-func CreateCue(db *sql.DB, cue *Cue) (error, int) {
+func CreateCue(db *sql.DB, cue *Cue) (int, error) {
   query := `  
     INSERT INTO cues (createdAt, updatedAt)  
     VALUES ($1, $2)
@@ -65,13 +65,13 @@ func CreateCue(db *sql.DB, cue *Cue) (error, int) {
     cue.UpdatedAt).Scan(&id)
 
   if err != nil {
-    return err, -1
+    return -1, err
   }
 
-  return nil, id
+  return id, nil
 }
 
-func InsertEvent(db *sql.DB, event *Event) (error, int) {
+func InsertEvent(db *sql.DB, event *Event) (int, error) {
   query := `  
     INSERT INTO events (hostid, 
     eventname, createdAt, updatedAt)  
@@ -88,13 +88,13 @@ func InsertEvent(db *sql.DB, event *Event) (error, int) {
     event.UpdatedAt).Scan(&id)
 
   if err != nil {
-    return err, -1
+    return -1, err
   }
 
-  return nil, id
+  return id, nil
 }
 
-func FindAllEvents(db *sql.DB) (error, Events) {
+func FindAllEvents(db *sql.DB) (Events, error) {
   query := "SELECT * FROM events"
 
   allEvents := Events{}
@@ -102,7 +102,7 @@ func FindAllEvents(db *sql.DB) (error, Events) {
 
   rows, err := db.Query(query)
   if err != nil {
-    return err, allEvents
+    return allEvents, err
   }
 
   for rows.Next() {
@@ -117,10 +117,10 @@ func FindAllEvents(db *sql.DB) (error, Events) {
     allEvents.Data = append(allEvents.Data, e)
   }
 
-  return nil, allEvents
+  return allEvents, nil
 }
 
-func FindOneEvent(db *sql.DB, id int) (error, Event) {
+func FindOneEvent(db *sql.DB, id int) (Event, error) {
   query := "SELECT * FROM events WHERE evid=$1"
   fmt.Println(id)
 
@@ -128,7 +128,7 @@ func FindOneEvent(db *sql.DB, id int) (error, Event) {
 
   rows, err := db.Query(query, id)
   if err != nil {
-    return err, e
+    return e, err
   }
 
   for rows.Next() {
@@ -141,10 +141,10 @@ func FindOneEvent(db *sql.DB, id int) (error, Event) {
       &e.UpdatedAt)
   }
 
-  return nil, e
+  return e, nil
 }
 
-func DeactivateAllUsersAtEvent(db *sql.DB, id int) (error) {
+func DeactivateAllUsersAtEvent(db *sql.DB, id int) error {
   query := `
   UPDATE users as u
   SET isActive=FALSE
@@ -170,7 +170,7 @@ func DeactivateAllUsersAtEvent(db *sql.DB, id int) (error) {
   return nil
 }
 
-func DeactivateEvent(db *sql.DB, id int) (error) {
+func DeactivateEvent(db *sql.DB, id int) error {
   query := "UPDATE events SET isActive=FALSE WHERE evid=$1"
 
   _, err := db.Exec(query, id)
