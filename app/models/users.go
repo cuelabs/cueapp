@@ -1,10 +1,10 @@
-package db
+package models
 
 import (
   "database/sql"
 )
 
-func JoinEventUser(db *sql.DB, evId int, uId int) (error) {
+func JoinEventUser(db *sql.DB, evId int, uId int) error {
   query := `  
     INSERT INTO events_users (eu_evid, eu_uid)  
     VALUES ($1, $2)`
@@ -21,7 +21,7 @@ func JoinEventUser(db *sql.DB, evId int, uId int) (error) {
   return nil
 }
 
-func DeleteEventUser(db *sql.DB, evId int, uId int) (error) {
+func DeleteEventUser(db *sql.DB, evId int, uId int) error {
   query := `  
     DELETE FROM events_users
     WHERE eu_evid=$1 AND eu_uid=$2
@@ -39,7 +39,7 @@ func DeleteEventUser(db *sql.DB, evId int, uId int) (error) {
   return nil
 }
 
-func InsertUser(db *sql.DB, user *NewUser) (error, NewUserInfo) {
+func InsertUser(db *sql.DB, user *NewUser) (NewUserInfo, error) {
   query := `  
     INSERT INTO users (displayName, createdAt)  
     VALUES ($1, $2)
@@ -53,18 +53,18 @@ func InsertUser(db *sql.DB, user *NewUser) (error, NewUserInfo) {
     user.CreatedAt).Scan(&newUser.UserID, &newUser.Username)
 
   if err != nil {
-    return err, newUser
+    return newUser, err
   }
 
-  return nil, newUser
+  return newUser, nil
 }
 
-func FindUser(db *sql.DB, user *User) (error, UserData) {
+func FindUser(db *sql.DB, user *User) (UserData, error) {
   u := UserData{}
 
   rows, err := db.Query("SELECT * FROM users WHERE uid=$1", user.Uid)
   if err != nil {
-    return err, u
+    return u, err
   }
 
   for rows.Next() {
@@ -75,10 +75,10 @@ func FindUser(db *sql.DB, user *User) (error, UserData) {
       &u.CreatedAt)
   }
 
-  return nil, u
+  return u, nil
 }
 
-func FindCurrentUserEvent(db *sql.DB, uid int) (error, int, string) {
+func FindCurrentUserEvent(db *sql.DB, uid int) (int, string, error) {
   var evId int
   var name string
 
@@ -90,14 +90,14 @@ func FindCurrentUserEvent(db *sql.DB, uid int) (error, int, string) {
 
   rows, err := db.Query(query, uid)
   if err != nil {
-    return err, -1, ""
+    return -1, "", err
   }
 
   for rows.Next() {
     rows.Scan(&evId, &name)
   }
 
-  return nil, evId, name
+  return evId, name, nil
 }
 
 func ActivateUser(db *sql.DB, userId int) error {

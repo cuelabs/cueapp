@@ -5,16 +5,16 @@ import (
   "encoding/json"
   "database/sql"
   "time"
-  "github.com/mattcarpowich1/cueapp/app/db"
+  "github.com/mattcarpowich1/cueapp/app/models"
 )
 
 var (
-  user db.User 
-  userInfo db.NewUserInfo
-  newUser db.NewUser 
-  userData db.UserData
-  evId db.EventId
-  guests db.Guests
+  user models.User 
+  userInfo models.NewUserInfo
+  newUser models.NewUser 
+  userData models.UserData
+  evId models.EventId
+  guests models.Guests
   userErr error
 )
 
@@ -25,7 +25,7 @@ func ReadAllUsersEvent(dbCon *sql.DB) http.HandlerFunc {
       panic(userErr)
     }
 
-    userErr, guests = db.FindUsersAtEvent(dbCon, evId.ID)
+    guests, userErr = models.FindUsersAtEvent(dbCon, evId.ID)
     if userErr != nil {
       panic(userErr)
     }
@@ -51,7 +51,7 @@ func CreateUser(dbCon *sql.DB) http.HandlerFunc {
     }
 
     newUser.CreatedAt = time.Now()
-    userErr, userInfo = db.InsertUser(dbCon, &newUser)
+    userInfo, userErr = models.InsertUser(dbCon, &newUser)
     if userErr != nil {
       panic(userErr)
     }
@@ -79,12 +79,12 @@ func LoadUser(dbCon *sql.DB) http.HandlerFunc {
 
     // fmt.Println(user.Uid)
 
-    userErr, userData = db.FindUser(dbCon, &user)
+    userData, userErr = models.FindUser(dbCon, &user)
     if userErr != nil {
       panic(userErr)
     }
 
-    userErr, userData.EventId, userData.EventName = db.FindCurrentUserEvent(dbCon, userData.UserId)
+    userData.EventId, userData.EventName, userErr = models.FindCurrentUserEvent(dbCon, userData.UserId)
     if userErr != nil {
       panic(userErr)
     }

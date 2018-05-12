@@ -5,36 +5,36 @@ import JoinEventModal from '../components/JoinEventModal'
 import { handleSearch } from '../actions'
 
 class JoinEvent extends Component {
-  componentWillMount () {
-    const { dispatch } = this.props
-    const ws2 = new WebSocket('ws://localhost:8080/ws')
-    ws2.addEventListener('message', e => {
-      const stuff = JSON.parse(e.data)
-      if (stuff.is_accept) {
-        dispatch({
-          type: 'GUEST_ACCEPTANCE'
-        })
-      }
-    })
-  }
+  // componentWillMount () {
+  //   const { dispatch } = this.props
+  //   const ws2 = new WebSocket('ws://localhost:8080/ws')
+  //   ws2.addEventListener('message', e => {
+  //     const stuff = JSON.parse(e.data)
+  //     if (stuff.is_accept) {
+  //       dispatch({
+  //         type: 'GUEST_ACCEPTANCE'
+  //       })
+  //     }
+  //   })
+  // }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.joinRequestPending) {
-      const ws2 = new WebSocket('ws://localhost:8080/ws')
-      ws2.addEventListener('message', e => {
-        const stuff = JSON.parse(e.data)
-        if (stuff.is_accept) {
-          nextProps.dispatch({
-            type: 'GUEST_ACCEPTANCE'
-          })
-        } else if (stuff.is_reject) {
-          nextProps.dispatch({
-            type: 'GUEST_REJECTION'
-          })
-        }
-      })
-    }
-  }
+  // componentWillReceiveProps (nextProps) {
+  //   if (nextProps.joinRequestPending) {
+  //     const ws2 = new WebSocket('ws://localhost:8080/ws')
+  //     ws2.addEventListener('message', e => {
+  //       const stuff = JSON.parse(e.data)
+  //       if (stuff.is_accept) {
+  //         nextProps.dispatch({
+  //           type: 'GUEST_ACCEPTANCE'
+  //         })
+  //       } else if (stuff.is_reject) {
+  //         nextProps.dispatch({
+  //           type: 'GUEST_REJECTION'
+  //         })
+  //       }
+  //     })
+  //   }
+  // }
 
   render () {
     const {
