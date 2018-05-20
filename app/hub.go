@@ -3,11 +3,6 @@ package main
 
 import "strconv"
 
-type message struct {
-  data []byte
-  event string
-}
-
 type eventMessage struct {
   EventID int `json:"event_id"`
   HostID int `json:"host_id"`
