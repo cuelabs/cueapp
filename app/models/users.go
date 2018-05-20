@@ -83,9 +83,11 @@ func FindCurrentUserEvent(db *sql.DB, uid int) (int, string, error) {
   var name string
 
   query := `
-    SELECT eu_evid, eventname FROM events_users
+    SELECT eu_evid, eventname FROM (
+      SELECT eu_evid FROM events_users WHERE eu_uid=$1 
+      ) as e
     INNER JOIN events
-    ON eu_uid=$1
+    ON e.eu_evid=events.evid
   `
 
   rows, err := db.Query(query, uid)
