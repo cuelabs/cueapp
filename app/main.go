@@ -7,13 +7,9 @@ import (
   "github.com/mattcarpowich1/cueapp/app/models"
   "github.com/gorilla/handlers"
   "github.com/gorilla/mux"
-  // "github.com/gorilla/websocket"
   "github.com/rs/cors"
   _ "github.com/lib/pq"
   "os"
-  // "log"
-  // "encoding/json"
-  // "fmt"
 )
 
 const connectionString = `
@@ -21,19 +17,7 @@ const connectionString = `
   dbname=cuetestdb
   sslmode=disable`
 
-// var Clients = make(map[*websocket.Conn]bool) // connected clients
-// var Broadcast = make(chan JoinRequest)      // broadcast channel
-// var upgrader = websocket.Upgrader{}
 var err error
-
-// type JoinRequest struct {
-//   UserID    int `json:"user_id"`
-//   Username string `json:"username"`
-//   EventID int `json:"event_id"`
-//   IsAccept bool `json:"is_accept"`
-//   IsReject bool `json:"is_reject"`
-//   IsEndEvent bool `json:"is_end_event"`
-// }
 
 func main() {
   models.DBCon, err = sql.Open("postgres", connectionString)
