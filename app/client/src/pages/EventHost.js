@@ -9,6 +9,7 @@ import {
   changeHostView,
   endEvent
 } from '../actions'
+import Socket from '../utils/Socket'
 
 class EventHost extends Component {
   constructor () {
@@ -21,39 +22,19 @@ class EventHost extends Component {
   }
 
   componentDidMount () {
-    const { dispatch, eventId } = this.props
-    const ws = initWebSocket(eventId)
-    ws.onopen = () => console.log('ello')
+    const { dispatch, eventId, userId } = this.props
+    const ws = new Socket(eventId)
+    ws.assignMessageReader(msg => {
+      switch (msg.message_type) {
+        case 'JOIN_REQUEST':
+          console.log('you have a message -> ', msg)
+          break
+        default:
+          return false
+      }
+    })
     dispatch(loadEventInfo(eventId))
   }
-
-  // componentWillReceiveProps (nextProps) {
-  //   const { dispatch, isActive, hostId, userId, done } = this.props
-  //   if ((nextProps.hostId > this.props.hostId) && (!done)) {
-  //     const ws2 = new WebSocket('ws://localhost:8080/ws')
-  //     ws2.addEventListener('message', e => {
-  //       const stuff = JSON.parse(e.data)
-  //       if (isActive && nextProps.hostId === userId && !stuff.is_accept && !stuff.is_end_event) {
-  //         dispatch(incomingJoinRequest(stuff.user_id, stuff.username))
-  //       }
-  //       if (stuff.is_end_event) {
-  //         if (hostId !== userId) {
-  //           setTimeout(() => {
-  //             dispatch({
-  //               type: 'USER_REMOVED_FROM_EVENT'
-  //             }, 1800)
-  //           })
-  //         } else {
-  //           setTimeout(() => {
-  //             dispatch({
-  //               type: 'HOST_END_EVENT'
-  //             })
-  //           })
-  //         }
-  //       }
-  //     })
-  //   }
-  // }
 
   circleChange (num) {
     const { dispatch } = this.props
@@ -138,11 +119,6 @@ class EventHost extends Component {
       </div>
     ) : <div />
   }
-}
-
-const initWebSocket = evId => {
-  const ws = new WebSocket(`ws://localhost:8080/ws?event=${evId}`)
-  return ws
 }
 
 const mapStateToProps = state => state

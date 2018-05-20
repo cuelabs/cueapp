@@ -1,9 +1,18 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 package main 
 
+import "strconv"
+
 type message struct {
   data []byte
   event string
+}
+
+type eventMessage struct {
+  EventID int `json:"event_id"`
+  HostID int `json:"host_id"`
+  UserID int `json:"user_id"`
+  MessageType string `json:"message_type"`
 }
 
 type subscription struct {
@@ -16,7 +25,7 @@ type hub struct {
   events map[string]map[*connection]bool
 
   //inbound messages from connections
-  broadcast chan message
+  broadcast chan eventMessage
 
   //register requests from connections
   register chan *subscription
@@ -26,7 +35,7 @@ type hub struct {
 }
 
 var h = hub{
-  broadcast: make(chan message),
+  broadcast: make(chan eventMessage),
   register: make(chan *subscription),
   unregister: make(chan *subscription),
   events: make(map[string]map[*connection]bool),
@@ -57,15 +66,15 @@ func (h *hub) run() {
       }
 
     case m := <- h.broadcast:
-      connections := h.events[m.event]
+      connections := h.events[strconv.Itoa(m.EventID)]
       for c := range connections {
         select {
-        case c.send <- m.data:
+        case c.send <- m:
         default:
           close(c.send)
           delete(connections, c)
           if len(connections) == 0 {
-            delete(h.events, m.event)
+            delete(h.events, strconv.Itoa(m.EventID))
           }
         }
       }
