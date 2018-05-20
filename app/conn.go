@@ -7,6 +7,7 @@ import (
   "net/http"
   "time"
   "strconv"
+  "fmt"
 )
 
 const (
@@ -28,13 +29,15 @@ var upgrader = websocket.Upgrader{
   WriteBufferSize: 1024,
 }
 
+var e eventMessage
+
 // connection is an middleman between the websocket connection and the hub.
 type connection struct {
   // The websocket connection.
   ws *websocket.Conn
 
   // Buffered channel of outbound messages.
-  send chan []byte
+  send chan eventMessage
 
   // Event id for this connection
   evID int 
@@ -42,7 +45,7 @@ type connection struct {
 
 // readPump pumps messages from the websocket connection to the hub.
 func (c *connection) readPump() {
-  s := &subscription{conn: c, event: string(c.evID)}
+  s := &subscription{conn: c, event: strconv.Itoa(c.evID)}
   defer func() {
     h.unregister <- s
     s.conn.ws.Close()
@@ -52,20 +55,23 @@ func (c *connection) readPump() {
   s.conn.ws.SetPongHandler(func(string) error { 
     s.conn.ws.SetReadDeadline(time.Now().Add(pongWait)); return nil 
   })
-  m := message{}
+
   for {
-    _, msg, err := s.conn.ws.ReadMessage()
+    err := s.conn.ws.ReadJSON(&e)
     if err != nil {
-      break
+      panic(err)
     }
-    m.data = msg
-    h.broadcast <- m
+    fmt.Printf("Got message: %#v\n", e)
+    h.broadcast <- e
   }
 }
 
 // write writes a message with the given message type and payload.
-func (c *connection) write(mt int, payload []byte) error {
+func (c *connection) write(mt int, payload []byte, e eventMessage) error {
   c.ws.SetWriteDeadline(time.Now().Add(writeWait))
+  if mt == -1 {
+    return c.ws.WriteJSON(e)
+  }
   return c.ws.WriteMessage(mt, payload)
 }
 
@@ -80,14 +86,14 @@ func (c *connection) writePump() {
     select {
     case message, ok := <- c.send:
       if !ok {
-        c.write(websocket.CloseMessage, []byte{})
+        c.write(websocket.CloseMessage, []byte{}, eventMessage{})
         return
       }
-      if err := c.write(websocket.TextMessage, message); err != nil {
+      if err := c.write(-1, []byte{}, message); err != nil {
         return
       }
     case <- ticker.C:
-      if err := c.write(websocket.PingMessage, []byte{}); err != nil {
+      if err := c.write(websocket.PingMessage, []byte{}, eventMessage{}); err != nil {
         return
       }
     }
@@ -125,9 +131,8 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
     panic(err)
   }
 
-  c := &connection{send: make(chan []byte, 256), ws: ws, evID: i}
-  s := &subscription{conn: c, event: string(id)}
-  log.Println(s.event)
+  c := &connection{send: make(chan eventMessage), ws: ws, evID: i}
+  s := &subscription{conn: c, event: id}
   h.register <- s
   go s.conn.writePump()
   s.conn.readPump()
