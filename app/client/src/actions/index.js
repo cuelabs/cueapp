@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const ws = new WebSocket('ws://localhost:8080/ws')
+// const ws = new WebSocket('ws://localhost:8080/ws')
 
-ws.onopen = () => console.log('ello')
+// ws.onopen = () => console.log('ello')
 
 export const changeHostView = num => {
   return dispatch => {
@@ -135,14 +135,14 @@ export const sendJoinRequest = (userId, username, eventId) => {
     dispatch({
       type: 'JOIN_REQUEST'
     })
-    ws.send(
-      JSON.stringify({
-        user_id: userId,
-        username: username,
-        event_id: eventId,
-        is_accept: false
-      })
-    )
+    // ws.send(
+    //   JSON.stringify({
+    //     user_id: userId,
+    //     username: username,
+    //     event_id: eventId,
+    //     is_accept: false
+    //   })
+    // )
   }
 }
 
@@ -166,15 +166,15 @@ export const incomingJoinRequest = (userId, username, onPage) => {
 
 export const rejectRequest = (uid, eventId) => {
   return dispatch => {
-    ws.send(
-      JSON.stringify({
-        user_id: uid,
-        username: '',
-        event_id: eventId,
-        is_accept: false,
-        is_reject: true
-      })
-    )
+    // ws.send(
+    //   JSON.stringify({
+    //     user_id: uid,
+    //     username: '',
+    //     event_id: eventId,
+    //     is_accept: false,
+    //     is_reject: true
+    //   })
+    // )
     dispatch({
       type: 'HOST_JUST_REJECTED',
       id: uid
@@ -184,15 +184,15 @@ export const rejectRequest = (uid, eventId) => {
 
 export const acceptRequest = (uid, eventId) => {
   return dispatch => {
-    ws.send(
-      JSON.stringify({
-        user_id: uid,
-        username: '',
-        event_id: -1,
-        is_accept: true,
-        is_reject: false
-      })
-    )
+    // ws.send(
+    //   JSON.stringify({
+    //     user_id: uid,
+    //     username: '',
+    //     event_id: -1,
+    //     is_accept: true,
+    //     is_reject: false
+    //   })
+    // )
     dispatch({
       type: 'HOST_JUST_ACCEPTED',
       id: uid
@@ -255,16 +255,16 @@ export const endEvent = id => {
     dispatch({
       type: 'EVENT_ENDING'
     })
-    ws.send(
-      JSON.stringify({
-        user_id: -1,
-        username: '',
-        event_id: id,
-        is_accept: false,
-        is_reject: false,
-        is_end_event: true
-      })
-    )
+    // ws.send(
+    //   JSON.stringify({
+    //     user_id: -1,
+    //     username: '',
+    //     event_id: id,
+    //     is_accept: false,
+    //     is_reject: false,
+    //     is_end_event: true
+    //   })
+    // )
   }
 }
 

@@ -22,6 +22,8 @@ class EventHost extends Component {
 
   componentDidMount () {
     const { dispatch, eventId } = this.props
+    const ws = initWebSocket(eventId)
+    ws.onopen = () => console.log('ello')
     dispatch(loadEventInfo(eventId))
   }
 
@@ -136,6 +138,11 @@ class EventHost extends Component {
       </div>
     ) : <div />
   }
+}
+
+const initWebSocket = evId => {
+  const ws = new WebSocket(`ws://localhost:8080/ws?event=${evId}`)
+  return ws
 }
 
 const mapStateToProps = state => state
