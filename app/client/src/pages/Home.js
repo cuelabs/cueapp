@@ -19,20 +19,6 @@ class Home extends Component {
     this.joinEvent = this.joinEvent.bind(this)
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { dispatch } = nextProps
-    if (nextProps.eventName && (nextProps.eventName.length > this.props.eventName.length)) {
-      if (!nextProps.isActive) {
-        dispatch(resumePending(nextProps.eventId, nextProps.eventName))
-      }
-    }
-    if (nextProps.joinRequestPending) {
-      this.setState({
-        join: true
-      })
-    }
-  }
-
   handleNameChange (e) {
     const { value } = e.target
     this.setState({
@@ -60,15 +46,15 @@ class Home extends Component {
   }
 
   render () {
-    const { userId } = this.props
+    const { userId, eventId } = this.props
     const { create, join } = this.state
 
     let content
     if (userId > 0) {
       if (create) {
         content = <CreateEvent />
-      } else if (join) {
-        content = <JoinEvent />
+      } else if (join || (eventId > 0)) {
+          content = <JoinEvent />
       } else {
         content = (
           <div className='page home'>

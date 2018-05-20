@@ -2,22 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SearchResults from '../components/SearchResults'
 import JoinEventModal from '../components/JoinEventModal'
-import { handleSearch } from '../actions'
+import { handleSearch, resumePending } from '../actions'
 
 class JoinEvent extends Component {
-  // componentWillMount () {
-  //   const { dispatch } = this.props
-  //   const ws2 = new WebSocket('ws://localhost:8080/ws')
-  //   ws2.addEventListener('message', e => {
-  //     const stuff = JSON.parse(e.data)
-  //     if (stuff.is_accept) {
-  //       dispatch({
-  //         type: 'GUEST_ACCEPTANCE'
-  //       })
-  //     }
-  //   })
-  // }
-
+  componentDidMount () {
+    const { dispatch, eventId, eventName } = this.props
+    if (eventId > 0) {
+      dispatch(resumePending(eventId, eventName))
+    }
+  }
   // componentWillReceiveProps (nextProps) {
   //   if (nextProps.joinRequestPending) {
   //     const ws2 = new WebSocket('ws://localhost:8080/ws')
@@ -44,8 +37,8 @@ class JoinEvent extends Component {
       dispatch,
       selectedEventId,
       selectedEventName,
-      joinRequestPending
-
+      joinRequestPending,
+      resume
     } = this.props
 
     return (

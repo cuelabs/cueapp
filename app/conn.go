@@ -3,11 +3,13 @@ package main
 
 import (
   "github.com/gorilla/websocket"
+  "github.com/mattcarpowich1/cueapp/app/models"
   "log"
   "net/http"
   "time"
   "strconv"
   "fmt"
+  "database/sql"
 )
 
 const (
@@ -44,7 +46,7 @@ type connection struct {
 }
 
 // readPump pumps messages from the websocket connection to the hub.
-func (c *connection) readPump() {
+func (c *connection) readPump(dbCon *sql.DB) {
   s := &subscription{conn: c, event: strconv.Itoa(c.evID)}
   defer func() {
     h.unregister <- s
@@ -62,6 +64,12 @@ func (c *connection) readPump() {
       panic(err)
     }
     fmt.Printf("Got message: %#v\n", e)
+    if e.MessageType == "JOIN_REQUEST" {
+      err = models.JoinEventUser(dbCon, e.EventID, e.UserID)
+      if err != nil {
+        panic(err)
+      }
+    }
     h.broadcast <- e
   }
 }
@@ -101,39 +109,43 @@ func (c *connection) writePump() {
 }
 
 // serverWs handles websocket requests from the peer.
-func serveWs(w http.ResponseWriter, r *http.Request) {
-  r.Header["Origin"] = nil
-  if r.Method != "GET" {
-    http.Error(w, "Method not allowed", 405)
-    return
+func serveWs(dbCon *sql.DB) http.HandlerFunc {
+  fn := func(w http.ResponseWriter, r *http.Request) {
+    r.Header["Origin"] = nil
+    if r.Method != "GET" {
+      http.Error(w, "Method not allowed", 405)
+      return
+    }
+
+    log.Println("hello there")
+
+    keys, ok := r.URL.Query()["event"]
+
+    if !ok || len(keys) < 1 {
+      log.Println("Url Param 'event' is missing")
+      return
+    }
+
+    id := keys[0]
+
+    ws, err := upgrader.Upgrade(w, r, nil)
+
+    if err != nil {
+      log.Println(err)
+      return
+    }
+
+    i, err := strconv.Atoi(id)
+    if err != nil {
+      panic(err)
+    }
+
+    c := &connection{send: make(chan eventMessage), ws: ws, evID: i}
+    s := &subscription{conn: c, event: id}
+    h.register <- s
+    go s.conn.writePump()
+    s.conn.readPump(dbCon)
   }
 
-  log.Println("hello there")
-
-  keys, ok := r.URL.Query()["event"]
-
-  if !ok || len(keys) < 1 {
-    log.Println("Url Param 'event' is missing")
-    return
-  }
-
-  id := keys[0]
-
-  ws, err := upgrader.Upgrade(w, r, nil)
-
-  if err != nil {
-    log.Println(err)
-    return
-  }
-
-  i, err := strconv.Atoi(id)
-  if err != nil {
-    panic(err)
-  }
-
-  c := &connection{send: make(chan eventMessage), ws: ws, evID: i}
-  s := &subscription{conn: c, event: id}
-  h.register <- s
-  go s.conn.writePump()
-  s.conn.readPump()
+  return fn
 }

@@ -34,7 +34,7 @@ func main() {
   router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/create", controllers.CreateUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
-  router.HandleFunc("/ws", serveWs)
+  router.HandleFunc("/ws", serveWs(models.DBCon))
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
