@@ -15,7 +15,10 @@ class JoinEventModal extends Component {
   }
 
   joinRequest () {
-    const { id, uid } = this.props
+    const { id, uid, dispatch } = this.props
+    dispatch({
+      type: 'JOIN_REQUEST'
+    })
     const data = {
       event_id: id,
       host_id: -1,

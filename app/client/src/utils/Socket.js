@@ -1,5 +1,6 @@
 function Socket(evId, immediateSend, payload) {
-  this.ws = new WebSocket(`ws://localhost:8080/ws?event=${evId}`)
+  const url = `ws://localhost:8080/ws?event=${evId}`
+  this.ws = new WebSocket(url)
 
   this.ws.onopen = () => {
     if (!immediateSend) {
@@ -17,7 +18,6 @@ function Socket(evId, immediateSend, payload) {
   }
 
   this.sendMessage = function(m) {
-    console.log('m: ', m)
     this.ws.send(JSON.stringify(m))
   }
 
