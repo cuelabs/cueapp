@@ -7,6 +7,8 @@ import {
   loadEventInfo,
   incomingJoinRequest,
   changeHostView,
+  acceptRequest,
+  rejectRequest,
   endEvent
 } from '../actions'
 import Socket from '../utils/Socket'
@@ -18,6 +20,7 @@ class EventHost extends Component {
       selected: 0
     }
     this.circleChange = this.circleChange.bind(this)
+    this.handleRequest = this.handleRequest.bind(this)
     this.handleEnd = this.handleEnd.bind(this)
   }
 
@@ -28,11 +31,17 @@ class EventHost extends Component {
       switch (msg.message_type) {
         case 'JOIN_REQUEST':
           console.log('you have a message -> ', msg)
+          dispatch(incomingJoinRequest(msg.user_id, msg.display_name, (this.state.selected === 1)))
           break
+        case 'ACCEPT':
+          dispatch(acceptRequest(msg.user_id, eventId))
+        case 'REJECT':
+          dispatch(rejectRequest(msg.user_id, eventId))
         default:
           return false
       }
     })
+    sockets[eventId.toString()] = ws
     dispatch(loadEventInfo(eventId))
   }
 
@@ -41,9 +50,30 @@ class EventHost extends Component {
     dispatch(changeHostView(num))
   }
 
+  handleRequest (uid, accept) {
+    const { eventId } = this.props
+    const evId = eventId.toString()
+    if (sockets.hasOwnProperty(evId)) {
+      sockets[evId].sendMessage({
+        event_id: eventId,
+        host_id: -1,
+        user_id: uid,
+        display_name: '',
+        message_type: accept ? 'ACCEPT' : 'REJECT'
+      })
+    }
+  }
+
   handleEnd () {
     const { dispatch, eventId } = this.props
     dispatch(endEvent(eventId))
+  }
+
+  componentWillUnmount () {
+    const { eventId } = this.props
+    if (sockets.hasOwnProperty(eventId.toString())) {
+      sockets[eventId.toString()].destroy()
+    }
   }
 
   render () {
@@ -105,7 +135,9 @@ class EventHost extends Component {
         {
           hostView === 1 &&
           hostId === userId &&
-          <HostNotifications data={pendingGuests} />
+          <HostNotifications 
+            data={pendingGuests}
+            handler={this.handleRequest} />
         }
         {
           hostView === 2 &&
@@ -120,6 +152,8 @@ class EventHost extends Component {
     ) : <div />
   }
 }
+
+const sockets = {}
 
 const mapStateToProps = state => state
 

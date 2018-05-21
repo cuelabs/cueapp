@@ -10,9 +10,7 @@ $cue-white-3: #FCFCFC;
 $cue-purple: #7F1AE5;
 $cue-shadow: #222225;
 $cue-brighter: #2C2C30;
-// $cue-nav-height: calc((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px);
 $cue-nav-height: calc((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px);
-// $cue-eve-height: calc((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px);
 $cue-load-height: calc(50vh - ((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px) - 36px);
 $cue-main-height: calc(100vh - (((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px) * 2));
 $cue-logo-font-size: calc(56px + (56 - 24) * (100vw - 360px)/(960-360));
@@ -35,7 +33,6 @@ html, body {
 }
 
 .container {
-  // height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -52,14 +49,12 @@ nav {
   margin: 0 auto;
   height: $cue-nav-height;
   width: 100%;
-  // background: $cue-brighter;
   clear: both;
   z-index: 2;
 }
 
 nav > div > input {
   margin-right: 4vw;
-  // background: $cue-white;
   text-indent: calc(32px + (24 - 20) * (100vw - 360px)/(960-360));
 }
 
@@ -77,8 +72,6 @@ nav > div > input {
 
 .fa.fa-search {
   transform: translateX(calc(30px + (24 - 20) * (100vw - 360px)/(960-360)));
-  // transform: translateX(32px);
-  // transform: translateY(-1px);
   font-size: 24px;
   color: $cue-black;
   z-index: 10;
@@ -156,12 +149,10 @@ main {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  // height: $cue-main-height;
   z-index: 5;
 }
 
 .page {
-  // height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -231,14 +222,12 @@ form > label {
 
 input {
   width: $cue-input-width;
-  // height: $cue-input-height;
   height: 32px;
   font-family: $cue-font-secondary;
   border: 1px solid $cue-white-2;
   border-radius: 17px;
   text-indent: 12px;
   caret-color: $cue-black-light;
-  // background-color: $cue-white-2 !important;
   background-color: $cue-white-2;
   color: $cue-black;
   font-size: 20px;
@@ -276,7 +265,6 @@ input {
   align-items: center;
   color: $cue-black-light;
   padding: 0 8px;
-  // border: 1px solid $cue-brighter;
 }
 
 .search-result:hover {
@@ -410,7 +398,6 @@ h3.host-view-page-title.host-indicator {
   flex-wrap: nowrap;
   overflow-y: scroll;
   max-height: 50vh;
-  // border-bottom: 2px solid $cue-shadow;
 }
 
 ul.host-view-page-list > li {
@@ -461,7 +448,6 @@ ul.host-view-page-list > li:nth-child(1) {
 
 ul.host-view-page-list > li > p {
   margin: 0;
-  // margin-bottom: 16px;
 }
 
 div.guest-photo {
@@ -584,7 +570,6 @@ button {
 }
 
 .btn-login {
-  // padding: 8px;
   align-self: flex-end;
   margin-top: 12px;
   width: 96px;
@@ -606,11 +591,8 @@ button.btn-home:nth-child(2) {
 
 button:hover {
   cursor: pointer;
-  // box-shadow: 9px 9px 24px 5px $cue-black-light;
   transition: all .18s easeInOutCirc;
   color: $cue-white;
-  // transform: translateX(-1px);
-  // transform: translateY(-1px);
   background: $cue-purple;
   border-color: $cue-purple;
 

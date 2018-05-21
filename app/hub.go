@@ -7,6 +7,7 @@ type eventMessage struct {
   EventID int `json:"event_id"`
   HostID int `json:"host_id"`
   UserID int `json:"user_id"`
+  DisplayName string `json:"display_name"`
   MessageType string `json:"message_type"`
 }
 

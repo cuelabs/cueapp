@@ -15,7 +15,7 @@ class JoinEventModal extends Component {
   }
 
   joinRequest () {
-    const { id, uid, dispatch } = this.props
+    const { id, uid, dispatch, uname } = this.props
     dispatch({
       type: 'JOIN_REQUEST'
     })
@@ -23,6 +23,7 @@ class JoinEventModal extends Component {
       event_id: id,
       host_id: -1,
       user_id: uid,
+      display_name: uname,
       message_type: 'JOIN_REQUEST'
     }
     const ws = new Socket(id, true, data)
@@ -39,6 +40,9 @@ class JoinEventModal extends Component {
         case 'REJECT':
           console.log('You were rejected, actually.')
           ws.destroy()
+          dispatch({
+            type: 'GUEST_REJECTION'
+          })
           break
         default:
           return false 
