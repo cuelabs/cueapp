@@ -24,7 +24,7 @@ class HostNotifications extends Component {
   }
 
   render () {
-    const { guests } = this.props
+    const { guests, handler } = this.props
     const pendingGuests = guests
       .filter(g => {
         if (g.IsActive || g.DisplayName === '') {
@@ -33,7 +33,6 @@ class HostNotifications extends Component {
           return true
         }
       })
-    console.log(pendingGuests)
 
     return (
       <div className='view'>
@@ -48,10 +47,10 @@ class HostNotifications extends Component {
                 <div className='host-request-options'>
                   <button style={{padding: '2vh'}}
                     className='button-host'
-                    onClick={() => this.handleAccept(item.UserID)}>Accept</button>
+                    onClick={() => handler(item.UserID, true)}>Accept</button>
                   <button style={{padding: '2vh'}}
                     className='button-host'
-                    onClick={() => this.handleReject(item.UserID)}>Reject</button>
+                    onClick={() => handler(item.UserID, false)}>Reject</button>
                 </div>
               </li>
             )).reverse()

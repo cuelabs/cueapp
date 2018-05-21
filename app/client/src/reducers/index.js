@@ -32,16 +32,6 @@ const cueReducer = (state = initialState, action) => {
         ...state,
         beginning: false
       }
-    case 'AUTH_CODE_REQUEST':
-      return {
-        ...state,
-        awaitingAuth: true
-      }
-    case 'AUTH_PAGE_LOADED':
-      return {
-        ...state,
-        authPage: action.content
-      }
     case 'CHANGE_HOST_VIEW':
       return {
         ...state,

@@ -69,6 +69,16 @@ func (c *connection) readPump(dbCon *sql.DB) {
       if err != nil {
         panic(err)
       }
+    } else if e.MessageType == "ACCEPT" {
+      err = models.ActivateUser(dbCon, e.UserID)
+      if err != nil {
+        panic(err)
+      }
+    } else if e.MessageType == "REJECT" {
+      err = models.DeleteEventUser(dbCon, e.EventID, e.UserID)
+      if err != nil {
+        panic(err)
+      }
     }
     h.broadcast <- e
   }
