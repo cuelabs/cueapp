@@ -23,7 +23,7 @@ export const tempLogin = name => {
       type: 'TEMP_LOGIN_REQUEST'
     })
 
-    axios.post('https://localhost:8080/users/create', {
+    axios.post('/users/create', {
       Username: name
     })
       .then(res => {
@@ -44,7 +44,7 @@ export const loadUser = id => {
       type: 'LOAD_USER_REQUEST'
     })
 
-    axios.post('https://localhost:8080/users/load', {
+    axios.post('/users/load', {
       Uid: parseInt(id)
     })
       .then(res => {
@@ -76,7 +76,7 @@ export const loadEventInfo = id => {
       done: false
     })
 
-    axios.post('https://localhost:8080/events/read/one', {
+    axios.post('/events/read/one', {
       ID: id
     })
       .then(res => {
@@ -158,7 +158,7 @@ export const loadRequests = evId => {
       type: 'LOADING_REQUESTS'
     })
 
-    axios.post('https://localhost:8080/events/guests', {
+    axios.post('/events/guests', {
       ID: evId
     })
       .then(res => {
@@ -186,7 +186,7 @@ export const handleNewEvent = (name, user) => {
       type: 'NEW_EVENT_REQUEST'
     })
 
-    axios.post('https://localhost:8080/events/create', {
+    axios.post('/events/create', {
       HostId: user,
       EventName: name
     })
@@ -221,7 +221,7 @@ export const handleSearch = e => {
     })
 
     if (value !== '') {
-      axios.get('https://localhost:8080/events/read/all')
+      axios.get('/events/read/all')
         .then(res => {
           const { Data } = res.data
 
