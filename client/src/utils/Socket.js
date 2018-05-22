@@ -1,5 +1,5 @@
 function Socket(evId, immediateSend, payload) {
-  const url = `wss:///ws?event=${evId}`
+  const url = `wss://arcane-tundra-63613.herokuapp.com/ws?event=${evId}`
   this.ws = new WebSocket(url)
 
   this.ws.onopen = () => {
