@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/mattcarpowich1/cueapp/app",
+	"ImportPath": "github.com/mattcarpowich1/cueapp",
 	"GoVersion": "go1.9",
 	"GodepVersion": "v80",
 	"Deps": [

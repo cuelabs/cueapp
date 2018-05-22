@@ -1,1 +1,1 @@
-web: cd app && ./main
+web: ./main
