@@ -42,6 +42,6 @@ func main() {
   http.Handle("/", router)
   handler := cors.Default().Handler(router)
   
-  http.ListenAndServe(":8080", handlers.LoggingHandler(os.Stdout, handler))
+  http.ListenAndServe(":" + os.Getenv("PORT"), handlers.LoggingHandler(os.Stdout, handler))
 }
 
