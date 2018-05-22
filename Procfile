@@ -1,1 +1,1 @@
-web: cd app && go build main.go conn.go hub.go && ./main
+web: cd app && ./main
