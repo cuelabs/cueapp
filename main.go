@@ -20,7 +20,7 @@ const connectionString = `
 var err error
 
 func main() {
-  os.Setenv("PORT", "8080")
+  // os.Setenv("$PORT", "8080")
   models.DBCon, err = sql.Open("postgres", connectionString)
   if err != nil {
     panic(err)
@@ -41,6 +41,6 @@ func main() {
   http.Handle("/", router)
   handler := cors.Default().Handler(router)
   
-  http.ListenAndServe(":8080", handlers.LoggingHandler(os.Stdout, handler))
+  http.ListenAndServe(":" + os.Getenv("PORT"), handlers.LoggingHandler(os.Stdout, handler))
 }
 
