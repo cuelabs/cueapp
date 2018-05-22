@@ -1,1 +1,1 @@
-web: cueapp $PORT=8080
+web: PORT=8080 cueapp
