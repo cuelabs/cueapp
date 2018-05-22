@@ -1,1 +1,1 @@
-web: go build main.go conn.go hub.go && ./main
+web: go build main.go conn.go hub.go && ./main $PORT=8080
