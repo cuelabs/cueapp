@@ -20,6 +20,7 @@ const connectionString = `
 var err error
 
 func main() {
+  os.Setenv("PORT", "8080")
   models.DBCon, err = sql.Open("postgres", connectionString)
   if err != nil {
     panic(err)
