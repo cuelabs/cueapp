@@ -1,0 +1,37 @@
+{
+	"ImportPath": "github.com/mattcarpowich1/cueapp/app",
+	"GoVersion": "go1.9",
+	"GodepVersion": "v80",
+	"Deps": [
+		{
+			"ImportPath": "github.com/gorilla/handlers",
+			"Comment": "v1.3.0",
+			"Rev": "90663712d74cb411cbef281bc1e08c19d1a76145"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Comment": "v1.6.0-8-g5bbbb5b",
+			"Rev": "5bbbb5b2b5729b132181cc7f4aa3b3c973e9a0ed"
+		},
+		{
+			"ImportPath": "github.com/gorilla/websocket",
+			"Comment": "v1.2.0-40-g21ab95f",
+			"Rev": "21ab95fa12b9bdd8fecf5fa3586aad941cc98785"
+		},
+		{
+			"ImportPath": "github.com/lib/pq",
+			"Comment": "go1.0-cutoff-195-g83612a5",
+			"Rev": "83612a56d3dd153a94a629cd64925371c9adad78"
+		},
+		{
+			"ImportPath": "github.com/lib/pq/oid",
+			"Comment": "go1.0-cutoff-195-g83612a5",
+			"Rev": "83612a56d3dd153a94a629cd64925371c9adad78"
+		},
+		{
+			"ImportPath": "github.com/rs/cors",
+			"Comment": "v1.3.0-1-g36f00aa",
+			"Rev": "36f00aa91d31dac5aeba5cee361f0e5d395116ac"
+		}
+	]
+}

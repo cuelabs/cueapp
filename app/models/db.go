@@ -25,7 +25,8 @@ type User struct {
 type Guest struct {
   UserID int
   DisplayName string
-  IsActive bool 
+  IsActive bool
+  EventID int 
 }
 
 type Guests struct {
@@ -46,8 +47,8 @@ type UserData struct {
   UserId int
   DisplayName string
   IsActive bool
-  CreatedAt time.Time
   EventId int
+  CreatedAt time.Time
   EventName string
 }
 

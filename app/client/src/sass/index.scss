@@ -353,12 +353,50 @@ input {
           animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
 }
 
+//GUEST VIEW
+.event-guest {
+  width: 90vw;
+}
+
+h2.guest-view-event-title {
+  text-align: right;
+  color: $cue-black-light;
+  font-size: $cue-event-font-size;
+  padding-bottom: 8px;
+  width: 100%;
+  margin: 0;
+  margin-top: 8px;
+}
+
+.event-guest small {
+  align-self: flex-end;
+  color: $cue-black-light;
+  font-size: 12px;
+  transition: color .2s ease;
+}
+
+.event-guest small:hover {
+  cursor: pointer;
+  color: $cue-purple;
+  transition: color .2s ease;
+}
+
 // HOST VIEW
 .event-host {
   width: 90vw;
 }
 
 h2.host-view-event-title {
+  text-align: right;
+  color: $cue-black-light;
+  font-size: $cue-event-font-size;
+  padding-bottom: 8px;
+  width: 100%;
+  margin: 0;
+  margin-top: 8px;
+}
+
+h2.guest-view-event-title {
   text-align: right;
   color: $cue-black-light;
   font-size: $cue-event-font-size;

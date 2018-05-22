@@ -38,6 +38,11 @@ func CreateEvent(dbCon *sql.DB) http.HandlerFunc {
       panic(err)
     }
 
+    err = models.UpdateUserEvent(dbCon, eventId.EvID, event.HostID)
+    if err != nil {
+      panic(err)
+    }
+
     cue.CreatedAt = rightNow
     cue.UpdatedAt = rightNow
 

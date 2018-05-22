@@ -6,6 +6,7 @@ import Main from './components/Main'
 import PlayControls from './components/PlayControls'
 import Loader from './components/Loader'
 import Home from './pages/Home'
+import EventGuest from './pages/EventGuest'
 import EventHost from './pages/EventHost'
 
 class App extends Component {
@@ -27,7 +28,9 @@ class App extends Component {
       hostId,
       userId,
       eventName,
-      beginning
+      beginning,
+      dispatch,
+      eventId
     } = this.props
 
     return (
@@ -39,7 +42,13 @@ class App extends Component {
             <Main>
               { !isActive
                 ? <Home />
-                : <EventHost title={eventName} />
+                : hostId === userId ? 
+                  <EventHost title={eventName} /> :
+                  <EventGuest 
+                    title={eventName}
+                    dispatcher={dispatch}
+                    id={eventId}
+                    uid={userId} />
               }
               {
                 hostId === userId && isActive && !beginning &&

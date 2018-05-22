@@ -77,16 +77,16 @@ func LoadUser(dbCon *sql.DB) http.HandlerFunc {
       panic(userErr)
     }
 
-    // fmt.Println(user.Uid)
-
     userData, userErr = models.FindUser(dbCon, &user)
     if userErr != nil {
       panic(userErr)
     }
 
-    userData.EventId, userData.EventName, userErr = models.FindCurrentUserEvent(dbCon, userData.UserId)
-    if userErr != nil {
-      panic(userErr)
+    if userData.EventId > -1 {
+      userData.EventName, userErr = models.FindEventNameById(dbCon, userData.EventId)
+      if userErr != nil {
+        panic(userErr)
+      }
     }
 
     userDataJson, err := json.Marshal(userData)

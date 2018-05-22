@@ -72,6 +72,7 @@ func FindUser(db *sql.DB, user *User) (UserData, error) {
       &u.UserId, 
       &u.DisplayName, 
       &u.IsActive,
+      &u.EventId,
       &u.CreatedAt)
   }
 
@@ -100,6 +101,15 @@ func FindCurrentUserEvent(db *sql.DB, uid int) (int, string, error) {
   }
 
   return evId, name, nil
+}
+
+func UpdateUserEvent(db *sql.DB, eventId int, userId int) error {
+  _, err := db.Exec("UPDATE users SET u_evid=$1 WHERE uid=$2", eventId, userId)
+  if err != nil {
+    return err
+  }
+
+  return nil
 }
 
 func ActivateUser(db *sql.DB, userId int) error {

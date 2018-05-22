@@ -31,12 +31,25 @@ class EventHost extends Component {
       switch (msg.message_type) {
         case 'JOIN_REQUEST':
           console.log('you have a message -> ', msg)
-          dispatch(incomingJoinRequest(msg.user_id, msg.display_name, (this.state.selected === 1)))
+          dispatch(incomingJoinRequest(msg.user_id, msg.display_name, eventId, (this.state.selected === 1)))
           break
         case 'ACCEPT':
           dispatch(acceptRequest(msg.user_id, eventId))
+          break
         case 'REJECT':
           dispatch(rejectRequest(msg.user_id, eventId))
+          break
+        case 'GUEST_LEAVE_EVENT':
+          dispatch({
+            type: 'GUEST_LEFT_EVENT',
+            id: msg.user_id
+          })
+          break
+        case 'END_EVENT':
+          dispatch({
+            type: 'HOST_END_EVENT'
+          })
+          break
         default:
           return false
       }
@@ -66,7 +79,15 @@ class EventHost extends Component {
 
   handleEnd () {
     const { dispatch, eventId } = this.props
-    dispatch(endEvent(eventId))
+    if (sockets.hasOwnProperty(eventId)) {
+      sockets[eventId].sendMessage({
+        event_id: eventId,
+        host_id: -1,
+        user_id: -1,
+        display_name: '',
+        message_type: 'END_EVENT'
+      })
+    }
   }
 
   componentWillUnmount () {
@@ -91,7 +112,7 @@ class EventHost extends Component {
 
     const activeGuests = guests
       .filter(g => {
-        if (g.IsActive && (g.UserID !== userId)) {
+        if ((g.EventID === eventId) && g.IsActive && (g.UserID !== userId)) {
           return true
         } else {
           return false
@@ -99,7 +120,7 @@ class EventHost extends Component {
       })
     const pendingGuests = guests
       .filter(g => {
-        if (g.IsActive) {
+        if (g.IsActive || (g.EventID !== eventId)) {
           return false
         } else {
           return true
