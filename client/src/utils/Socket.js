@@ -1,5 +1,5 @@
 function Socket(evId, immediateSend, payload) {
-  const url = `ws://ws?event=${evId}`
+  const url = `wss://ws?event=${evId}`
   this.ws = new WebSocket(url)
 
   this.ws.onopen = () => {
