@@ -1,1 +1,1 @@
-web: cueapp
+web: PORT=8080 cueapp
