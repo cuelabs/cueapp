@@ -1,1 +1,1 @@
-web: main
+web: cueapp $PORT=8080
