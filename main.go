@@ -20,7 +20,6 @@ import (
 var err error
 
 func main() {
-  // os.Setenv("PORT", "8080")
   models.DBCon, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
   if err != nil {
     panic(err)
