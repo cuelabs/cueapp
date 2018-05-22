@@ -62,7 +62,8 @@ const cueReducer = (state = initialState, action) => {
           {
             UserID: action.userId,
             DisplayName: action.username,
-            IsActive: action.isActive
+            IsActive: action.isActive,
+            EventID: action.eventId
           }
         ],
         counter: action.updateCounter ? state.counter + 1 : 0
@@ -126,7 +127,6 @@ const cueReducer = (state = initialState, action) => {
         guests: guests
           .filter(g => {
             if (g.UserID === action.id) {
-              console.log('ey')
               return false
             } else {
               return true
@@ -151,6 +151,29 @@ const cueReducer = (state = initialState, action) => {
         selectedEventName: '',
         selectedEventId: -1,
         query: ''
+      }
+    // for event host
+    case 'GUEST_LEFT_EVENT':
+      return {
+        ...state,
+        guests: guests
+          .filter(g => {
+            if (g.UserID === action.id) {
+              return false
+            } else {
+              return true
+            }
+          })
+      }
+    // for event guest
+    case 'GUEST_EXIT':
+      return {
+        ...state,
+        isActive: false,
+        eventId: -1,
+        eventName: '',
+        selectedEventId: -1,
+        hostId: -1
       }
     case 'USER_REMOVED_FROM_EVENT':
       return {

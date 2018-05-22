@@ -38,7 +38,8 @@ class JoinEvent extends Component {
       selectedEventId,
       selectedEventName,
       joinRequestPending,
-      resume
+      resume,
+      eventId
     } = this.props
 
     return (
@@ -56,6 +57,7 @@ class JoinEvent extends Component {
           selectedEventId > -1 &&
           <JoinEventModal
             id={selectedEventId}
+            evid={eventId}
             uid={userId}
             name={selectedEventName}
             dispatch={dispatch}

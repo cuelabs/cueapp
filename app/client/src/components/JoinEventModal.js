@@ -14,6 +14,36 @@ class JoinEventModal extends Component {
     this.joinRequest = this.joinRequest.bind(this)
   }
 
+  componentDidMount () {
+    if (this.props.evid !== null) {
+      const ws = new Socket(this.props.evid)
+      sockets[this.props.evid.toString()] = ws
+      ws.assignMessageReader(msg => {
+        if (!(msg.user_id === this.props.uid)) {
+          return false
+        }
+        switch (msg.message_type) {
+          case 'ACCEPT':
+            console.log('You got accepted!')
+            ws.destroy()
+            this.props.dispatch({
+              type: 'GUEST_ACCEPTANCE'
+            })
+            break
+          case 'REJECT':
+            console.log('You were rejected, actually.')
+            ws.destroy()
+            this.props.dispatch({
+              type: 'GUEST_REJECTION'
+            })
+            break
+          default:
+            return false 
+        }
+      })
+    }
+  }
+
   joinRequest () {
     const { id, uid, dispatch, uname } = this.props
     dispatch({
@@ -27,7 +57,7 @@ class JoinEventModal extends Component {
       message_type: 'JOIN_REQUEST'
     }
     const ws = new Socket(id, true, data)
-
+    sockets[id.toString()] = ws
     ws.assignMessageReader(msg => {
       if (!(msg.user_id === uid)) {
         return false
@@ -36,6 +66,9 @@ class JoinEventModal extends Component {
         case 'ACCEPT':
           console.log('You got accepted!')
           ws.destroy()
+          dispatch({
+            type: 'GUEST_ACCEPTANCE'
+          })
           break
         case 'REJECT':
           console.log('You were rejected, actually.')
@@ -49,6 +82,13 @@ class JoinEventModal extends Component {
       }
     })
   } 
+
+  componentWillUnmount () {
+    const { id } = this.props
+    if (sockets.hasOwnProperty(id.toString())) {
+      sockets[id.toString()].destroy()
+    }
+  }
 
   render () {
     const {
@@ -100,5 +140,7 @@ const toCamelCase = (val, i, arr) => {
     return val
   }
 }
+
+const sockets = {}
 
 export default JoinEventModal

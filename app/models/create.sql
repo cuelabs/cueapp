@@ -29,6 +29,7 @@ CREATE TABLE users (
   uid SERIAL PRIMARY KEY,
   displayName varchar(100) not null UNIQUE,
   isActive BOOLEAN DEFAULT FALSE,
+  u_evid INTEGER DEFAULT -1,
   createdAt TIMESTAMP DEFAULT NOW()
 );
 

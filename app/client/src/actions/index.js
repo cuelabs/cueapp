@@ -49,6 +49,7 @@ export const loadUser = id => {
     })
       .then(res => {
         setTimeout(() => {
+          console.log(res.data)
           dispatch({
             type: 'LOAD_USER_SUCCESS',
             id: res.data.UserId,
@@ -118,21 +119,18 @@ export const sendJoinRequest = (userId, username, eventId) => {
   }
 }
 
-export const incomingJoinRequest = (userId, username, onPage) => {
+export const incomingJoinRequest = (userId, username, eventId, onPage) => {
   return dispatch => {
     if (userId > 0) {
       dispatch({
         type: 'HOST_NEW_REQUEST',
         userId,
         username,
+        eventId,
         isActive: false,
         updateCounter: !onPage
       })
-    } else {
-      dispatch({
-        type: 'USER_JOIN_EVENT'
-      })
-    }
+    } 
   }
 }
 

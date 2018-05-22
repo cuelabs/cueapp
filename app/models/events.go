@@ -2,12 +2,11 @@ package models
 
 import (
   "database/sql"
-  "fmt"
 )
 
 func FindUsersAtEvent(db *sql.DB, id int) (Guests, error) {
   query := `
-    SELECT uid, displayName, isActive FROM
+    SELECT uid, displayName, isActive, u_evid FROM
       (SELECT * FROM events_users WHERE eu_evid=$1
     ) AS e
     INNER JOIN users
@@ -26,7 +25,8 @@ func FindUsersAtEvent(db *sql.DB, id int) (Guests, error) {
     rows.Scan(
       &g.UserID,
       &g.DisplayName, 
-      &g.IsActive)
+      &g.IsActive,
+      &g.EventID)
     
     allGuests.Data = append(allGuests.Data, g)
   }
@@ -122,7 +122,6 @@ func FindAllEvents(db *sql.DB) (Events, error) {
 
 func FindOneEvent(db *sql.DB, id int) (Event, error) {
   query := "SELECT * FROM events WHERE evid=$1"
-  fmt.Println(id)
 
   e := Event{}
 
@@ -144,10 +143,26 @@ func FindOneEvent(db *sql.DB, id int) (Event, error) {
   return e, nil
 }
 
+func FindEventNameById(db *sql.DB, id int) (string, error) {
+  query := "SELECT eventname FROM events WHERE evid=$1"
+  var s string
+  rows, err := db.Query(query, id)
+  if err != nil {
+    return s, err
+  }
+
+  for rows.Next() {
+    rows.Scan(&s)
+  }
+
+  return s, nil
+}
+
 func DeactivateAllUsersAtEvent(db *sql.DB, id int) error {
   query := `
   UPDATE users as u
-  SET isActive=FALSE
+  SET isActive=FALSE,
+    u_evid=-1
   FROM (
     SELECT * FROM users 
       INNER JOIN (

@@ -69,6 +69,10 @@ func (c *connection) readPump(dbCon *sql.DB) {
       if err != nil {
         panic(err)
       }
+      err = models.UpdateUserEvent(dbCon, e.EventID, e.UserID)
+      if err != nil {
+        panic(err)
+      }
     } else if e.MessageType == "ACCEPT" {
       err = models.ActivateUser(dbCon, e.UserID)
       if err != nil {
@@ -76,6 +80,32 @@ func (c *connection) readPump(dbCon *sql.DB) {
       }
     } else if e.MessageType == "REJECT" {
       err = models.DeleteEventUser(dbCon, e.EventID, e.UserID)
+      if err != nil {
+        panic(err)
+      }
+      err = models.UpdateUserEvent(dbCon, -1, e.UserID)
+      if err != nil {
+        panic(err)
+      }
+    } else if e.MessageType == "GUEST_LEAVE_EVENT" {
+      err = models.DeleteEventUser(dbCon, e.EventID, e.UserID)
+      if err != nil {
+        panic(err)
+      }
+      err = models.DeactivateUser(dbCon, e.UserID)
+      if err != nil {
+        panic(err)
+      }
+      err = models.UpdateUserEvent(dbCon, -1, e.UserID)
+      if err != nil {
+        panic(err)
+      }
+    } else if e.MessageType == "END_EVENT" {
+      err = models.DeactivateAllUsersAtEvent(dbCon, e.EventID)
+      if err != nil {
+        panic(err)
+      }
+      err = models.DeactivateEvent(dbCon, e.EventID)
       if err != nil {
         panic(err)
       }
@@ -150,7 +180,7 @@ func serveWs(dbCon *sql.DB) http.HandlerFunc {
       panic(err)
     }
 
-    c := &connection{send: make(chan eventMessage), ws: ws, evID: i}
+    c := &connection{send: make(chan eventMessage), ws: ws, evID: i} // msg := make(chan eventMessage) // c := &subscription{&connection{msg, ws, i}}
     s := &subscription{conn: c, event: id}
     h.register <- s
     go s.conn.writePump()
