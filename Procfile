@@ -1,1 +1,1 @@
-web: ./main
+web: go build main.go conn.go hub.go && ./main
