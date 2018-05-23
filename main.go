@@ -12,15 +12,25 @@ import (
   "os"
 )
 
+// dev
 // const connectionString = `
 //   user=matthewcarpowich
 //   dbname=cuetestdb
 //   sslmode=disable`
 
+// heroku
+var connectionString = os.Getenv("DATABASE_URL")
+
+//dev
+// const PORT = "8080"
+
+//heroku
+var PORT = os.Getenv("PORT")
+
 var err error
 
 func main() {
-  models.DBCon, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
+  models.DBCon, err = sql.Open("postgres", connectionString)
   if err != nil {
     panic(err)
   }
@@ -40,6 +50,6 @@ func main() {
   http.Handle("/", router)
   handler := cors.Default().Handler(router)
   
-  http.ListenAndServe(":" + os.Getenv("PORT"), handlers.LoggingHandler(os.Stdout, handler))
+  http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
 }
 

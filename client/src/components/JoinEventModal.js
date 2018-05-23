@@ -12,9 +12,11 @@ class JoinEventModal extends Component {
   constructor(props) {
     super(props)
     this.joinRequest = this.joinRequest.bind(this)
+    this.cancelRequest = this.cancelRequest.bind(this)
   }
 
   componentDidMount () {
+    console.log(this.props)
     if (this.props.evid !== null) {
       const ws = new Socket(this.props.evid)
       sockets[this.props.evid.toString()] = ws
@@ -26,6 +28,7 @@ class JoinEventModal extends Component {
           case 'ACCEPT':
             console.log('You got accepted!')
             ws.destroy()
+            delete sockets[this.props.evid.toString()]
             this.props.dispatch({
               type: 'GUEST_ACCEPTANCE'
             })
@@ -33,9 +36,16 @@ class JoinEventModal extends Component {
           case 'REJECT':
             console.log('You were rejected, actually.')
             ws.destroy()
+            delete sockets[this.props.evid.toString()]
             this.props.dispatch({
               type: 'GUEST_REJECTION'
             })
+            break
+          case 'CANCEL_REQUEST':
+            console.log('yo!')
+            ws.destroy()
+            delete sockets[this.props.evid.toString()]
+            this.props.dispatch(closeModal())
             break
           default:
             return false 
@@ -66,27 +76,56 @@ class JoinEventModal extends Component {
         case 'ACCEPT':
           console.log('You got accepted!')
           ws.destroy()
+          delete sockets[id.toString()]
           dispatch({
             type: 'GUEST_ACCEPTANCE'
           })
+          delete sockets[id.toString()]
           break
         case 'REJECT':
           console.log('You were rejected, actually.')
           ws.destroy()
+          delete sockets[id.toString()]
           dispatch({
             type: 'GUEST_REJECTION'
           })
+          break
+        case 'CANCEL_REQUEST':
+          console.log('yo!')
+          ws.destroy()
+          delete sockets[id.toString()]
+          this.props.dispatch(closeModal())
           break
         default:
           return false 
       }
     })
+  }
+
+  cancelRequest () {
+    const { uid } = this.props
+    let id 
+    if (this.props.evid > -1) {
+      id = this.props.evid
+    } else {
+      id = this.props.id
+    }
+    if (sockets.hasOwnProperty(id.toString())) {
+      sockets[id.toString()].sendMessage({
+        event_id: id,
+        host_id: -1,
+        user_id: uid,
+        display_name: '',
+        message_type: 'CANCEL_REQUEST'
+      })
+    }
   } 
 
   componentWillUnmount () {
     const { id } = this.props
     if (sockets.hasOwnProperty(id.toString())) {
       sockets[id.toString()].destroy()
+      delete sockets[id.toString()]
     }
   }
 
@@ -125,6 +164,8 @@ class JoinEventModal extends Component {
             }...
           </small>
           <Loader />
+          <small className='small-cancel'
+            onClick={this.cancelRequest}>CANCEL</small>
         </Modal>
       )
     }

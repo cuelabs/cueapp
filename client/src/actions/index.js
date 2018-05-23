@@ -1,5 +1,11 @@
 import axios from 'axios'
 
+//dev
+// const baseURL = 'http://localhost:8080'
+
+//production
+const baseURL = ''
+
 export const changeHostView = num => {
   return dispatch => {
     dispatch({
@@ -23,7 +29,7 @@ export const tempLogin = name => {
       type: 'TEMP_LOGIN_REQUEST'
     })
 
-    axios.post('/users/create', {
+    axios.post(`${baseURL}/users/create`, {
       Username: name
     })
       .then(res => {
@@ -44,7 +50,7 @@ export const loadUser = id => {
       type: 'LOAD_USER_REQUEST'
     })
 
-    axios.post('/users/load', {
+    axios.post(`${baseURL}/users/load`, {
       Uid: parseInt(id)
     })
       .then(res => {
@@ -76,7 +82,7 @@ export const loadEventInfo = id => {
       done: false
     })
 
-    axios.post('/events/read/one', {
+    axios.post(`${baseURL}/events/read/one`, {
       ID: id
     })
       .then(res => {
@@ -158,7 +164,7 @@ export const loadRequests = evId => {
       type: 'LOADING_REQUESTS'
     })
 
-    axios.post('/events/guests', {
+    axios.post(`${baseURL}/events/guests`, {
       ID: evId
     })
       .then(res => {
@@ -186,7 +192,7 @@ export const handleNewEvent = (name, user) => {
       type: 'NEW_EVENT_REQUEST'
     })
 
-    axios.post('/events/create', {
+    axios.post(`${baseURL}/events/create`, {
       HostId: user,
       EventName: name
     })
@@ -221,7 +227,7 @@ export const handleSearch = e => {
     })
 
     if (value !== '') {
-      axios.get('/events/read/all')
+      axios.get(`${baseURL}/events/read/all`)
         .then(res => {
           const { Data } = res.data
 

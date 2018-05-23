@@ -109,6 +109,15 @@ func (c *connection) readPump(dbCon *sql.DB) {
       if err != nil {
         panic(err)
       }
+    } else if e.MessageType == "CANCEL_REQUEST" {
+      err = models.UpdateUserEvent(dbCon, -1, e.UserID)
+      if err != nil {
+        panic(err)
+      }
+      err = models.DeleteEventUser(dbCon, e.EventID, e.UserID)
+      if err != nil {
+        panic(err)
+      }
     }
     h.broadcast <- e
   }

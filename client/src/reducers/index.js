@@ -25,7 +25,7 @@ const initialState = {
 }
 
 const cueReducer = (state = initialState, action) => {
-  const { guests } = state
+  const { guests, counter } = state
   switch (action.type) {
     case 'STOP_LOADING':
       return {
@@ -175,6 +175,19 @@ const cueReducer = (state = initialState, action) => {
         selectedEventId: -1,
         hostId: -1
       }
+    case 'GUEST_CANCELED_REQUEST':
+      return {
+        ...state,
+        guests: guests
+          .filter(g => {
+            if (g.UserID === action.id) {
+              return false
+            } else {
+              return true
+            }
+          }),
+        counter: (counter > 0) ? (counter - 1) : counter
+      }
     case 'USER_REMOVED_FROM_EVENT':
       return {
         ...state,
@@ -272,7 +285,9 @@ const cueReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedEventName: '',
-        selectedEventId: -1
+        selectedEventId: -1,
+        eventId: -1,
+        joinRequestPending: false
       }
     default:
       return state

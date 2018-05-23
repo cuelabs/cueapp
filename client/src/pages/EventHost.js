@@ -45,6 +45,12 @@ class EventHost extends Component {
             id: msg.user_id
           })
           break
+        case 'CANCEL_REQUEST':
+          dispatch({
+            type: 'GUEST_CANCELED_REQUEST',
+            id: msg.user_id
+          })
+          break
         case 'END_EVENT':
           dispatch({
             type: 'HOST_END_EVENT'
