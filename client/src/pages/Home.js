@@ -60,11 +60,11 @@ class Home extends Component {
           <div className='page home'>
             <Button home
               handler={this.joinEvent}>
-              Join An Event
+              JOIN EVENT
             </Button>
             <Button home
               handler={this.createEvent}>
-              Create Event
+              CREATE EVENT
             </Button>
           </div>
         )

@@ -144,13 +144,13 @@ class JoinEventModal extends Component {
         <Modal>
           <p>Join event {name}?</p>
           <div className='modal-inner'>
-            <Button join
+            <Button small
               handler={this.joinRequest}>
               Let's Go!
             </Button>
-            <Button join
+            <Button small
               handler={() => dispatch(closeModal())}>
-              Nevermind...
+              Nevermind
             </Button>
           </div>
         </Modal>
