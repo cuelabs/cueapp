@@ -11,23 +11,6 @@ class JoinEvent extends Component {
       dispatch(resumePending(eventId, eventName))
     }
   }
-  // componentWillReceiveProps (nextProps) {
-  //   if (nextProps.joinRequestPending) {
-  //     const ws2 = new WebSocket('ws://localhost:8080/ws')
-  //     ws2.addEventListener('message', e => {
-  //       const stuff = JSON.parse(e.data)
-  //       if (stuff.is_accept) {
-  //         nextProps.dispatch({
-  //           type: 'GUEST_ACCEPTANCE'
-  //         })
-  //       } else if (stuff.is_reject) {
-  //         nextProps.dispatch({
-  //           type: 'GUEST_REJECTION'
-  //         })
-  //       }
-  //     })
-  //   }
-  // }
 
   render () {
     const {
@@ -44,12 +27,17 @@ class JoinEvent extends Component {
 
     return (
       <div className='page join'>
-        <input
-          placeholder='search for ongoing event'
-          value={query}
-          onChange={e => {
-            dispatch(handleSearch(e))
-          }} />
+        <div className='search'>
+          <img className='search-icon blue' 
+            src='./ass4.svg' 
+            style={{height: 26}}/>
+          <input
+            placeholder='search events'
+            value={query}
+            onChange={e => {
+              dispatch(handleSearch(e))
+            }} />
+        </div>
         <SearchResults
           display={query !== ''}
           {...this.props} />

@@ -5,16 +5,20 @@ const Button = ({
   create,
   children,
   join,
-  handler
+  handler,
+  small,
+  submit
 }) => (
   <button
     onClick={() => handler ? handler() : null}
     className={
       `${home ? 'btn-home' : ''}
       ${create ? 'btn-create' : ''}
-      ${join ? 'btn-join' : ''}`
+      ${join ? 'btn-join' : ''}
+      ${small ? 'btn-small' : ''}
+      ${submit ? 'btn-submit' : ''}`
     }
-    type={create ? 'submit' : 'button'}>
+    type={(create || submit) ? 'submit' : 'button'}>
     {children}
   </button>
 )

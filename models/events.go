@@ -95,7 +95,7 @@ func InsertEvent(db *sql.DB, event *Event) (int, error) {
 }
 
 func FindAllEvents(db *sql.DB) (Events, error) {
-  query := "SELECT * FROM events"
+  query := "SELECT * FROM events WHERE isactive=TRUE"
 
   allEvents := Events{}
   e := Event{}

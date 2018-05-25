@@ -1,6 +1,11 @@
-$cue-font-primary: 'Ubuntu', sans-serif;
+$cue-font-primary: 'Tajawal', 'Ubuntu', sans-serif;
 $cue-font-secondary: 'Helvetica', sans-serif;
 $cue-black: #29292D;
+$cue-blue: #2E6DE9;
+$cue-blue-lighter: #5487EC;
+$cue-blue-lightest: #7EA4F0;
+$cue-blue-darker: #1057E3;
+$cue-blue-darkest: #083FAA; 
 $cue-black-hsl: hsl(240, 5, 17);
 $cue-black-light: hsl(240, 5, 80);
 $cue-black-gray: hsl(240, 5, 13);
@@ -28,7 +33,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: $cue-font-primary;
-  background: $cue-black;
+  background: $cue-white-2;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -70,6 +75,11 @@ nav > div > input {
   z-index: 11;
 }
 
+.search-icon.blue {
+  position: absolute;
+  transform: translateX(-36px);
+}
+
 .fa.fa-search {
   transform: translateX(calc(30px + (24 - 20) * (100vw - 360px)/(960-360)));
   font-size: 24px;
@@ -88,14 +98,14 @@ nav > div > input {
 }
 
 .fa.selected {
-  color: $cue-purple;
+  color: $cue-blue;
   transition: all .1s ease;
 }
 
 .controls {
   position: fixed;
   height: 16vh;
-  background-color: $cue-black-gray;
+  background-color: $cue-black;
   width: 100vw;
   bottom: 0;
   display: flex;
@@ -141,7 +151,7 @@ h1 {
   font-weight: 700;
   margin: 8px;
   margin-left: 4vw;
-  color: $cue-purple;
+  color: $cue-blue;
 }
 
 main {
@@ -150,6 +160,10 @@ main {
   justify-content: space-around;
   align-items: center;
   z-index: 5;
+}
+
+.logo {
+  font-weight: 200;
 }
 
 .page {
@@ -224,15 +238,44 @@ input {
   width: $cue-input-width;
   height: 32px;
   font-family: $cue-font-secondary;
-  border: 1px solid $cue-white-2;
-  border-radius: 17px;
-  text-indent: 12px;
+  // border: 1px solid $cue-white-2;
+  // border-radius: 17px;
+  border: none;
+  // text-indent: 12px;
   caret-color: $cue-black-light;
   background-color: $cue-white-2;
   color: $cue-black;
-  font-size: 20px;
+  font-size: 28px;
   outline: none;
   z-index: 7;
+}
+
+::-webkit-input-placeholder {
+   text-align: center;
+   color: $cue-black-light;
+   font-family: $cue-font-secondary;
+   font-size: 32px;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;
+   color: $cue-black-light;  
+   font-family: $cue-font-secondary;
+   font-size: 32px;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;
+   color: $cue-black-light; 
+   font-family: $cue-font-secondary; 
+   font-size: 32px;
+}
+
+:-ms-input-placeholder {  
+   text-align: center;
+   color: $cue-black-light; 
+   font-family: $cue-font-secondary;
+   font-size: 32px;
 }
 
 .search-results {
@@ -258,13 +301,14 @@ input {
 
 .search-result {
   margin: 0 auto;
-  height: $cue-input-height;
-  width: calc(100% - 16px);
+  // height: $cue-input-height;
+  height: 64px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   color: $cue-black-light;
-  padding: 0 8px;
+  // padding: 0 8px;
 }
 
 .search-result:hover {
@@ -274,7 +318,7 @@ input {
 }
 
 .search-result-event-title {
-  font-size: $cue-input-font-size;
+  font-size: 32px;
   font-family: $cue-font-secondary;
 }
 
@@ -288,8 +332,8 @@ input {
   top: $cue-nav-height;
   left: 10vw;
   height: 300px;
-  background-color: $cue-brighter;
-  z-index: 10;
+  background-color: $cue-white-2;
+  z-index: 20;
   animation-name: comeInModal;
   animation-iteration-count: 1;
   animation-duration: .3s;
@@ -303,13 +347,13 @@ input {
 .modal p {
   text-align: center;
   font-size: 24px;
-  color: $cue-white;
+  color: $cue-blue;
 }
 
 .modal small {
   position: absolute;
   top: 24px;
-  color: $cue-white;
+  color: $cue-blue;
   text-align: center;
   width: 72vw;
   left: 4vw;
@@ -318,6 +362,11 @@ input {
 small.small-cancel {
   top: 256px;
   font-size: 12px;
+}
+
+small.small-cancel:hover {
+  cursor: pointer;
+  color: $cue-blue-darker;
 }
 
 .modal-inner {
@@ -352,7 +401,7 @@ small.small-cancel {
   margin: 0 auto;
   width: 15%;
   height: 15%;
-  background-color: $cue-purple;
+  background-color: $cue-blue;
   border-radius: 100%;
   -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
           animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
@@ -451,7 +500,7 @@ ul.host-view-page-list > li {
   justify-content: flex-start;
   align-items: center;
   border-top: 1px solid $cue-black-light;
-  color: $cue-white;
+  color: $cue-black;
   padding: 4vh 0;
   padding-left: 12px;
   animation-name: elEye;
@@ -577,11 +626,13 @@ div.guest-photo {
 }
 
 button {
-  background: $cue-white;
+  background: $cue-blue;
   font-family: $cue-font-primary;
-  color: $cue-black;
-  border-radius: 6px;
-  border-color: $cue-white;
+  color: $cue-white-2;
+  height: 64px;
+  font-weight: 300;
+  box-sizing: border-box;
+  border-radius: 32px;
   transition: all .18s ease-out;
   font-size: 14px;
   outline: none;
@@ -590,12 +641,30 @@ button {
 
 .button-host {
   width: 96px;
+  background: none;
+  text-align: right;
+  color: $cue-blue;
+  border: none;
+}
+
+.button-host:hover {
+  color: $cue-blue-darkest;
+  background: none !important;
 }
 
 .btn-home {
-  font-size: $cue-button-font-size;
+  font-size: 32px;
   width: $cue-button-width;
   padding: 2.7vh 0;
+}
+
+.btn-small {
+  font-size: 18px;
+  width: 128px;
+  background: none;
+  color: $cue-blue;
+  border: none;
+  box-sizing: border-box;
 }
 
 .btn-create {
@@ -624,6 +693,11 @@ button {
   align-items: center;
 }
 
+.btn-submit {
+  align-self: flex-end;
+  text-align: right;
+}
+
 button.btn-home:nth-child(1) {
   margin-bottom: -4vh;
 }
@@ -635,10 +709,12 @@ button.btn-home:nth-child(2) {
 button:hover {
   cursor: pointer;
   transition: all .18s easeInOutCirc;
-  color: $cue-white;
-  background: $cue-purple;
-  border-color: $cue-purple;
+  background: $cue-blue-lighter;
+}
 
+.btn-small:hover {
+  background: none;
+  color: $cue-blue-darker;
 }
 
 button:active {

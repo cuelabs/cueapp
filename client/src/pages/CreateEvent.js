@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleNewEvent } from '../actions'
+import Button from '../components/Button'
 
 class CreateEvent extends Component {
   constructor () {
@@ -34,8 +35,9 @@ class CreateEvent extends Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type='text'
+            placeholder='event name'
             onChange={this.handleChange} />
-          <button type='submit'>Create</button>
+          <Button submit small>Create</Button>
         </form>
       </div>
     )
