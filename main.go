@@ -13,19 +13,19 @@ import (
 )
 
 // dev
-// const connectionString = `
-//   user=matthewcarpowich
-//   dbname=cuetestdb
-//   sslmode=disable`
+const connectionString = `
+  user=matthewcarpowich
+  dbname=cuetestdb
+  sslmode=disable`
 
 // heroku
-var connectionString = os.Getenv("DATABASE_URL")
+// var connectionString = os.Getenv("DATABASE_URL")
 
 //dev
-// const PORT = "8080"
+const PORT = "8080"
 
 //heroku
-var PORT = os.Getenv("PORT")
+// var PORT = os.Getenv("PORT")
 
 var err error
 

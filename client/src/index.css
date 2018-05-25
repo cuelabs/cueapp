@@ -1,72 +1,721 @@
-/*
-Error: Undefined variable: "$cue-blue-light".
-        on line 108 of ./src/sass/index.scss
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tajawal", "Ubuntu", sans-serif;
+  background: #FAFAFA;
+  -webkit-font-smoothing: antialiased; }
 
-103: }
-104: 
-105: .controls {
-106:   position: fixed;
-107:   height: 16vh;
-108:   background-color: $cue-blue-light;
-109:   width: 100vw;
-110:   bottom: 0;
-111:   display: flex;
-112:   flex-direction: column;
-113:   justify-content: center;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; }
 
-Backtrace:
-./src/sass/index.scss:108
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/script/tree/variable.rb:49:in `_perform'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/script/tree/node.rb:50:in `perform'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:402:in `visit_prop'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `block in with_base'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:135:in `with_frame'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `with_base'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `visit'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:444:in `block (2 levels) in visit_rule'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:444:in `map'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:444:in `block in visit_rule'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:442:in `visit_rule'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `block in with_base'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:135:in `with_frame'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `with_base'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `visit'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:52:in `map'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:161:in `visit'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:10:in `visit'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/root_node.rb:36:in `css_tree'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/engine.rb:307:in `render_with_sourcemap'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `each'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:443:in `on_file_changed'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:320:in `block in watch'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:115:in `_process_changes'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:19:in `block in loop_for'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop_for'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:84:in `_wait_for_changes'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:42:in `block in setup'
-/Users/matthewcarpowich/.rvm/gems/ruby-2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `block in add'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Undefined variable: \"$cue-blue-light\".\A         on line 108 of ./src/sass/index.scss\A \A 103: }\A 104: \A 105: .controls {\A 106:   position: fixed;\A 107:   height: 16vh;\A 108:   background-color: $cue-blue-light;\A 109:   width: 100vw;\A 110:   bottom: 0;\A 111:   display: flex;\A 112:   flex-direction: column;\A 113:   justify-content: center;"; }
+nav {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  height: calc((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px);
+  width: 100%;
+  clear: both;
+  z-index: 2; }
+
+nav > div > input {
+  margin-right: 4vw;
+  text-indent: calc(32px + (24 - 20) * (100vw - 360px)/(960-360)); }
+
+.search {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+.search-icon {
+  transform: translateX(calc(26px + (22 - 20) * (100vw - 360px)/(960-360)));
+  height: 18px;
+  z-index: 11; }
+
+.search-icon.blue {
+  position: absolute;
+  transform: translateX(-36px); }
+
+.fa.fa-search {
+  transform: translateX(calc(30px + (24 - 20) * (100vw - 360px)/(960-360)));
+  font-size: 24px;
+  color: #29292D;
+  z-index: 10; }
+
+.fa-users, .fa-envelope, .fa-sliders {
+  font-size: 32px;
+  transition: all .1s ease;
+  color: #c9c9cf; }
+
+.fa-users:hover, .fa-envelope:hover, .fa-sliders:hover {
+  cursor: pointer; }
+
+.fa.selected {
+  color: #29292D;
+  transition: all .1s ease; }
+
+.controls {
+  position: fixed;
+  height: 16vh;
+  background-color: #29292D;
+  width: 100vw;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.controls-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: no-wrap;
+  align-items: center;
+  width: 142px; }
+
+.controls-row > i {
+  font-size: 24px;
+  color: #FAFAFA;
+  text-align: center; }
+
+.controls-row > i.fa-play {
+  transform: translateX(calc(3px - .09vw));
+  z-index: 100;
+  color: #FAFAFA; }
+
+.center-circle {
+  align-self: center;
+  height: 48px;
+  width: 48px;
+  border-radius: 25px;
+  border: 1px solid #FAFAFA;
+  position: absolute;
+  top: calc(8vh - 25px);
+  left: calc(50vw - 25px); }
+
+h1 {
+  box-sizing: border-box;
+  font-size: calc(56px + (56 - 24) * (100vw - 360px)/(960-360));
+  font-family: "Tajawal", "Ubuntu", sans-serif;
+  font-weight: 700;
+  margin: 8px;
+  margin-left: 4vw;
+  color: #c9c9cf; }
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 5; }
+
+.logo {
+  font-weight: 200; }
+
+.logo:hover {
+  cursor: pointer; }
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.inner-right-column {
+  margin: 0 auto;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  text-align: right; }
+
+.inner-right-column > button {
+  padding: 2vh; }
+
+.page.home {
+  justify-content: space-around;
+  height: calc(100vh - (((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px) * 2)); }
+
+.page.join {
+  justify-content: flex-start; }
+
+a {
+  text-decoration: none;
+  color: #29292D; }
+
+h1 > a {
+  color: #7F1AE5; }
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%; }
+
+form > label {
+  color: #29292D; }
+
+.page.create form a {
+  font-size: calc(32px + (32 - 16) * (100vw - 360px)/(960-360));
+  width: calc(296px + (592 - 296) * (100vw - 360px)/(960-360));
+  padding: 2.7vh 0;
+  align-self: flex-end;
+  text-align: right; }
+
+.page.create form a button {
+  padding: 2.7vh 2.7vh; }
+
+input {
+  width: calc(256px + (480 - 256) * (100vw - 360px)/(960-360));
+  height: 32px;
+  font-family: "Helvetica", sans-serif;
+  border: none;
+  caret-color: #c9c9cf;
+  background-color: #FAFAFA;
+  color: #29292D;
+  font-size: 28px;
+  outline: none;
+  z-index: 7; }
+
+.page.create form input {
+  border-bottom: 1px solid #29292D;
+  padding-bottom: 16px; }
+
+::-webkit-input-placeholder {
+  text-indent: 8px;
+  color: #c9c9cf;
+  font-family: "Helvetica", sans-serif;
+  font-size: 32px; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  text-indent: 8px;
+  color: #c9c9cf;
+  font-family: "Helvetica", sans-serif;
+  font-size: 32px; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  text-indent: 8px;
+  color: #c9c9cf;
+  font-family: "Helvetica", sans-serif;
+  font-size: 32px; }
+
+:-ms-input-placeholder {
+  text-indent: 8px;
+  color: #c9c9cf;
+  font-family: "Helvetica", sans-serif;
+  font-size: 32px; }
+
+.search-results {
+  transform: translateY(calc((32px + (56 - 32) * (100vw - 360px)/(960-360)) * -1));
+  height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
+  margin: 0 auto;
+  width: 100%;
+  background: #FAFAFA;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  transition: all .1s ease;
+  opacity: 0;
+  z-index: 5; }
+
+.search-results.show {
+  height: auto;
+  min-height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
+  transform: translateY(0);
+  transition: all .1s ease;
+  opacity: 1; }
+
+.search-result {
+  margin: 0 auto;
+  height: 64px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #c9c9cf; }
+
+.search-result:hover {
+  color: #29292D;
+  cursor: pointer;
+  transition: all .18s ease; }
+
+.search-result-event-title {
+  font-size: 32px;
+  font-family: "Helvetica", sans-serif; }
+
+.modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 80vw;
+  top: calc((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px);
+  left: 10vw;
+  height: 300px;
+  background-color: #FAFAFA;
+  z-index: 20;
+  animation-name: comeInModal;
+  animation-iteration-count: 1;
+  animation-duration: .3s;
+  animation-timing-function: easeInOutCubic;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.09);
+  border-radius: 4px;
+  border: 1px solid #F5F5F5;
+  max-height: 66vh; }
+
+.modal p {
+  text-align: center;
+  font-size: 24px;
+  color: #29292D; }
+
+.modal small {
+  position: absolute;
+  top: 24px;
+  color: #29292D;
+  text-align: center;
+  width: 72vw;
+  left: 4vw; }
+
+small.small-cancel {
+  top: 256px;
+  font-size: 12px;
+  color: #1f1f23; }
+
+small.small-cancel:hover {
+  cursor: pointer;
+  color: #222225; }
+
+.modal-inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center; }
+
+.first {
+  position: absolute !important;
+  top: calc(50vh - 48px);
+  margin-top: 0 !important; }
+
+.sk-circle {
+  margin: 100px auto;
+  width: 72px;
+  height: 72px;
+  position: relative; }
+
+.sk-circle .sk-child {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0; }
+
+.sk-circle .sk-child:before {
+  content: '';
+  display: block;
+  margin: 0 auto;
+  width: 15%;
+  height: 15%;
+  background-color: #52525b;
+  border-radius: 100%;
+  -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
+  animation: sk-circleBounceDelay 1.2s infinite ease-in-out both; }
+
+.event-guest {
+  width: 90vw; }
+
+h2.guest-view-event-title {
+  text-align: right;
+  color: #083FAA;
+  font-size: calc(36px + (24 - 16) * (100vw - 360px)/(960-360));
+  padding-bottom: 8px;
+  width: 100%;
+  margin: 0;
+  margin-top: 8px; }
+
+.event-guest small {
+  align-self: flex-end;
+  color: #c9c9cf;
+  font-size: 12px;
+  transition: color .2s ease; }
+
+.event-guest small:hover {
+  cursor: pointer;
+  color: #7F1AE5;
+  transition: color .2s ease; }
+
+.event-host {
+  width: 90vw; }
+
+h2.host-view-event-title {
+  text-align: right;
+  color: #c9c9cf;
+  font-size: calc(36px + (24 - 16) * (100vw - 360px)/(960-360));
+  padding-bottom: 8px;
+  width: 100%;
+  margin: 0;
+  margin-top: 8px; }
+
+h2.guest-view-event-title {
+  text-align: right;
+  color: #c9c9cf;
+  font-size: calc(36px + (24 - 16) * (100vw - 360px)/(960-360));
+  padding-bottom: 8px;
+  width: 100%;
+  margin: 0;
+  margin-top: 8px; }
+
+h3.host-view-page-title {
+  color: #29292D;
+  align-self: flex-start;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 300;
+  padding-bottom: 16px;
+  padding-top: 8px; }
+
+h3.host-view-page-title.host-indicator {
+  color: #7F1AE5;
+  margin-bottom: 24px;
+  margin-top: -13px;
+  font-size: 16px;
+  align-self: flex-end; }
+
+.host-view-page-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  flex-wrap: nowrap;
+  overflow-y: scroll;
+  max-height: 50vh; }
+
+ul.host-view-page-list > li {
+  margin: 0;
+  width: calc(100% - 12px);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: 1px solid #c9c9cf;
+  color: #29292D;
+  padding: 4vh 0;
+  padding-left: 12px;
+  animation-name: elEye;
+  animation-duration: .4s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1; }
+
+.please-fade {
+  animation-name: elEye;
+  animation-duration: .4s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1; }
+
+@keyframes elEye {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+ul.host-view-page-list > li:nth-child(1) {
+  border-top: none; }
+
+.host-request-options {
+  align-self: flex-end;
+  margin-top: 16px; }
+
+.host-request-options > button:nth-child(2) {
+  margin-left: 8px; }
+
+ul.host-view-page-list > li > p {
+  margin: 0; }
+
+div.guest-photo {
+  margin: 0;
+  margin-left: 16px;
+  margin-right: 16px;
+  height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
+  width: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
+  border-radius: 50%;
+  background-color: #F5F5F5;
+  background-position: center;
+  background-size: cover; }
+
+.host-circles {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  align-self: flex-start;
+  width: 120px;
+  margin-bottom: 0px;
+  margin-top: 8px;
+  margin-bottom: 8px; }
+
+.host-circles > .notifications {
+  animation-name: notify;
+  animation-timing-function: ease;
+  animation-duration: .2s;
+  animation-iteration-count: 1;
+  font-size: 13px;
+  position: absolute;
+  top: -6px;
+  left: 68px;
+  color: white;
+  background: #F90A3D;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+@keyframes notify {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+.circle {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #FAFAFA;
+  border: 1px solid #c9c9cf; }
+
+.circle.circle-selected {
+  background-color: #c9c9cf; }
+
+.circle:hover {
+  cursor: pointer; }
+
+@keyframes comeInModal {
+  0% {
+    transform: translateY(calc(100vh - 300px));
+    opacity: 0; }
+  100% {
+    transform: translateY(0);
+    opacity: 1; } }
+button {
+  background: #29292D;
+  font-family: "Tajawal", "Ubuntu", sans-serif;
+  color: #FAFAFA;
+  height: 64px;
+  font-weight: 300;
+  box-sizing: border-box;
+  border-radius: 32px;
+  transition: all .18s ease-out;
+  font-size: 14px;
+  outline: none;
+  z-index: 12; }
+
+.button-host {
+  width: 96px;
+  background: none;
+  text-align: right;
+  color: #29292D;
+  border: none; }
+
+.button-host:hover {
+  background: none !important; }
+
+.btn-home {
+  font-size: 32px;
+  width: calc(296px + (592 - 296) * (100vw - 360px)/(960-360));
+  padding: 2.7vh 0; }
+
+.btn-small {
+  font-size: 18px;
+  width: 128px;
+  background: none;
+  color: #29292D;
+  border: none;
+  box-sizing: border-box; }
+
+.btn-create {
+  font-size: 14px;
+  padding: 8px 16px;
+  align-self: flex-end;
+  height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
+  margin-top: 8px; }
+
+.btn-join {
+  font-size: 14px;
+  padding: 8px 16px;
+  height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360)); }
+
+.btn-login {
+  align-self: flex-end;
+  margin-top: 12px;
+  width: 96px;
+  font-size: 16px;
+  height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.btn-submit {
+  align-self: flex-end;
+  text-align: right; }
+
+button.btn-home:nth-child(1) {
+  margin-bottom: -4vh; }
+
+button.btn-home:nth-child(2) {
+  margin-top: -4vh; }
+
+button:hover {
+  cursor: pointer;
+  transition: all .18s easeInOutCirc;
+  background: #52525b; }
+
+.btn-small:hover {
+  background: none;
+  color: #050505; }
+
+button:active {
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.09);
+  transform: translateX(0px);
+  transform: translateY(0px);
+  transition: all .2s easeInOutCirc; }
+
+.sk-circle .sk-circle2 {
+  -webkit-transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  transform: rotate(30deg); }
+
+.sk-circle .sk-circle3 {
+  -webkit-transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  transform: rotate(60deg); }
+
+.sk-circle .sk-circle4 {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg); }
+
+.sk-circle .sk-circle5 {
+  -webkit-transform: rotate(120deg);
+  -ms-transform: rotate(120deg);
+  transform: rotate(120deg); }
+
+.sk-circle .sk-circle6 {
+  -webkit-transform: rotate(150deg);
+  -ms-transform: rotate(150deg);
+  transform: rotate(150deg); }
+
+.sk-circle .sk-circle7 {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg); }
+
+.sk-circle .sk-circle8 {
+  -webkit-transform: rotate(210deg);
+  -ms-transform: rotate(210deg);
+  transform: rotate(210deg); }
+
+.sk-circle .sk-circle9 {
+  -webkit-transform: rotate(240deg);
+  -ms-transform: rotate(240deg);
+  transform: rotate(240deg); }
+
+.sk-circle .sk-circle10 {
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg); }
+
+.sk-circle .sk-circle11 {
+  -webkit-transform: rotate(300deg);
+  -ms-transform: rotate(300deg);
+  transform: rotate(300deg); }
+
+.sk-circle .sk-circle12 {
+  -webkit-transform: rotate(330deg);
+  -ms-transform: rotate(330deg);
+  transform: rotate(330deg); }
+
+.sk-circle .sk-circle2:before {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s; }
+
+.sk-circle .sk-circle3:before {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s; }
+
+.sk-circle .sk-circle4:before {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s; }
+
+.sk-circle .sk-circle5:before {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s; }
+
+.sk-circle .sk-circle6:before {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s; }
+
+.sk-circle .sk-circle7:before {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s; }
+
+.sk-circle .sk-circle8:before {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s; }
+
+.sk-circle .sk-circle9:before {
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s; }
+
+.sk-circle .sk-circle10:before {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s; }
+
+.sk-circle .sk-circle11:before {
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s; }
+
+.sk-circle .sk-circle12:before {
+  -webkit-animation-delay: -0.1s;
+  animation-delay: -0.1s; }
+
+@-webkit-keyframes sk-circleBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+@keyframes sk-circleBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+@media screen and (max-width: 400px) {
+  h1 {
+    transform: translateY(0.2vw); } }
+@media screen and (min-width: 768px) {
+  h1 {
+    transform: translateX(0.3vw); } }
+
+/*# sourceMappingURL=index.css.map */

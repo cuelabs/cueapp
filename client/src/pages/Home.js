@@ -34,37 +34,41 @@ class Home extends Component {
   }
 
   joinEvent () {
-    this.setState({
-      join: true
+    const { dispatch } = this.props
+    dispatch({
+      type: 'CHANGE_HOME_VIEW',
+      view: 'JOIN'
     })
   }
 
   createEvent () {
-    this.setState({
-      create: true
+    const { dispatch } = this.props
+    dispatch({
+      type: 'CHANGE_HOME_VIEW',
+      view: 'CREATE'
     })
   }
 
   render () {
-    const { userId, eventId } = this.props
+    const { userId, eventId, homeView } = this.props
     const { create, join } = this.state
 
     let content
     if (userId > 0) {
-      if (create) {
+      if (homeView === 'CREATE') {
         content = <CreateEvent />
-      } else if (join || (eventId > 0)) {
+      } else if (homeView === 'JOIN' || (eventId > 0)) {
           content = <JoinEvent />
       } else {
         content = (
           <div className='page home'>
             <Button home
               handler={this.joinEvent}>
-              JOIN EVENT
+              JOIN
             </Button>
             <Button home
               handler={this.createEvent}>
-              CREATE EVENT
+              CREATE
             </Button>
           </div>
         )

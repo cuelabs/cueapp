@@ -10,6 +10,7 @@ const initialState = {
   isHost: false,
   hostId: -1,
   hostView: 0,
+  homeView: 'HOME',
   isActive: false,
   eventId: null,
   eventName: '',
@@ -36,6 +37,11 @@ const cueReducer = (state = initialState, action) => {
       return {
         ...state,
         hostView: action.num
+      }
+    case 'CHANGE_HOME_VIEW':
+      return {
+        ...state, 
+        homeView: action.view
       }
     case 'TEMP_LOGIN_REQUEST':
       return {

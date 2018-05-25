@@ -1,8 +1,8 @@
 import ReconnectingWebSocket from 'reconnectingwebsocket'
 
 function Socket(evId, immediateSend, payload) {
-  // const baseURL = 'ws://localhost:8080/'
-  const baseURL = 'wss://arcane-tundra-63613.herokuapp.com/'
+  const baseURL = 'ws://localhost:8080/'
+  // const baseURL = 'wss://arcane-tundra-63613.herokuapp.com/'
   const url = `${baseURL}ws?event=${evId}`
   this.ws = new ReconnectingWebSocket(url)
 
