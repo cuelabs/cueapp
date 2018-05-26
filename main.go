@@ -75,11 +75,12 @@ func main() {
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/completeAuth", auth.CompleteAuth).Methods("GET")
   router.HandleFunc("/ws", serveWs(models.DBCon))
-  if Client != nil {
-    router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
-  } else {
-    router.HandleFunc("/", redirect(url))
-  }
+  // if Client != nil {
+  //   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
+  // } else {
+  //   router.HandleFunc("/", redirect(url))
+  // }
+  router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
   handler := cors.Default().Handler(router)
