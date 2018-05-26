@@ -1,9 +1,9 @@
 import React from 'react'
 import Logo from './Logo'
 
-const Nav = ({showSearch, handler, value}) => (
+const Nav = ({showSearch, handler, value, dispatch}) => (
   <nav>
-    <Logo />
+    <Logo dispatch={dispatch} />
     {
       showSearch && (
         <div className='search'>

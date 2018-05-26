@@ -7,9 +7,11 @@ $cue-blue-lightest: #7EA4F0;
 $cue-blue-darker: #1057E3;
 $cue-blue-darkest: #083FAA; 
 $cue-black-hsl: hsl(240, 5, 17);
+$cue-black-mid: hsl(240, 5, 34);
 $cue-black-light: hsl(240, 5, 80);
 $cue-black-gray: hsl(240, 5, 13);
 $cue-white: #F5F5F5;
+$cue-black-2: #050505;
 $cue-white-2: #FAFAFA;
 $cue-white-3: #FCFCFC;
 $cue-purple: #7F1AE5;
@@ -98,7 +100,7 @@ nav > div > input {
 }
 
 .fa.selected {
-  color: $cue-blue;
+  color: $cue-black;
   transition: all .1s ease;
 }
 
@@ -125,12 +127,14 @@ nav > div > input {
 
 .controls-row > i {
   font-size: 24px; 
-  color: $cue-white;
+  color: $cue-white-2;
   text-align: center;
 }
 
 .controls-row > i.fa-play {
   transform: translateX(calc(3px - .09vw));
+  z-index: 100;
+  color: $cue-white-2;
 }
 
 .center-circle {
@@ -138,7 +142,7 @@ nav > div > input {
   height: 48px;
   width: 48px;
   border-radius: 25px;
-  border: 1px solid $cue-white;
+  border: 1px solid $cue-white-2;
   position: absolute;
   top: calc(8vh - 25px);
   left: calc(50vw - 25px);
@@ -151,7 +155,7 @@ h1 {
   font-weight: 700;
   margin: 8px;
   margin-left: 4vw;
-  color: $cue-blue;
+  color: $cue-black-light;
 }
 
 main {
@@ -164,6 +168,10 @@ main {
 
 .logo {
   font-weight: 200;
+}
+
+.logo:hover {
+  cursor: pointer;
 }
 
 .page {
@@ -250,29 +258,34 @@ input {
   z-index: 7;
 }
 
+.page.create form input {
+  border-bottom: 1px solid $cue-black;
+  padding-bottom: 16px;
+}
+
 ::-webkit-input-placeholder {
-   text-align: center;
+   text-indent: 8px;
    color: $cue-black-light;
    font-family: $cue-font-secondary;
    font-size: 32px;
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   text-align: center;
+   text-indent: 8px;
    color: $cue-black-light;  
    font-family: $cue-font-secondary;
    font-size: 32px;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   text-align: center;
+   text-indent: 8px;
    color: $cue-black-light; 
    font-family: $cue-font-secondary; 
    font-size: 32px;
 }
 
 :-ms-input-placeholder {  
-   text-align: center;
+   text-indent: 8px;
    color: $cue-black-light; 
    font-family: $cue-font-secondary;
    font-size: 32px;
@@ -347,13 +360,13 @@ input {
 .modal p {
   text-align: center;
   font-size: 24px;
-  color: $cue-blue;
+  color: $cue-black;
 }
 
 .modal small {
   position: absolute;
   top: 24px;
-  color: $cue-blue;
+  color: $cue-black;
   text-align: center;
   width: 72vw;
   left: 4vw;
@@ -362,11 +375,12 @@ input {
 small.small-cancel {
   top: 256px;
   font-size: 12px;
+  color: $cue-black-gray;
 }
 
 small.small-cancel:hover {
   cursor: pointer;
-  color: $cue-blue-darker;
+  color: $cue-shadow;
 }
 
 .modal-inner {
@@ -401,7 +415,7 @@ small.small-cancel:hover {
   margin: 0 auto;
   width: 15%;
   height: 15%;
-  background-color: $cue-blue;
+  background-color: $cue-black-mid;
   border-radius: 100%;
   -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
           animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
@@ -414,7 +428,7 @@ small.small-cancel:hover {
 
 h2.guest-view-event-title {
   text-align: right;
-  color: $cue-black-light;
+  color: $cue-blue-darkest;
   font-size: $cue-event-font-size;
   padding-bottom: 8px;
   width: 100%;
@@ -626,7 +640,7 @@ div.guest-photo {
 }
 
 button {
-  background: $cue-blue;
+  background: $cue-black;
   font-family: $cue-font-primary;
   color: $cue-white-2;
   height: 64px;
@@ -643,12 +657,11 @@ button {
   width: 96px;
   background: none;
   text-align: right;
-  color: $cue-blue;
+  color: $cue-black;
   border: none;
 }
 
 .button-host:hover {
-  color: $cue-blue-darkest;
   background: none !important;
 }
 
@@ -662,7 +675,7 @@ button {
   font-size: 18px;
   width: 128px;
   background: none;
-  color: $cue-blue;
+  color: $cue-black;
   border: none;
   box-sizing: border-box;
 }
@@ -709,12 +722,12 @@ button.btn-home:nth-child(2) {
 button:hover {
   cursor: pointer;
   transition: all .18s easeInOutCirc;
-  background: $cue-blue-lighter;
+  background: $cue-black-mid;
 }
 
 .btn-small:hover {
   background: none;
-  color: $cue-blue-darker;
+  color: $cue-black-2;
 }
 
 button:active {

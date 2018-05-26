@@ -36,12 +36,13 @@ class App extends Component {
     return (
         <div className='container'>
           { !beginning &&
-            <Nav showSearch={isActive} />
+            <Nav showSearch={isActive}
+              dispatch={dispatch} />
           }
           { !beginning ? (
             <Main>
               { !isActive
-                ? <Home />
+                ? <Home {...this.props}/>
                 : hostId === userId ? 
                   <EventHost title={eventName} /> :
                   <EventGuest 

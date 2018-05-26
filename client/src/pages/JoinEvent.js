@@ -29,7 +29,7 @@ class JoinEvent extends Component {
       <div className='page join'>
         <div className='search'>
           <img className='search-icon blue' 
-            src='./ass4.svg' 
+            src='./ass3.svg' 
             style={{height: 26}}/>
           <input
             placeholder='search events'

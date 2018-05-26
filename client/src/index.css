@@ -57,7 +57,7 @@ nav > div > input {
   cursor: pointer; }
 
 .fa.selected {
-  color: #2E6DE9;
+  color: #29292D;
   transition: all .1s ease; }
 
 .controls {
@@ -81,18 +81,20 @@ nav > div > input {
 
 .controls-row > i {
   font-size: 24px;
-  color: #F5F5F5;
+  color: #FAFAFA;
   text-align: center; }
 
 .controls-row > i.fa-play {
-  transform: translateX(calc(3px - .09vw)); }
+  transform: translateX(calc(3px - .09vw));
+  z-index: 100;
+  color: #FAFAFA; }
 
 .center-circle {
   align-self: center;
   height: 48px;
   width: 48px;
   border-radius: 25px;
-  border: 1px solid #F5F5F5;
+  border: 1px solid #FAFAFA;
   position: absolute;
   top: calc(8vh - 25px);
   left: calc(50vw - 25px); }
@@ -104,7 +106,7 @@ h1 {
   font-weight: 700;
   margin: 8px;
   margin-left: 4vw;
-  color: #2E6DE9; }
+  color: #c9c9cf; }
 
 main {
   display: flex;
@@ -115,6 +117,9 @@ main {
 
 .logo {
   font-weight: 200; }
+
+.logo:hover {
+  cursor: pointer; }
 
 .page {
   display: flex;
@@ -184,28 +189,32 @@ input {
   outline: none;
   z-index: 7; }
 
+.page.create form input {
+  border-bottom: 1px solid #29292D;
+  padding-bottom: 16px; }
+
 ::-webkit-input-placeholder {
-  text-align: center;
+  text-indent: 8px;
   color: #c9c9cf;
   font-family: "Helvetica", sans-serif;
   font-size: 32px; }
 
 :-moz-placeholder {
   /* Firefox 18- */
-  text-align: center;
+  text-indent: 8px;
   color: #c9c9cf;
   font-family: "Helvetica", sans-serif;
   font-size: 32px; }
 
 ::-moz-placeholder {
   /* Firefox 19+ */
-  text-align: center;
+  text-indent: 8px;
   color: #c9c9cf;
   font-family: "Helvetica", sans-serif;
   font-size: 32px; }
 
 :-ms-input-placeholder {
-  text-align: center;
+  text-indent: 8px;
   color: #c9c9cf;
   font-family: "Helvetica", sans-serif;
   font-size: 32px; }
@@ -271,23 +280,24 @@ input {
 .modal p {
   text-align: center;
   font-size: 24px;
-  color: #2E6DE9; }
+  color: #29292D; }
 
 .modal small {
   position: absolute;
   top: 24px;
-  color: #2E6DE9;
+  color: #29292D;
   text-align: center;
   width: 72vw;
   left: 4vw; }
 
 small.small-cancel {
   top: 256px;
-  font-size: 12px; }
+  font-size: 12px;
+  color: #1f1f23; }
 
 small.small-cancel:hover {
   cursor: pointer;
-  color: #1057E3; }
+  color: #222225; }
 
 .modal-inner {
   width: 100%;
@@ -319,7 +329,7 @@ small.small-cancel:hover {
   margin: 0 auto;
   width: 15%;
   height: 15%;
-  background-color: #2E6DE9;
+  background-color: #52525b;
   border-radius: 100%;
   -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
   animation: sk-circleBounceDelay 1.2s infinite ease-in-out both; }
@@ -329,7 +339,7 @@ small.small-cancel:hover {
 
 h2.guest-view-event-title {
   text-align: right;
-  color: #c9c9cf;
+  color: #083FAA;
   font-size: calc(36px + (24 - 16) * (100vw - 360px)/(960-360));
   padding-bottom: 8px;
   width: 100%;
@@ -505,7 +515,7 @@ div.guest-photo {
     transform: translateY(0);
     opacity: 1; } }
 button {
-  background: #2E6DE9;
+  background: #29292D;
   font-family: "Tajawal", "Ubuntu", sans-serif;
   color: #FAFAFA;
   height: 64px;
@@ -521,11 +531,10 @@ button {
   width: 96px;
   background: none;
   text-align: right;
-  color: #2E6DE9;
+  color: #29292D;
   border: none; }
 
 .button-host:hover {
-  color: #083FAA;
   background: none !important; }
 
 .btn-home {
@@ -537,7 +546,7 @@ button {
   font-size: 18px;
   width: 128px;
   background: none;
-  color: #2E6DE9;
+  color: #29292D;
   border: none;
   box-sizing: border-box; }
 
@@ -577,11 +586,11 @@ button.btn-home:nth-child(2) {
 button:hover {
   cursor: pointer;
   transition: all .18s easeInOutCirc;
-  background: #5487EC; }
+  background: #52525b; }
 
 .btn-small:hover {
   background: none;
-  color: #1057E3; }
+  color: #050505; }
 
 button:active {
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.09);
