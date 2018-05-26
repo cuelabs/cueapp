@@ -10,7 +10,7 @@ import (
   "strconv"
 )
 
-const redirectURI = "https://arcane-tundra-63613.herokuapp.com/completeAuth"
+const redirectURI = "https://arcane-tundra-63613.herokuapp.com/callback"
 
 // os.Setenv("SPOTIFY_ID", "2a437f62902142b78efdcbaab0b95271")
 // os.Setenv("SPOTIFY_SECRET", "35e6b3b0f37846debfbf21d15ab01073")
