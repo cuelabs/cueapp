@@ -34,11 +34,24 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   }
   if st := r.FormValue("state"); st != State {
     http.NotFound(w, r)
-    log.Fatalf("State mistmatch: %s != %s\n", st, State)
+    log.Fatalf("State mismatch: %s != %s\n", st, State)
   }
+  // use the token to get an authenticated client
   client := Auth.NewClient(tok)
   fmt.Fprintf(w, "Login Completed!")
-  Connected = true
+  Ch <- &client
+  // tok, err := Auth.Token(State, r)
+  // if err != nil {
+  //   http.Error(w, "Couldn't get token", http.StatusForbidden)
+  //   log.Fatal(err)
+  // }
+  // if st := r.FormValue("state"); st != State {
+  //   http.NotFound(w, r)
+  //   log.Fatalf("State mistmatch: %s != %s\n", st, State)
+  // }
+  // client := Auth.NewClient(tok)
+  // fmt.Fprintf(w, "Login Completed!")
+  // Connected = true
 
   // u, err := client.CurrentUser()
   // if err != nil {
@@ -56,10 +69,10 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   // w.WriteHeader(http.StatusOK)
   // w.Write(uidJson)
 
-  Ch <- &client
+  // Ch <- &client
 
   // http.Redirect(w, r, "/", 301)
-  http.FileServer(http.Dir("./client/build"))
+  // http.FileServer(http.Dir("./client/build"))
 }
 
 func PrintSomething(client *spotify.Client) http.HandlerFunc {

@@ -75,7 +75,7 @@ func main() {
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/completeAuth", auth.CompleteAuth).Methods("GET")
   router.HandleFunc("/ws", serveWs(models.DBCon))
-  // router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
+  router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   router.HandleFunc("/", redirect(url))
   // router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   // http.FileServer(http.Dir("./client/build"))
@@ -89,7 +89,11 @@ func main() {
 
 func redirect(url string) http.HandlerFunc {
   fn := func(w http.ResponseWriter, r *http.Request) {
-    http.Redirect(w, r, url, 301)
+    if auth.Connected == false {
+      http.Redirect(w, r, url, 301)
+    } else {
+      http.FileServer(http.Dir("./client/build"))
+    }
   }
   return fn
 }
