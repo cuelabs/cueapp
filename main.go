@@ -12,7 +12,7 @@ import (
   _ "github.com/lib/pq"
   "github.com/zmb3/spotify"
   "os"
-  "fmt"
+  // "fmt"
   // "log"
 )
 
@@ -50,10 +50,10 @@ func main() {
 
   // os.Setenv("SPOTIFY_ID", "2a437f62902142b78efdcbaab0b95271")
   // os.Setenv("SPOTIFY_SECRET", "35e6b3b0f37846debfbf21d15ab01073")
-  auth.Auth.SetAuthInfo(clientID, secretKey)
+  // auth.Auth.SetAuthInfo(clientID, secretKey)
 
   url := auth.Auth.AuthURL(auth.State)
-  fmt.Println("Please log in to Spotify by visiting the following page in your browser:", url)
+  // fmt.Println("Please log in to Spotify by visiting the following page in your browser:", url)
 
   // user, err2 := client.CurrentUser()
   // if err2 != nil {
@@ -73,14 +73,14 @@ func main() {
   router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/create", controllers.CreateUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
-  router.HandleFunc("/completeAuth", auth.CompleteAuth).Methods("GET")
+  // router.HandleFunc("/completeAuth", auth.CompleteAuth).Methods("GET")
   router.HandleFunc("/ws", serveWs(models.DBCon))
-  // if Client != nil {
-  //   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
-  // } else {
-  //   router.HandleFunc("/", redirect(url))
-  // }
-  router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
+  if auth.Connected == true {
+    router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
+  } else {
+    router.HandleFunc("/", redirect(url))
+  }
+  // router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
   handler := cors.Default().Handler(router)

@@ -16,12 +16,15 @@ const redirectURI = "https://arcane-tundra-63613.herokuapp.com/completeAuth"
 // os.Setenv("SPOTIFY_SECRET", "35e6b3b0f37846debfbf21d15ab01073")
 
 var (
-  Auth  = spotify.NewAuthenticator(redirectURI, spotify.ScopeUserReadPrivate)
-  Ch    = make(chan *spotify.Client)
-  State = "abc123"
+  Auth      = spotify.NewAuthenticator(redirectURI, spotify.ScopeUserReadPrivate)
+  Ch        = make(chan *spotify.Client)
+  State     = "abc123"
+  Connected = false
   id      models.User
   err2    error
 )
+
+
 
 func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   tok, err := Auth.Token(State, r)
@@ -35,6 +38,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   }
   client := Auth.NewClient(tok)
   fmt.Fprintf(w, "Login Completed!")
+  Connected = true
 
   // u, err := client.CurrentUser()
   // if err != nil {

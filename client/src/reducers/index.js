@@ -7,22 +7,16 @@ const initialState = {
   searchLoading: false,
   userId: -1,
   displayName: '',
-  isHost: false,
   hostId: -1,
   hostView: 0,
   homeView: 'HOME',
   isActive: false,
   eventId: null,
   eventName: '',
-  userAuthorized: false,
-  awaitingAuth: false,
-  authPage: null,
   joinRequestPending: false,
   eventLoading: false,
-  acceptedGuest: -1,
   beginning: true,
-  counter: 0,
-  done: false
+  counter: 0
 }
 
 const cueReducer = (state = initialState, action) => {
