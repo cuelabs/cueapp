@@ -63,6 +63,8 @@ func main() {
 
   go h.run()
 
+  Client := <- auth.Ch
+
   router := mux.NewRouter()
   router.HandleFunc("/events/read/all", controllers.ReadAllEvents(models.DBCon)).Methods("GET")
   router.HandleFunc("/api", auth.PrintSomething(Client)).Methods("GET")
@@ -83,8 +85,8 @@ func main() {
   handler := cors.Default().Handler(router)
   http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
 
-  Client := <- auth.Ch
-  fmt.Println(Client)
+  // Client := <- auth.Ch
+  // fmt.Println(Client)
 }
 
 func redirect(url string) http.HandlerFunc {
