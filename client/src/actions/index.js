@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 //dev
-const baseURL = 'http://localhost:8080'
+// const baseURL = 'http://localhost:8080'
 
 //production
-// const baseURL = ''
+const baseURL = ''
 
 export const changeHostView = num => {
   return dispatch => {
