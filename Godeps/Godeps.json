@@ -32,6 +32,26 @@
 			"ImportPath": "github.com/rs/cors",
 			"Comment": "v1.3.0-1-g36f00aa",
 			"Rev": "36f00aa91d31dac5aeba5cee361f0e5d395116ac"
+		},
+		{
+			"ImportPath": "github.com/zmb3/spotify",
+			"Rev": "79deba8533f6a0e6545b3937667522d323aa6754"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "6078986fec03a1dcc236c34816c71b0e05018fda"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context/ctxhttp",
+			"Rev": "6078986fec03a1dcc236c34816c71b0e05018fda"
+		},
+		{
+			"ImportPath": "golang.org/x/oauth2",
+			"Rev": "fdc9e635145ae97e6c2cb777c48305600cf515cb"
+		},
+		{
+			"ImportPath": "golang.org/x/oauth2/internal",
+			"Rev": "fdc9e635145ae97e6c2cb777c48305600cf515cb"
 		}
 	]
 }
