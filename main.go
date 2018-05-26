@@ -73,7 +73,7 @@ func main() {
   router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/create", controllers.CreateUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
-  // router.HandleFunc("/completeAuth", auth.CompleteAuth).Methods("GET")
+  router.HandleFunc("/completeAuth", auth.CompleteAuth).Methods("GET")
   router.HandleFunc("/ws", serveWs(models.DBCon))
   router.PathPrefix("/home").Handler(http.FileServer(http.Dir("./client/build")))
   router.HandleFunc("/", redirect(url))
