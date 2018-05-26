@@ -51,7 +51,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   // }
   // client := Auth.NewClient(tok)
   // fmt.Fprintf(w, "Login Completed!")
-  Connected = true
+  // Connected = true
 
   // u, err := client.CurrentUser()
   // if err != nil {
