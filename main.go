@@ -76,7 +76,7 @@ func main() {
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/callback", auth.CompleteAuth)
   router.HandleFunc("/ws", serveWs(models.DBCon))
-  router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
+  router.PathPrefix("/home").Handler(http.FileServer(http.Dir("./client/build")))
   router.HandleFunc("/", redirect(url))
   // router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   // http.FileServer(http.Dir("./client/build"))
