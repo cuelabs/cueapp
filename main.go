@@ -89,7 +89,8 @@ func main() {
 
   fmt.Println("here we are")
 
-  // Client := <- auth.Ch
+  Client := <- auth.Ch
+  fmt.Println("client here")
   // fmt.Println(Client)
 }
 
