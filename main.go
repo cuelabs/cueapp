@@ -75,8 +75,9 @@ func main() {
   router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/create", controllers.CreateUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
-  router.HandleFunc("/callback", auth.CompleteAuth).
-    Queries("code", "{code}", "state", "{state}").Methods("GET")
+  // router.HandleFunc("/callback", auth.CompleteAuth).
+  //   Queries("code", "{code}", "state", "{state}").Methods("GET")
+  http.HandleFunc("/callback", auth.CompleteAuth)
   router.HandleFunc("/ws", serveWs(models.DBCon))
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   router.HandleFunc("/", redirect(url))
