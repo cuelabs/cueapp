@@ -91,7 +91,7 @@ func main() {
 
   Client := <- auth.Ch
   fmt.Println("client here")
-  // fmt.Println(Client)
+  fmt.Println(Client)
 }
 
 func redirect(url string) http.HandlerFunc {
