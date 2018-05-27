@@ -85,7 +85,7 @@ func main() {
   // http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
   handler := cors.Default().Handler(router)
-  http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
+  go http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
 
   fmt.Println("here we are")
 
