@@ -96,7 +96,7 @@ func redirect(url string) http.HandlerFunc {
     if auth.Connected == false {
       http.Redirect(w, r, url, 301)
     } else {
-      // http.FileServer(http.Dir("./client/build"))
+      http.FileServer(http.Dir("./client/build"))
       w.WriteHeader(http.StatusOK)
     }
   }
