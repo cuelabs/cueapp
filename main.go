@@ -61,10 +61,11 @@ func main() {
   // }
   // fmt.Println("You are logged in as:", user.ID)
   fmt.Println("Hello From Go")
+  fmt.Println(url)
 
   go h.run()
 
-  Client := <- auth.Ch
+  // Client := <- auth.Ch
 
   router := mux.NewRouter()
   router.HandleFunc("/events/read/all", controllers.ReadAllEvents(models.DBCon)).Methods("GET")
@@ -76,16 +77,16 @@ func main() {
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/callback", auth.CompleteAuth)
   router.HandleFunc("/ws", serveWs(models.DBCon))
-  router.PathPrefix("/home").Handler(http.FileServer(http.Dir("./client/build")))
+  router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   router.HandleFunc("/", redirect(url))
   // router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
-  // http.FileServer(http.Dir("./client/build"))
+  http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
   handler := cors.Default().Handler(router)
   http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
 
-  // Client := <- auth.Ch
-  // fmt.Println(Client)
+  Client := <- auth.Ch
+  fmt.Println(Client)
 }
 
 func redirect(url string) http.HandlerFunc {
@@ -93,7 +94,8 @@ func redirect(url string) http.HandlerFunc {
     if auth.Connected == false {
       http.Redirect(w, r, url, 301)
     } else {
-      http.FileServer(http.Dir("./client/build"))
+      // http.FileServer(http.Dir("./client/build"))
+      w.WriteHeader(http.StatusOK)
     }
   }
   return fn
