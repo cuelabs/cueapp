@@ -79,7 +79,7 @@ func main() {
   //   Queries("code", "{code}", "state", "{state}").Methods("GET")
   // http.HandleFunc("/callback", auth.CompleteAuth)
   router.HandleFunc("/ws", serveWs(models.DBCon))
-  router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
+  router.PathPrefix("/app").Handler(http.FileServer(http.Dir("./client/build")))
   router.HandleFunc("/", redirect(url))
   // router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   // http.FileServer(http.Dir("./client/build"))
