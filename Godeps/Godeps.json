@@ -2,6 +2,9 @@
 	"ImportPath": "github.com/mattcarpowich1/cueapp",
 	"GoVersion": "go1.9",
 	"GodepVersion": "v80",
+	"Packages": [
+		"./..."
+	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/gorilla/handlers",
