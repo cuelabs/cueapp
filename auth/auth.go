@@ -46,7 +46,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   fmt.Fprintf(w, "Login Completed!")
   fmt.Println("hello, anyone??????")
   Ch <- &client
-  // fmt.Println("hello, anyone???????")
+  fmt.Println("hello, anyone???????")
   // tok, err := Auth.Token(State, r)
   // if err != nil {
   //   http.Error(w, "Couldn't get token", http.StatusForbidden)
