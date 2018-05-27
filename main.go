@@ -12,7 +12,7 @@ import (
   _ "github.com/lib/pq"
   "github.com/zmb3/spotify"
   "os"
-  // "fmt"
+  "fmt"
   // "log"
 )
 
@@ -60,6 +60,7 @@ func main() {
   //   log.Fatal(err2)
   // }
   // fmt.Println("You are logged in as:", user.ID)
+  fmt.Println("Hello From Go")
 
   go h.run()
 
