@@ -69,7 +69,7 @@ func main() {
 
   router := mux.NewRouter()
   router.HandleFunc("/events/read/all", controllers.ReadAllEvents(models.DBCon)).Methods("GET")
-  router.HandleFunc("/api", auth.PrintSomething(Client)).Methods("GET")
+  // router.HandleFunc("/api", auth.PrintSomething(Client)).Methods("GET")
   router.HandleFunc("/events/read/one", controllers.ReadOneEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/events/create", controllers.CreateEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent(models.DBCon)).Methods("POST")
@@ -77,7 +77,7 @@ func main() {
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
   // router.HandleFunc("/callback", auth.CompleteAuth).
   //   Queries("code", "{code}", "state", "{state}").Methods("GET")
-  http.HandleFunc("/callback", auth.CompleteAuth)
+  // http.HandleFunc("/callback", auth.CompleteAuth)
   router.HandleFunc("/ws", serveWs(models.DBCon))
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   router.HandleFunc("/", redirect(url))
@@ -87,8 +87,10 @@ func main() {
   handler := cors.Default().Handler(router)
   http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
 
-  Client := <- auth.Ch
-  fmt.Println(Client)
+  fmt.Println("here we are")
+
+  // Client := <- auth.Ch
+  // fmt.Println(Client)
 }
 
 func redirect(url string) http.HandlerFunc {
