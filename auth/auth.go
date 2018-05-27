@@ -27,6 +27,7 @@ var (
 
 
 func CompleteAuth(w http.ResponseWriter, r *http.Request) {
+  fmt.Println("hello, anyone?")
   tok, err := Auth.Token(State, r)
   if err != nil {
     http.Error(w, "Couldn't get token", http.StatusForbidden)
