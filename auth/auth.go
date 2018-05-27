@@ -43,7 +43,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   // use the token to get an authenticated client
   client := Auth.NewClient(tok)
   fmt.Println("hello, anyone?????")
-  fmt.Fprintf(w, "Login Completed!")
+  // fmt.Fprintf(w, "Login Completed!")
   fmt.Println("hello, anyone??????")
   Ch <- &client
   fmt.Println("hello, anyone???????")
@@ -80,7 +80,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   // fmt.Println("hello, anyone????????")
 
   // // http.Redirect(w, r, "/", 301)
-  // http.FileServer(http.Dir("./client/build"))
+  http.FileServer(http.Dir("./client/build"))
   // fmt.Println("hello, anyone?????????")
 }
 
