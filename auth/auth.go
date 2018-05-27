@@ -29,14 +29,17 @@ var (
 func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   fmt.Println("hello, anyone?")
   tok, err := Auth.Token(State, r)
+  fmt.Println("hello, anyone??")
   if err != nil {
     http.Error(w, "Couldn't get token", http.StatusForbidden)
     log.Fatal(err)
   }
+  fmt.Println("hello, anyone???")
   if st := r.FormValue("state"); st != State {
     http.NotFound(w, r)
     log.Fatalf("State mismatch: %s != %s\n", st, State)
   }
+  fmt.Println("hello, anyone????")
   // use the token to get an authenticated client
   client := Auth.NewClient(tok)
   fmt.Fprintf(w, "Login Completed!")
