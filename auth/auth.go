@@ -72,7 +72,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
 
   // Ch <- &client
 
-  http.Redirect(w, r, "/home", 301)
+  http.Redirect(w, r, "/", 301)
   // http.FileServer(http.Dir("./client/build"))
 }
 
