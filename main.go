@@ -124,8 +124,7 @@ func redirect(url string) http.HandlerFunc {
 func loginComplete(c *spotify.Client) http.HandlerFunc {
   fn := func(w http.ResponseWriter, r *http.Request) {
     fmt.Println("are we there?")
-    http.FileServer(http.Dir("./client/build"))
-    http.ServeFile(w, r, ".loginComplete.html")
+    http.ServeFile(w, r, "./client/build/loginComplete.html")
   }
   return fn
 }
