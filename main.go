@@ -34,10 +34,10 @@ var connectionString = os.Getenv("DATABASE_URL")
 //heroku
 var PORT = os.Getenv("PORT")
 
-// const (
-//   clientID  = "2a437f62902142b78efdcbaab0b95271"
-//   secretKey = "35e6b3b0f37846debfbf21d15ab01073"
-// )
+const (
+  clientID  = "2a437f62902142b78efdcbaab0b95271"
+  secretKey = "35e6b3b0f37846debfbf21d15ab01073"
+)
 
 var (
   err error
