@@ -15,6 +15,15 @@ export const changeHostView = num => {
   }
 }
 
+export const loginSpotify = () => {
+  return dispatch => {
+    dispatch({
+      type: 'AUTH_REDIRECT'
+    })
+    window.location.href = `${baseURL}/login`
+  }
+}
+
 export const guestAcceptance = () => {
   return dispatch => {
     dispatch({

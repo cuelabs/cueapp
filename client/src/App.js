@@ -12,9 +12,9 @@ import EventHost from './pages/EventHost'
 class App extends Component {
   componentDidMount () {
     const { dispatch } = this.props
-    const uid = window.localStorage.getItem('uid')
-    if (uid !== null) {
-      dispatch(loadUser(uid))
+    const token = window.localStorage.getItem('cue-access-token')
+    if (token !== null) {
+      dispatch(loadUser(token))
     } else {
       dispatch({
         type: 'STOP_LOADING'

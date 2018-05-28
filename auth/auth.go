@@ -19,7 +19,7 @@ var (
   Auth      = spotify.NewAuthenticator(redirectURI, spotify.ScopeUserReadPrivate)
   Ch        = make(chan *spotify.Client)
   State     = "abc1234"
-  Connected = false
+  // Connected = false
   id      models.User
   err2    error
 )
@@ -58,7 +58,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   // }
   // client := Auth.NewClient(tok)
   // fmt.Fprintf(w, "Login Completed!")
-  Connected = true
+  // Connected = true
 
   // u, err := client.CurrentUser()
   // if err != nil {
@@ -79,7 +79,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   // Ch <- &client
   // fmt.Println("hello, anyone????????")
 
-  http.Redirect(w, r, "/app", 301)
+  // http.Redirect(w, r, "/loginComplete", 301)
   // http.FileServer(http.Dir("./client/build"))
   // fmt.Println("hello, anyone?????????")
 }

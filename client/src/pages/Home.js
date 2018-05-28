@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { tempLogin, resumePending } from '../actions'
+import { tempLogin, resumePending, loginSpotify } from '../actions'
 import CreateEvent from '../pages/CreateEvent'
 import JoinEvent from '../pages/JoinEvent'
 import Button from '../components/Button'
@@ -29,7 +29,7 @@ class Home extends Component {
   login () {
     const { dispatch } = this.props
     if (this.value !== '') {
-      dispatch(tempLogin(this.state.tempUsername))
+      dispatch(loginSpotify())
     }
   }
 
@@ -76,8 +76,6 @@ class Home extends Component {
     } else {
       content = (
         <div className='page'>
-          <input type='text'
-            onChange={this.handleNameChange} />
           <button type='button'
             className='btn-login'
             style={{padding: '12px'}}
