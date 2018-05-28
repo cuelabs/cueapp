@@ -79,7 +79,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   // Ch <- &client
   // fmt.Println("hello, anyone????????")
 
-  // http.Redirect(w, r, "/loginComplete", 301)
+  http.Redirect(w, r, "/loginComplete", 301)
   // http.FileServer(http.Dir("./client/build"))
   // fmt.Println("hello, anyone?????????")
 }
