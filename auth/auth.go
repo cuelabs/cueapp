@@ -40,7 +40,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   fmt.Println("Display name:", user.DisplayName)
   fmt.Println("Spotify URI:", string(user.URI))
   fmt.Println("Endpoint:", user.Endpoint)
-  fmt.Println("Image link: ", user.Images[0].URL, ", height: ", string(user.Images[0].Height))
+  fmt.Println("Image link: ", user.Images[0].URL)
 
   Ch <- &client
 }
