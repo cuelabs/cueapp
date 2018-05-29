@@ -48,6 +48,17 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
     log.Fatal(err3)
   }
   fmt.Println("You are logged in as:", user.ID)
+  // user2, err4 := client.GetUsersPublicProfile(spotify.ID(user.ID))
+  // if err4 != nil {
+  //   fmt.Fprintf(os.Stderr, err.Error())
+  //   return
+  // }
+
+  fmt.Println("User ID:", user.ID)
+  fmt.Println("Display name:", user.DisplayName)
+  fmt.Println("Spotify URI:", string(user.URI))
+  fmt.Println("Endpoint:", user.Endpoint)
+  // fmt.Println("Followers:", user.Followers.Count)
   // fmt.Fprintf(w, "Login Completed!")
   fmt.Println("hello, anyone??????")
   Ch <- &client
@@ -87,7 +98,6 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   // http.Redirect(w, r, "/" + string(tok), 301)
   // http.FileServer(http.Dir("./client/build"))
   // fmt.Println("hello, anyone?????????")
-  return
 }
 
 func PrintSomething(client *spotify.Client) http.HandlerFunc {
