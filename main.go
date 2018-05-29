@@ -102,6 +102,7 @@ func main() {
   router.HandleFunc("/login", redirect(url))
   router.HandleFunc("/ws", serveWs(models.DBCon))
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
+  router.HandleFunc("/", handleHome)
   http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
   handler := cors.Default().Handler(router)
@@ -127,5 +128,18 @@ func loginComplete(c *spotify.Client) http.HandlerFunc {
     http.ServeFile(w, r, "./client/build/loginComplete.html")
   }
   return fn
+}
+
+func handleHome(w http.ResponseWriter, r *http.Request) {
+  fmt.Println("yo yo")
+  keys, ok := r.URL.Query()["token"]
+  if !ok || len(keys) < 1 {
+    fmt.Println("notoken")
+    http.FileServer(http.Dir("./client/build"))
+    return
+  }
+  // token := keys[0]
+  // http.Redirect(w, r, "/" + string(token), 301)
+  return
 }
 

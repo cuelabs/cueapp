@@ -43,6 +43,11 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   // use the token to get an authenticated client
   client := Auth.NewClient(tok)
   fmt.Println("hello, anyone?????")
+  user, err3 := client.CurrentUser()
+  if err3 != nil {
+    log.Fatal(err3)
+  }
+  fmt.Println("You are logged in as:", user.ID)
   // fmt.Fprintf(w, "Login Completed!")
   fmt.Println("hello, anyone??????")
   Ch <- &client
@@ -79,9 +84,10 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
   // Ch <- &client
   // fmt.Println("hello, anyone????????")
 
-  http.Redirect(w, r, "/loginComplete", 301)
+  // http.Redirect(w, r, "/" + string(tok), 301)
   // http.FileServer(http.Dir("./client/build"))
   // fmt.Println("hello, anyone?????????")
+  return
 }
 
 func PrintSomething(client *spotify.Client) http.HandlerFunc {
