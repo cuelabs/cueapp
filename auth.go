@@ -63,6 +63,7 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       newUserInfo, err := models.InsertSpotifyUser(dbCon, &newUser)
       if err != nil {
         panic(err)
+        return
       }
       fmt.Println("added new user with id: " + newUserInfo.SUID)
     }

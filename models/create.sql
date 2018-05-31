@@ -28,7 +28,7 @@ CREATE TABLE cues (
 CREATE TABLE users (
   suid varchar(100) PRIMARY KEY,
   displayName varchar(100) not null UNIQUE,
-  displayImage varchar(100) not null UNIQUE,
+  displayImage varchar(1000) not null UNIQUE,
   isActive BOOLEAN DEFAULT FALSE,
   u_evid INTEGER DEFAULT -1,
   createdAt TIMESTAMP DEFAULT NOW()
