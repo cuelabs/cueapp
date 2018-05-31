@@ -70,6 +70,7 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
 
     sub := &spotifySubscription{client: &client, suid: user.ID}
     s.register <- sub
+    http.Redirect(w, r, ("user=" + user.ID), 301)
   }
   return fn
 }
