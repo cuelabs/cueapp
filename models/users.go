@@ -116,10 +116,10 @@ func FindUserBySUID(db *sql.DB, id string) (SpotifyUserData, error) {
       &u.ID,
       &u.SUID, 
       &u.DisplayName, 
+      &u.DisplayImage,
       &u.IsActive,
       &u.EventId,
-      &u.CreatedAt,
-      &u.DisplayName)
+      &u.CreatedAt)
   }
 
   return u, nil
