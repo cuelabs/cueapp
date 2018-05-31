@@ -14,7 +14,6 @@ const redirectURI = "https://arcane-tundra-63613.herokuapp.com/callback"
 
 var (
   Auth      = spotify.NewAuthenticator(redirectURI, spotify.ScopeUserReadPrivate)
-  Ch        = make(chan *spotify.Client)
   State     = "abc1234"
   id      models.User
   err2    error
@@ -69,7 +68,8 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       fmt.Println("Here is the id: " + string(newUserInfo.ID))
     }
 
-    Ch <- &client
+    sub := &spotifySubscription{client: &client, suid: user.ID}
+    s.register <- sub
   }
   return fn
 }

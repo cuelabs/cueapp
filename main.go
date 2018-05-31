@@ -9,10 +9,7 @@ import (
   "github.com/gorilla/mux"
   "github.com/rs/cors"
   _ "github.com/lib/pq"
-  "github.com/zmb3/spotify"
   "os"
-  "fmt"
-  // "log"
 )
 
 // dev
@@ -37,7 +34,6 @@ const (
 
 var (
   err error
-  Client *spotify.Client
 )
 
 
@@ -51,6 +47,7 @@ func main() {
   url := Auth.AuthURL(State)
 
   go h.run()
+  go s.run()
 
   router := mux.NewRouter()
   router.HandleFunc("/events/read/all", controllers.ReadAllEvents(models.DBCon)).Methods("GET")
@@ -68,8 +65,6 @@ func main() {
   handler := cors.Default().Handler(router)
   go http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
 
-  Client := <- Ch
-  fmt.Println(Client)
 }
 
 func redirect(url string) http.HandlerFunc {
