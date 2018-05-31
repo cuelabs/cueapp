@@ -59,7 +59,7 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
         CreatedAt: time.Now(),
       }
 
-      newUserInfo, err := models.InsertSpotifyUser(dbCon, &newUser)
+      _, err := models.InsertSpotifyUser(dbCon, &newUser)
       if err != nil {
         panic(err)
         return
