@@ -64,6 +64,7 @@ type UserData struct {
 }
 
 type SpotifyUserData struct {
+  ID int
   SUID string
   DisplayName string
   IsActive bool

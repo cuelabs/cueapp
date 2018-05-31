@@ -113,6 +113,7 @@ func FindUserBySUID(db *sql.DB, id string) (SpotifyUserData, error) {
 
   for rows.Next() {
     rows.Scan(
+      &u.ID,
       &u.SUID, 
       &u.DisplayName, 
       &u.IsActive,

@@ -48,7 +48,8 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       return
     }
 
-    if u.SUID == user.ID {
+    if u.ID > 0 {
+      fmt.Println("Found user " + u.DisplayName)
       return
     }  else {
       // insert new user in the database with the authenticated users SUID
