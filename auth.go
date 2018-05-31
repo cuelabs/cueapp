@@ -14,9 +14,9 @@ const redirectURI = "https://arcane-tundra-63613.herokuapp.com/callback"
 var (
   Auth      = spotify.NewAuthenticator(redirectURI, spotify.ScopeUserReadPrivate)
   State     = "abc1234"
-  id      models.User
-  err2    error
-  u models.SpotifyUserData
+  id        models.User
+  err2      error
+  u         models.SpotifyUserData
 )
 
 func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {

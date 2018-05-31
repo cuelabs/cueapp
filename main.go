@@ -60,6 +60,7 @@ func main() {
   router.HandleFunc("/login", redirect(url))
   router.HandleFunc("/ws", serveWs(models.DBCon))
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
+  router.PathPrefix("/user/").Handler(http.FileServer(http.Dir("./client/build")))
   http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
   handler := cors.Default().Handler(router)
