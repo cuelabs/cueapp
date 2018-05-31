@@ -69,7 +69,7 @@ type SpotifyUserData struct {
   IsActive bool
   EventId int
   CreatedAt time.Time
-  EventName string
+  DisplayImage string
 }
 
 type Cue struct {

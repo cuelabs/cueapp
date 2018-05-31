@@ -18,6 +18,7 @@ var (
   State     = "abc1234"
   id      models.User
   err2    error
+  u models.SpotifyUserData
 )
 
 func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {

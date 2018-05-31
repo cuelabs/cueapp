@@ -2,6 +2,7 @@ package models
 
 import (
   "database/sql"
+  "fmt"
 )
 
 func JoinEventUser(db *sql.DB, evId int, uId int) error {
@@ -59,7 +60,7 @@ func InsertUser(db *sql.DB, user *NewUser) (NewUserInfo, error) {
   return newUser, nil
 }
 
-func InsertSpotifyUser(db *sql.DB, user *NewSpotifyUser) (*NewSpotifyUserID, error) {
+func InsertSpotifyUser(db *sql.DB, user *NewSpotifyUser) (NewSpotifyUserID, error) {
   query := `  
     INSERT INTO users (suid, displayName, displayImage, createdAt)  
     VALUES ($1, $2, $3, $4)
@@ -75,10 +76,10 @@ func InsertSpotifyUser(db *sql.DB, user *NewSpotifyUser) (*NewSpotifyUserID, err
     user.CreatedAt).Scan(&newUser.SUID)
 
   if err != nil {
-    return nil, err
+    return newUser, err
   }
 
-  return &newUser, nil
+  return newUser, nil
 }
 
 func FindUser(db *sql.DB, user *User) (UserData, error) {
@@ -103,6 +104,7 @@ func FindUser(db *sql.DB, user *User) (UserData, error) {
 
 func FindUserBySUID(db *sql.DB, id string) (SpotifyUserData, error) {
   u := SpotifyUserData{}
+  fmt.Println("id in function " + id)
 
   rows, err := db.Query("SELECT * FROM users WHERE suid=$1", id)
   if err != nil {
@@ -115,7 +117,8 @@ func FindUserBySUID(db *sql.DB, id string) (SpotifyUserData, error) {
       &u.DisplayName, 
       &u.IsActive,
       &u.EventId,
-      &u.CreatedAt)
+      &u.CreatedAt,
+      &u.DisplayName)
   }
 
   return u, nil
