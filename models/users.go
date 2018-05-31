@@ -104,7 +104,7 @@ func FindUser(db *sql.DB, user *User) (UserData, error) {
 func FindUserBySUID(db *sql.DB, id string) (*SpotifyUserData, error) {
   u := SpotifyUserData{}
 
-  rows, err := db.Query("SELECT * FROM users WHERE suid=$1", id)
+  rows, err := db.Query("SELECT * FROM users WHERE suid='$1'", id)
   if err != nil {
     return nil, err
   }
