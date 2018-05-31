@@ -5,7 +5,6 @@ import (
   "database/sql"
   "github.com/mattcarpowich1/cueapp/controllers"
   "github.com/mattcarpowich1/cueapp/models"
-  "github.com/mattcarpowich1/cueapp/auth"
   "github.com/gorilla/handlers"
   "github.com/gorilla/mux"
   "github.com/rs/cors"
@@ -48,8 +47,8 @@ func main() {
     panic(err)
   }
 
-  auth.Auth.SetAuthInfo(clientID, secretKey)
-  url := auth.Auth.AuthURL(auth.State)
+  Auth.SetAuthInfo(clientID, secretKey)
+  url := Auth.AuthURL(State)
 
   go h.run()
 
@@ -60,7 +59,7 @@ func main() {
   router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/create", controllers.CreateUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
-  router.HandleFunc("/callback", auth.CompleteAuth)
+  router.HandleFunc("/callback", CompleteAuth(models.DBCon))
   router.HandleFunc("/login", redirect(url))
   router.HandleFunc("/ws", serveWs(models.DBCon))
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
@@ -69,7 +68,7 @@ func main() {
   handler := cors.Default().Handler(router)
   go http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
 
-  Client := <- auth.Ch
+  Client := <- Ch
   fmt.Println(Client)
 }
 
