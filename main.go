@@ -59,7 +59,7 @@ func main() {
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/callback", CompleteAuth(models.DBCon))
   router.HandleFunc("/login", redirect(url))
-  router.HandleFunc("/user/*", func(w http.ResponseWriter, r *http.Request) {
+  router.HandleFunc(`/{user:[0-9]+}`, func(w http.ResponseWriter, r *http.Request) {
     fmt.Println("in func")
     http.FileServer(http.Dir("./client/build"))
     })
