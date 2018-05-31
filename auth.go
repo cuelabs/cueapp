@@ -40,23 +40,13 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       log.Fatal(err3)
     }
 
-    fmt.Println("User ID:", user.ID)
-    // fmt.Println("Display name:", user.DisplayName)
-    // fmt.Println("Spotify URI:", string(user.URI))
-    // fmt.Println("Endpoint:", user.Endpoint)
-    // fmt.Println("Image link: ", user.Images[0].URL)
-
-    // check if authenticated user exists in db
     u, err4 := models.FindUserBySUID(dbCon, user.ID)
-    fmt.Println("Select just happened and u.SUID is..." + u.SUID)
     if err4 != nil {
       panic(err)
-      fmt.Println("there was an error in the read")
       return
     }
-    fmt.Println("The length of the spotify user id is..." + string(len(u.SUID)))
+
     if u.SUID == user.ID {
-      fmt.Println("Found user with display name: " + u.DisplayName)
       return
     }  else {
       // insert new user in the database with the authenticated users SUID
@@ -66,14 +56,12 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
         DisplayImage: user.Images[0].URL,
         CreatedAt: time.Now(),
       }
-      fmt.Println("Hopefully this does not print")
       newUserInfo, err := models.InsertSpotifyUser(dbCon, &newUser)
       if err != nil {
         panic(err)
         return
       }
-      fmt.Println("added new user with id: " + newUserInfo.SUID)
-      fmt.Println("length of new user id is..." + string(len(newUserInfo.SUID)))
+      fmt.Println("Here is the id: " + string(newUserInfo.ID))
     }
 
     Ch <- &client

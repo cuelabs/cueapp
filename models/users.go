@@ -64,7 +64,7 @@ func InsertSpotifyUser(db *sql.DB, user *NewSpotifyUser) (NewSpotifyUserID, erro
   query := `  
     INSERT INTO users (suid, displayName, displayImage, createdAt)  
     VALUES ($1, $2, $3, $4)
-    RETURNING suid`
+    RETURNING uid`
 
   newUser := NewSpotifyUserID{}
 
@@ -73,7 +73,7 @@ func InsertSpotifyUser(db *sql.DB, user *NewSpotifyUser) (NewSpotifyUserID, erro
     user.SUID,
     user.DisplayName,
     user.DisplayImage, 
-    user.CreatedAt).Scan(&newUser.SUID)
+    user.CreatedAt).Scan(&newUser.ID)
 
   if err != nil {
     return newUser, err

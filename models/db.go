@@ -51,7 +51,7 @@ type NewUserInfo struct {
 } 
 
 type NewSpotifyUserID struct {
-  SUID string
+  ID int
 }
 
 type UserData struct {
