@@ -40,6 +40,7 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
     user, err3 := client.CurrentUser()
     if err3 != nil {
       log.Fatal(err3)
+      return
     }
 
     u, err4 := models.FindUserBySUID(dbCon, user.ID)
@@ -49,6 +50,7 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
     }
 
     if u.ID > 0 {
+      fmt.Printf("%+v\n", u)
       fmt.Println("Found user " + u.DisplayName)
       return
     }  else {
