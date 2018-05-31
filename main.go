@@ -10,6 +10,7 @@ import (
   "github.com/rs/cors"
   _ "github.com/lib/pq"
   "os"
+  "fmt"
 )
 
 // dev
@@ -58,9 +59,13 @@ func main() {
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/callback", CompleteAuth(models.DBCon))
   router.HandleFunc("/login", redirect(url))
+  router.HandleFunc("/user/", func(w http.ResponseWriter, r *http.Request) {
+    fmt.Println("in func")
+    http.FileServer(http.Dir("./client/build"))
+    })
   router.HandleFunc("/ws", serveWs(models.DBCon))
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
-  router.PathPrefix("/user/").Handler(http.FileServer(http.Dir("./client/build")))
+  // router.PathPrefix("/user/").Handler(http.FileServer(http.Dir("./client/build")))
   http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
   handler := cors.Default().Handler(router)
