@@ -69,7 +69,7 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       s.register <- sub
     }
 
-    http.Redirect(w, r, ("user=" + user.ID), 301)
+    http.Redirect(w, r, ("/user/" + user.ID), 301)
   }
   return fn
 }
