@@ -101,12 +101,12 @@ func FindUser(db *sql.DB, user *User) (UserData, error) {
   return u, nil
 }
 
-func FindUserBySUID(db *sql.DB, id string) (*SpotifyUserData, error) {
+func FindUserBySUID(db *sql.DB, id string) (SpotifyUserData, error) {
   u := SpotifyUserData{}
 
   rows, err := db.Query("SELECT * FROM users WHERE suid='$1'", id)
   if err != nil {
-    return nil, err
+    return u, err
   }
 
   for rows.Next() {
@@ -118,7 +118,7 @@ func FindUserBySUID(db *sql.DB, id string) (*SpotifyUserData, error) {
       &u.CreatedAt)
   }
 
-  return &u, nil
+  return u, nil
 }
 
 func FindCurrentUserEvent(db *sql.DB, uid int) (int, string, error) {
