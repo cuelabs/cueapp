@@ -33,7 +33,7 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       return
     }
 
-    // use the token to get an authenticated client
+    // Use the token to get an authenticated client
     client := Auth.NewClient(tok)
     user, err3 := client.CurrentUser()
     if err3 != nil {
@@ -41,6 +41,7 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       return
     }
 
+    // Check if authenticated user exists in DB
     u, err4 := models.FindUserBySUID(dbCon, user.ID)
     if err4 != nil {
       panic(err)
@@ -51,7 +52,7 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       sub := &spotifySubscription{client: &client, suid: user.ID}
       s.register <- sub
     }  else {
-      // insert new user in the database with the authenticated users SUID
+      // Insert new user in the database with the authenticated users SUID
       newUser := models.NewSpotifyUser{
         SUID: user.ID,
         DisplayName: user.DisplayName,
@@ -65,6 +66,7 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
         return
       }
 
+      // Send client to spotifyHub
       sub := &spotifySubscription{client: &client, suid: user.ID}
       s.register <- sub
     }

@@ -10,7 +10,6 @@ import (
   "github.com/rs/cors"
   _ "github.com/lib/pq"
   "os"
-  "fmt"
 )
 
 // dev
@@ -51,26 +50,29 @@ func main() {
   go s.run()
 
   router := mux.NewRouter()
+  // API 
   router.HandleFunc("/events/read/all", controllers.ReadAllEvents(models.DBCon)).Methods("GET")
   router.HandleFunc("/events/read/one", controllers.ReadOneEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/events/create", controllers.CreateEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/create", controllers.CreateUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
-  router.HandleFunc("/callback", CompleteAuth(models.DBCon))
+
+  // Auth 
   router.HandleFunc("/login", redirect(url))
-  router.HandleFunc("/user/{suid:[0-9]+}", func(w http.ResponseWriter, r *http.Request) {
-    fmt.Println("in func")
-    http.FileServer(http.Dir("./client/build"))
-    })
+  router.HandleFunc("/callback", CompleteAuth(models.DBCon))
+
+  // User Home Page
+  router.HandleFunc("/user/{suid:[0-9]+}", homePage)
+
+  // Websocket
   router.HandleFunc("/ws", serveWs(models.DBCon))
+
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
-  // router.PathPrefix("/user/").Handler(http.FileServer(http.Dir("./client/build")))
   http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
   handler := cors.Default().Handler(router)
   http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
-
 }
 
 func redirect(url string) http.HandlerFunc {
@@ -78,4 +80,8 @@ func redirect(url string) http.HandlerFunc {
     http.Redirect(w, r, url, 301)
   }
   return fn
+}
+
+func homePage(w http.ResponseWriter, r *http.Request) {
+  http.FileServer(http.Dir("./client/build"))
 }

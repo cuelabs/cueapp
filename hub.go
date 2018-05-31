@@ -17,16 +17,16 @@ type subscription struct {
 }
 
 type hub struct {
-  //registered connections 
+  // Registered connections 
   events map[string]map[*connection]bool
 
-  //inbound messages from connections
+  // Inbound messages from connections
   broadcast chan eventMessage
 
-  //register requests from connections
+  // Register requests from connections
   register chan *subscription
 
-  //unregister request from connection
+  // Unregister request from connection
   unregister chan *subscription
 }
 

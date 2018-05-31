@@ -1,8 +1,6 @@
 package main
 
-import (
-  "github.com/zmb3/spotify"
-)
+import "github.com/zmb3/spotify"
 
 type spotifySubscription struct {
   client *spotify.Client
@@ -10,10 +8,10 @@ type spotifySubscription struct {
 }
 
 type spotifyHub struct {
-  //connected spotify clients
+  // Connected spotify clients
   clients map[string]map[*spotify.Client]bool
 
-  //channel for incoming clients
+  // Channel for incoming clients
   register chan *spotifySubscription
 }
 
