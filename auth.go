@@ -40,7 +40,6 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
     }
 
     fmt.Println("User ID:", user.ID)
-    fmt.Println("The length of the spotify user id is...", string(len(user.ID)))
     // fmt.Println("Display name:", user.DisplayName)
     // fmt.Println("Spotify URI:", string(user.URI))
     // fmt.Println("Endpoint:", user.Endpoint)
@@ -54,7 +53,7 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       fmt.Println("there was an error in the read")
       return
     }
-    fmt.Println("The length of the spotify user id is...", string(len(u.SUID)))
+    fmt.Println("The length of the spotify user id is..." + string(len(u.SUID)))
     if u.SUID == user.ID {
       fmt.Println("Found user with display name: " + u.DisplayName)
       return
