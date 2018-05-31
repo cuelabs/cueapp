@@ -26,8 +26,9 @@ CREATE TABLE cues (
 );
 
 CREATE TABLE users (
-  suid INT PRIMARY KEY,
+  suid varchar(100) PRIMARY KEY,
   displayName varchar(100) not null UNIQUE,
+  displayImage varchar(100) not null UNIQUE,
   isActive BOOLEAN DEFAULT FALSE,
   u_evid INTEGER DEFAULT -1,
   createdAt TIMESTAMP DEFAULT NOW()
@@ -41,6 +42,6 @@ CREATE TABLE events_cues (
 
 CREATE TABLE events_users (
   eu_evid INTEGER REFERENCES events(evid),
-  eu_uid INTEGER REFERENCES users(suid),
+  eu_uid varchar(100) REFERENCES users(suid),
   CONSTRAINT events_users_pkey PRIMARY KEY(eu_evid, eu_uid)
 );

@@ -59,6 +59,28 @@ func InsertUser(db *sql.DB, user *NewUser) (NewUserInfo, error) {
   return newUser, nil
 }
 
+func InsertSpotifyUser(db *sql.DB, user *NewSpotifyUser) (*NewSpotifyUserID, error) {
+  query := `  
+    INSERT INTO users (suid, displayName, displayImage, createdAt)  
+    VALUES ($1, $2, $3, $4)
+    RETURNING suid`
+
+  newUser := NewSpotifyUserID{}
+
+  err := db.QueryRow(
+    query,  
+    user.SUID,
+    user.DisplayName,
+    user.DisplayImage, 
+    user.CreatedAt).Scan(&newUser.SUID)
+
+  if err != nil {
+    return nil, err
+  }
+
+  return &newUser, nil
+}
+
 func FindUser(db *sql.DB, user *User) (UserData, error) {
   u := UserData{}
 
@@ -77,6 +99,26 @@ func FindUser(db *sql.DB, user *User) (UserData, error) {
   }
 
   return u, nil
+}
+
+func FindUserBySUID(db *sql.DB, id string) (*SpotifyUserData, error) {
+  u := SpotifyUserData{}
+
+  rows, err := db.Query("SELECT * FROM users WHERE suid=$1", id)
+  if err != nil {
+    return nil, err
+  }
+
+  for rows.Next() {
+    rows.Scan(
+      &u.SUID, 
+      &u.DisplayName, 
+      &u.IsActive,
+      &u.EventId,
+      &u.CreatedAt)
+  }
+
+  return &u, nil
 }
 
 func FindCurrentUserEvent(db *sql.DB, uid int) (int, string, error) {

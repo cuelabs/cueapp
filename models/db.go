@@ -38,13 +38,33 @@ type NewUser struct {
   CreatedAt time.Time
 }
 
+type NewSpotifyUser struct {
+  SUID string
+  DisplayName string
+  DisplayImage string
+  CreatedAt time.Time
+}
+
 type NewUserInfo struct {
   UserID int
   Username string
+} 
+
+type NewSpotifyUserID struct {
+  SUID string
 }
 
 type UserData struct {
   UserId int
+  DisplayName string
+  IsActive bool
+  EventId int
+  CreatedAt time.Time
+  EventName string
+}
+
+type SpotifyUserData struct {
+  SUID string
   DisplayName string
   IsActive bool
   EventId int
