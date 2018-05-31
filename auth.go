@@ -1,7 +1,6 @@
 package main
 
 import (
-  "fmt"
   "log"
   "net/http"
   "github.com/zmb3/spotify"
@@ -49,8 +48,6 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
     }
 
     if u.ID > 0 {
-      fmt.Printf("%+v\n", u)
-      fmt.Println("Found user " + u.DisplayName)
       sub := &spotifySubscription{client: &client, suid: user.ID}
       s.register <- sub
     }  else {
@@ -61,15 +58,17 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
         DisplayImage: user.Images[0].URL,
         CreatedAt: time.Now(),
       }
+
       newUserInfo, err := models.InsertSpotifyUser(dbCon, &newUser)
       if err != nil {
         panic(err)
         return
       }
-      fmt.Println("Here is the id: " + string(newUserInfo.ID))
+
       sub := &spotifySubscription{client: &client, suid: user.ID}
       s.register <- sub
     }
+
     http.Redirect(w, r, ("user=" + user.ID), 301)
   }
   return fn

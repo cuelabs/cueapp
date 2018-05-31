@@ -2,7 +2,6 @@ package main
 
 import (
   "github.com/zmb3/spotify"
-  "fmt"
 )
 
 type spotifySubscription struct {
@@ -27,8 +26,6 @@ func (s *spotifyHub) run() {
   for {
     select {
     case c := <- s.register:
-      fmt.Println("looky here")
-      fmt.Println(c.suid)
       client := s.clients[c.suid]
       if client == nil {
         client = make(map[*spotify.Client]bool)
