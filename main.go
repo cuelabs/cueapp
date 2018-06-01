@@ -13,19 +13,19 @@ import (
 )
 
 // dev
-// const connectionString = `
-//   user=matthewcarpowich
-//   dbname=cuetestdb
-//   sslmode=disable`
+const connectionString = `
+  user=matthewcarpowich
+  dbname=cuetestdb
+  sslmode=disable`
 
 // heroku
-var connectionString = os.Getenv("DATABASE_URL")
+// var connectionString = os.Getenv("DATABASE_URL")
 
 //dev
-// const PORT = "8080"
+const PORT = "8080"
 
 //heroku
-var PORT = os.Getenv("PORT")
+// var PORT = os.Getenv("PORT")
 
 const (
   clientID  = "2a437f62902142b78efdcbaab0b95271"
@@ -43,8 +43,8 @@ func main() {
     panic(err)
   }
 
-  Auth.SetAuthInfo(clientID, secretKey)
-  url := Auth.AuthURL(State)
+  // Auth.SetAuthInfo(clientID, secretKey)
+  // url := Auth.AuthURL(State)
 
   go h.run()
   go s.run()
@@ -59,7 +59,7 @@ func main() {
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
 
   // Auth 
-  router.HandleFunc("/login", redirect(url))
+  // router.HandleFunc("/login", redirect(url))
   router.HandleFunc("/callback", CompleteAuth(models.DBCon))
 
   // User Home Page
@@ -75,12 +75,12 @@ func main() {
   http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
 }
 
-func redirect(url string) http.HandlerFunc {
-  fn := func(w http.ResponseWriter, r *http.Request) {
-    http.Redirect(w, r, url, 301)
-  }
-  return fn
-}
+// func redirect(url string) http.HandlerFunc {
+//   fn := func(w http.ResponseWriter, r *http.Request) {
+//     http.Redirect(w, r, url, 301)
+//   }
+//   return fn
+// }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
   http.FileServer(http.Dir("./client/build"))
