@@ -15,19 +15,19 @@ import (
 )
 
 // dev
-const connectionString = `
-  user=matthewcarpowich
-  dbname=cuetestdb
-  sslmode=disable`
+// const connectionString = `
+//   user=matthewcarpowich
+//   dbname=cuetestdb
+//   sslmode=disable`
 
 // heroku
-// var connectionString = os.Getenv("DATABASE_URL")
+var connectionString = os.Getenv("DATABASE_URL")
 
 //dev
-const PORT = "8080"
+// const PORT = "8080"
 
 //heroku
-// var PORT = os.Getenv("PORT")
+var PORT = os.Getenv("PORT")
 
 const (
   clientID  = "2a437f62902142b78efdcbaab0b95271"
@@ -52,13 +52,14 @@ func main() {
 
   // controllers.S = S
 
-  // Auth.SetAuthInfo(clientID, secretKey)
-  // url := Auth.AuthURL(State)
+  Auth.SetAuthInfo(clientID, secretKey)
+  url := Auth.AuthURL(State)
 
   go h.run()
-  // go s.run()
+  go S.run()
 
   router := mux.NewRouter()
+  
   // Events API 
   router.HandleFunc("/events/read/all", controllers.ReadAllEvents(models.DBCon)).Methods("GET")
   router.HandleFunc("/events/read/one", controllers.ReadOneEvent(models.DBCon)).Methods("POST")
@@ -71,7 +72,7 @@ func main() {
   router.HandleFunc("/spotify/search", Search(&S)).Methods("POST")
 
   // Auth 
-  // router.HandleFunc("/login", redirect(url))
+  router.HandleFunc("/login", redirect(url))
   router.HandleFunc("/callback", CompleteAuth(models.DBCon))
   router.HandleFunc("/completeLogin/{suid:[0-9]+}", finishLogin)
   router.HandleFunc("/test/{suid:[0-9]+}", doTest)
@@ -90,12 +91,12 @@ func main() {
   http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
 }
 
-// func redirect(url string) http.HandlerFunc {
-//   fn := func(w http.ResponseWriter, r *http.Request) {
-//     http.Redirect(w, r, url, 301)
-//   }
-//   return fn
-// }
+func redirect(url string) http.HandlerFunc {
+  fn := func(w http.ResponseWriter, r *http.Request) {
+    http.Redirect(w, r, url, 301)
+  }
+  return fn
+}
 
 func Search(h *SpotifyHub) http.HandlerFunc {
   fn := func(w http.ResponseWriter, r *http.Request) {
