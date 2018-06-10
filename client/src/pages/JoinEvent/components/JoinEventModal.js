@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import Button from './Button'
-import Loader from './Loader'
-import Modal from './Modal'
-import { closeModal } from '../actions'
-import Socket from '../utils/Socket'
+import Button from '../../../components/Button'
+import Loader from '../../../components/Loader'
+import Modal from '../../../components/Modal'
+import { closeModal } from '../../../actions'
+import Socket from '../../../utils/Socket'
 
 class JoinEventModal extends Component {
   constructor (props) {

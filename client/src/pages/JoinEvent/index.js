@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import SearchResults from '../components/SearchResults'
-import JoinEventModal from '../components/JoinEventModal'
-import { handleEventSearch, resumePending } from '../actions'
-import '../images/ass4.svg'
+import SearchResults from '../../components/SearchResults'
+import JoinEventModal from './components/JoinEventModal'
+import { handleEventSearch, resumePending } from '../../actions'
 
 class JoinEvent extends Component {
   componentDidMount () {

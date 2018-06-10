@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { loadRequests, acceptRequest, rejectRequest } from '../actions'
+import { loadRequests, acceptRequest, rejectRequest } from '../../../actions'
 
 class HostNotifications extends Component {
   constructor () {
