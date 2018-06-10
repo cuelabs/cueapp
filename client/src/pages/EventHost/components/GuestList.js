@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { loadRequests } from '../actions'
+import { loadRequests } from '../../../actions'
 
 class GuestList extends Component {
   componentDidMount () {

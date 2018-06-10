@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import GuestList from '../components/GuestList'
-import HostNotifications from '../components/HostNotifications'
-import HostSettings from '../components/HostSettings'
+import GuestList from './components/GuestList'
+import HostNotifications from './components/HostNotifications'
+import HostSettings from './components/HostSettings'
 import {
   loadEventInfo,
   incomingJoinRequest,
@@ -9,8 +9,8 @@ import {
   acceptRequest,
   rejectRequest,
   endEvent
-} from '../actions'
-import Socket from '../utils/Socket'
+} from '../../actions'
+import Socket from '../../utils/Socket'
 
 class EventHost extends Component {
   constructor () {

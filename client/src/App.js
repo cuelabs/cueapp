@@ -4,7 +4,7 @@ import { loadUser } from './actions'
 import Nav from './components/Nav'
 import Main from './components/Main'
 import Loader from './components/Loader'
-import UserView from './containers/UserView'
+import UserView from './components/UserView'
 
 class App extends Component {
   componentDidMount () {
