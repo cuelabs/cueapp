@@ -6,6 +6,7 @@ import (
   "github.com/mattcarpowich1/cueapp/controllers"
   "github.com/mattcarpowich1/cueapp/models"
   "github.com/gorilla/handlers"
+  "github.com/zmb3/spotify"
   "github.com/gorilla/mux"
   "github.com/rs/cors"
   _ "github.com/lib/pq"
@@ -37,12 +38,19 @@ var (
   err error
 )
 
+var S = SpotifyHub{
+  clients: make(map[string]map[*spotify.Client]bool),
+  register: make(chan *spotifySubscription),
+}
+
 
 func main() {
   models.DBCon, err = sql.Open("postgres", connectionString)
   if err != nil {
     panic(err)
   }
+
+  // controllers.S = S
 
   // Auth.SetAuthInfo(clientID, secretKey)
   // url := Auth.AuthURL(State)
@@ -51,13 +59,16 @@ func main() {
   // go s.run()
 
   router := mux.NewRouter()
-  // API 
+  // Events API 
   router.HandleFunc("/events/read/all", controllers.ReadAllEvents(models.DBCon)).Methods("GET")
   router.HandleFunc("/events/read/one", controllers.ReadOneEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/events/create", controllers.CreateEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/create", controllers.CreateUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
+
+  // Spotify API
+  router.HandleFunc("/spotify/search", Search(&S)).Methods("POST")
 
   // Auth 
   // router.HandleFunc("/login", redirect(url))
@@ -74,6 +85,7 @@ func main() {
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
+  http.Handle("/user/{suid:[0-9]+}", http.StripPrefix("/user/", http.FileServer(http.Dir("./client/build"))))
   handler := cors.Default().Handler(router)
   http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
 }
@@ -84,6 +96,13 @@ func main() {
 //   }
 //   return fn
 // }
+
+func Search(h *SpotifyHub) http.HandlerFunc {
+  fn := func(w http.ResponseWriter, r *http.Request) {
+    fmt.Println("hey")
+  }
+  return fn
+}
 
 func homePage(w http.ResponseWriter, r *http.Request) {
   http.FileServer(http.Dir("./client/build"))
