@@ -1,6 +1,8 @@
 import React from 'react'
 import Main from '../components/Main'
 import Nav from '../components/Nav'
+import { loginSpotify } from '../actions'
+import { connect } from 'react-redux'
 
 const Login = props => {
   return (
@@ -12,11 +14,13 @@ const Login = props => {
           <button type='button'
             className='btn-login'
             style={{padding: '12px'}}
-            onClick={() => console.log('hi')}>Login</button>
+            onClick={() => props.dispatch(loginSpotify())}>Login</button>
         </div>
       </div>
     </Main>
   )
 }
 
-export default Login
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps)(Login)
