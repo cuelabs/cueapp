@@ -34,7 +34,7 @@ const cueReducer = (state = initialState, action) => {
       }
     case 'CHANGE_HOME_VIEW':
       return {
-        ...state, 
+        ...state,
         homeView: action.view
       }
     case 'TEMP_LOGIN_REQUEST':
@@ -77,6 +77,7 @@ const cueReducer = (state = initialState, action) => {
       return {
         ...state,
         userId: action.id,
+        suid: action.suid,
         displayName: action.username,
         isActive: action.isActive,
         eventId: action.eventId,
@@ -84,7 +85,7 @@ const cueReducer = (state = initialState, action) => {
         beginning: false,
         counter: 0
       }
-    case 'DONE': 
+    case 'DONE':
       return {
         ...state,
         done: true
@@ -213,7 +214,8 @@ const cueReducer = (state = initialState, action) => {
         selectedEventName: '',
         selectedEventId: -1,
         beginning: false,
-        counter: 0
+        counter: 0,
+        homeView: 'HOME'
       }
     case 'LOAD_REQUESTS_SUCCESS':
       return {
@@ -240,7 +242,9 @@ const cueReducer = (state = initialState, action) => {
         eventName: action.name,
         eventLoading: false,
         eventId: action.eventId,
-        done: false
+        done: false,
+        hostView: action.hostId === state.userId
+          ? 0 : state.hostView
       }
     case 'SEARCH_EVENTS_REQUEST':
       return {

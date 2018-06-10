@@ -17,4 +17,4 @@ const Loader = ({first}) => (
   </div>
 )
 
-export default Loader 
+export default Loader

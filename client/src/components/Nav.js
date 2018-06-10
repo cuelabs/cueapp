@@ -7,8 +7,9 @@ const Nav = ({showSearch, handler, value, dispatch}) => (
     {
       showSearch && (
         <div className='search'>
-          <img className='search-icon' src='./ass4.svg' />
+          <i className='fa fa-search search-nav' aria-hidden='true' />
           <input type='text'
+            className='spotify-search'
             value={value}
             onChange={handler} />
         </div>

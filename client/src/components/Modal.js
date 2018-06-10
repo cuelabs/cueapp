@@ -6,4 +6,4 @@ const Modal = ({loading, children}) => (
   </div>
 )
 
-export default Modal 
+export default Modal

@@ -10,24 +10,24 @@ class EventGuest extends Component {
   }
 
   componentDidMount () {
-    const { dispatcher, id, uid } = this.props
-    const ws = new Socket(id)
-    guestSockets[id.toString()] = ws
-    guestSockets[id.toString()].assignMessageReader(msg => {
-      if (msg.user_id === uid) {
-        switch(msg.message_type) {
+    const { dispatch, eventId, userId } = this.props
+    const ws = new Socket(eventId)
+    guestSockets[eventId.toString()] = ws
+    guestSockets[eventId.toString()].assignMessageReader(msg => {
+      if (msg.user_id === userId) {
+        switch (msg.message_type) {
           case 'GUEST_LEAVE_EVENT':
-            dispatcher({
+            dispatch({
               type: 'GUEST_EXIT'
             })
         }
       } else if (msg.message_type === 'END_EVENT') {
-        dispatcher({
+        dispatch({
           type: 'HOST_END_EVENT'
         })
       }
     })
-    dispatcher(loadEventInfo(id))
+    dispatch(loadEventInfo(eventId))
   }
 
   leaveEvent () {
@@ -40,13 +40,13 @@ class EventGuest extends Component {
         display_name: '',
         message_type: 'GUEST_LEAVE_EVENT'
       })
-    } 
+    }
   }
 
   componentWillUnmount () {
-    const { id } = this.props
-    if (guestSockets.hasOwnProperty(id.toString())) {
-      guestSockets[id.toString()].destroy()
+    const { eventId } = this.props
+    if (guestSockets.hasOwnProperty(eventId.toString())) {
+      guestSockets[eventId.toString()].destroy()
     }
   }
 

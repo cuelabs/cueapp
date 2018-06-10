@@ -9,10 +9,10 @@ import (
 )
 
 var (
-  user models.User 
+  user models.SpotifyUser 
   userInfo models.NewUserInfo
   newUser models.NewUser 
-  userData models.UserData
+  userData models.SpotifyUserData
   evId models.EventId
   guests models.Guests
   userErr error
@@ -77,17 +77,17 @@ func LoadUser(dbCon *sql.DB) http.HandlerFunc {
       panic(userErr)
     }
 
-    userData, userErr = models.FindUser(dbCon, &user)
+    userData, userErr = models.FindUserBySUID(dbCon, user.SUID)
     if userErr != nil {
       panic(userErr)
     }
 
-    if userData.EventId > -1 {
-      userData.EventName, userErr = models.FindEventNameById(dbCon, userData.EventId)
-      if userErr != nil {
-        panic(userErr)
-      }
-    }
+    // if userData.EventId > -1 {
+    //   userData.EventName, userErr = models.FindEventNameById(dbCon, userData.EventId)
+    //   if userErr != nil {
+    //     panic(userErr)
+    //   }
+    // }
 
     userDataJson, err := json.Marshal(userData)
     if err != nil {

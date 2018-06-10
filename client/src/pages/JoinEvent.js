@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import SearchResults from '../components/SearchResults'
 import JoinEventModal from '../components/JoinEventModal'
-import { handleSearch, resumePending } from '../actions'
+import { handleEventSearch, resumePending } from '../actions'
+import '../images/ass4.svg'
 
 class JoinEvent extends Component {
   componentDidMount () {
@@ -21,21 +21,18 @@ class JoinEvent extends Component {
       selectedEventId,
       selectedEventName,
       joinRequestPending,
-      resume,
       eventId
     } = this.props
 
     return (
       <div className='page join'>
         <div className='search'>
-          <img className='search-icon blue' 
-            src='./ass3.svg' 
-            style={{height: 26}}/>
+          <i className='fa fa-search' aria-hidden='true' />
           <input
             placeholder='search events'
             value={query}
             onChange={e => {
-              dispatch(handleSearch(e))
+              dispatch(handleEventSearch(e))
             }} />
         </div>
         <SearchResults
@@ -57,6 +54,4 @@ class JoinEvent extends Component {
   }
 }
 
-const mapStateToProps = state => state
-
-export default connect(mapStateToProps)(JoinEvent)
+export default JoinEvent

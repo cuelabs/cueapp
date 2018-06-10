@@ -3,7 +3,8 @@ html, body {
   padding: 0;
   font-family: "Tajawal", "Ubuntu", sans-serif;
   background: #FAFAFA;
-  -webkit-font-smoothing: antialiased; }
+  -webkit-font-smoothing: antialiased;
+  width: 100vw; }
 
 .container {
   display: flex;
@@ -26,7 +27,7 @@ nav {
 
 nav > div > input {
   margin-right: 4vw;
-  text-indent: calc(32px + (24 - 20) * (100vw - 360px)/(960-360)); }
+  text-indent: calc(28px + (24 - 20) * (100vw - 360px)/(960-360)); }
 
 .search {
   display: flex;
@@ -43,10 +44,17 @@ nav > div > input {
   transform: translateX(-36px); }
 
 .fa.fa-search {
-  transform: translateX(calc(30px + (24 - 20) * (100vw - 360px)/(960-360)));
+  transform: translateX(-8px);
   font-size: 24px;
   color: #29292D;
   z-index: 10; }
+
+.fa-search.search-nav {
+  transform: translateX(calc(28px + (22 - 20) * (100vw - 360px)/(960-360)));
+  background: #c9c9cf;
+  padding-left: 4px;
+  border-radius: 24px;
+  width: 24px; }
 
 .fa-users, .fa-envelope, .fa-sliders {
   font-size: 32px;
@@ -182,7 +190,7 @@ input {
   height: 32px;
   font-family: "Helvetica", sans-serif;
   border: none;
-  caret-color: #c9c9cf;
+  caret-color: #29292D;
   background-color: #FAFAFA;
   color: #29292D;
   font-size: 28px;
@@ -190,8 +198,14 @@ input {
   z-index: 7; }
 
 .page.create form input {
-  border-bottom: 1px solid #29292D;
+  border-bottom: 1px solid #c9c9cf;
   padding-bottom: 16px; }
+
+input.spotify-search {
+  background: #c9c9cf;
+  border-radius: 16px;
+  width: 220px;
+  font-size: 20px; }
 
 ::-webkit-input-placeholder {
   text-indent: 8px;
@@ -416,12 +430,23 @@ ul.host-view-page-list > li {
   align-items: center;
   border-top: 1px solid #c9c9cf;
   color: #29292D;
-  padding: 4vh 0;
+  padding-top: 32px;
+  padding-bottom: 60px;
   padding-left: 12px;
   animation-name: elEye;
   animation-duration: .4s;
   animation-timing-function: ease;
-  animation-iteration-count: 1; }
+  animation-iteration-count: 1;
+  height: 64px; }
+
+ul.host-view-page-list.guests > li {
+  padding-bottom: 32px; }
+
+ul.host-view-page-list > li > img {
+  height: 40px;
+  width: 40px;
+  border-radius: 24px;
+  margin-right: 12px; }
 
 .please-fade {
   animation-name: elEye;
@@ -439,13 +464,30 @@ ul.host-view-page-list > li:nth-child(1) {
 
 .host-request-options {
   align-self: flex-end;
-  margin-top: 16px; }
+  margin-top: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  transform: translateX(-12px); }
 
 .host-request-options > button:nth-child(2) {
-  margin-left: 8px; }
+  margin-left: 12px; }
 
-ul.host-view-page-list > li > p {
-  margin: 0; }
+ul.host-view-page-list > li > div > p {
+  margin: 0;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start; }
+
+.notification-top-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%; }
 
 div.guest-photo {
   margin: 0;
@@ -534,6 +576,24 @@ button {
   color: #29292D;
   border: none; }
 
+.button-host-request {
+  width: 72px;
+  height: 28px;
+  border-radius: 14px;
+  background: #c9c9cf;
+  font-size: 14px;
+  line-height: 28px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #29292D;
+  border: 1px solid #c9c9cf;
+  font-weight: 400; }
+
+.button-host-request:hover {
+  background: #c9c9cf; }
+
 .button-host:hover {
   background: none !important; }
 
@@ -575,7 +635,13 @@ button {
 
 .btn-submit {
   align-self: flex-end;
-  text-align: right; }
+  text-align: center;
+  background: #c9c9cf;
+  height: 32px;
+  border-radius: 16px;
+  margin-top: 12px;
+  width: 80px;
+  line-height: 32px; }
 
 button.btn-home:nth-child(1) {
   margin-bottom: -4vh; }

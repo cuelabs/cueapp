@@ -1,36 +1,14 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { tempLogin, resumePending, loginSpotify } from '../actions'
 import CreateEvent from '../pages/CreateEvent'
 import JoinEvent from '../pages/JoinEvent'
 import Button from '../components/Button'
+import Loader from '../components/Loader'
 
 class Home extends Component {
   constructor () {
     super()
-    this.state = {
-      tempUsername: '',
-      create: false,
-      join: false
-    }
-    this.handleNameChange = this.handleNameChange.bind(this)
-    this.login = this.login.bind(this)
     this.createEvent = this.createEvent.bind(this)
     this.joinEvent = this.joinEvent.bind(this)
-  }
-
-  handleNameChange (e) {
-    const { value } = e.target
-    this.setState({
-      tempUsername: value
-    })
-  }
-
-  login () {
-    const { dispatch } = this.props
-    if (this.value !== '') {
-      dispatch(loginSpotify())
-    }
   }
 
   joinEvent () {
@@ -50,15 +28,18 @@ class Home extends Component {
   }
 
   render () {
-    const { userId, eventId, homeView } = this.props
-    const { create, join } = this.state
+    const {
+      userId,
+      eventId,
+      homeView
+    } = this.props
 
     let content
     if (userId > 0) {
       if (homeView === 'CREATE') {
         content = <CreateEvent />
       } else if (homeView === 'JOIN' || (eventId > 0)) {
-          content = <JoinEvent />
+        content = <JoinEvent {...this.props} />
       } else {
         content = (
           <div className='page home'>
@@ -76,10 +57,7 @@ class Home extends Component {
     } else {
       content = (
         <div className='page'>
-          <button type='button'
-            className='btn-login'
-            style={{padding: '12px'}}
-            onClick={this.login}>Login</button>
+          <Loader />
         </div>
       )
     }
@@ -88,6 +66,4 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => state
-
-export default connect(mapStateToProps)(Home)
+export default Home

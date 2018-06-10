@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import GuestList from '../components/GuestList'
 import HostNotifications from '../components/HostNotifications'
 import HostSettings from '../components/HostSettings'
@@ -25,7 +24,7 @@ class EventHost extends Component {
   }
 
   componentDidMount () {
-    const { dispatch, eventId, userId } = this.props
+    const { dispatch, eventId } = this.props
     const ws = new Socket(eventId)
     ws.assignMessageReader(msg => {
       switch (msg.message_type) {
@@ -52,9 +51,7 @@ class EventHost extends Component {
           })
           break
         case 'END_EVENT':
-          dispatch({
-            type: 'HOST_END_EVENT'
-          })
+          dispatch(endEvent())
           break
         default:
           return false
@@ -84,7 +81,7 @@ class EventHost extends Component {
   }
 
   handleEnd () {
-    const { dispatch, eventId } = this.props
+    const { eventId } = this.props
     if (sockets.hasOwnProperty(eventId)) {
       sockets[eventId].sendMessage({
         event_id: eventId,
@@ -157,13 +154,13 @@ class EventHost extends Component {
         {
           hostView === 0 &&
           hostId === userId &&
-          <GuestList users={activeGuests} evId={eventId} />
+          <GuestList {...this.props} />
         }
         {
           hostView === 1 &&
           hostId === userId &&
-          <HostNotifications 
-            data={pendingGuests}
+          <HostNotifications
+            {...this.props}
             handler={this.handleRequest} />
         }
         {
@@ -182,6 +179,4 @@ class EventHost extends Component {
 
 const sockets = {}
 
-const mapStateToProps = state => state
-
-export default connect(mapStateToProps)(EventHost)
+export default EventHost
