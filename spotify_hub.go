@@ -7,7 +7,7 @@ type spotifySubscription struct {
   suid string
 }
 
-type spotifyHub struct {
+type SpotifyHub struct {
   // Connected spotify clients
   clients map[string]map[*spotify.Client]bool
 
@@ -15,12 +15,7 @@ type spotifyHub struct {
   register chan *spotifySubscription
 }
 
-var s = spotifyHub{
-  clients: make(map[string]map[*spotify.Client]bool),
-  register: make(chan *spotifySubscription),
-}
-
-func (s *spotifyHub) run() {
+func (s *SpotifyHub) run() {
   for {
     select {
     case c := <- s.register:
