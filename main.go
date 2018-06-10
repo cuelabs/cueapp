@@ -74,8 +74,8 @@ func main() {
   // Auth 
   router.HandleFunc("/login", redirect(url))
   router.HandleFunc("/callback", CompleteAuth(models.DBCon))
-  router.HandleFunc("/completeLogin/{suid:[0-9]+}", finishLogin)
-  router.HandleFunc("/test/{suid:[0-9]+}", doTest)
+  // router.HandleFunc("/completeLogin/{suid:[0-9]+}", finishLogin)
+  // router.HandleFunc("/test/{suid:[0-9]+}", doTest)
 
   // User Home Page
   router.HandleFunc("/user/{suid:[0-9]+}", homePage)
@@ -110,14 +110,14 @@ func homePage(w http.ResponseWriter, r *http.Request) {
   http.ServeFile(w, r, "./client/build/index.html")
 }
 
-func finishLogin(w http.ResponseWriter, r *http.Request) {
-  fmt.Printf("%+v\n", r)
-  fmt.Printf("%+v\n", w)
-  fmt.Println(r.Header.Get("something"))
-}
+// func finishLogin(w http.ResponseWriter, r *http.Request) {
+//   fmt.Printf("%+v\n", r)
+//   fmt.Printf("%+v\n", w)
+//   fmt.Println(r.Header.Get("something"))
+// }
 
-func doTest(w http.ResponseWriter, r *http.Request) {
-  id := mux.Vars(r)["suid"]
-  r.Header.Set("something", "somestring")
-  http.Redirect(w, r, "/completeLogin/" + id, 301)
-}
+// func doTest(w http.ResponseWriter, r *http.Request) {
+//   id := mux.Vars(r)["suid"]
+//   r.Header.Set("something", "somestring")
+//   http.Redirect(w, r, "/completeLogin/" + id, 301)
+// }
