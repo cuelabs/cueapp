@@ -3,11 +3,8 @@ import { connect } from 'react-redux'
 import { loadUser } from './actions'
 import Nav from './components/Nav'
 import Main from './components/Main'
-import PlayControls from './components/PlayControls'
 import Loader from './components/Loader'
-import Home from './pages/Home'
-import EventGuest from './pages/EventGuest'
-import EventHost from './pages/EventHost'
+import UserView from './containers/UserView'
 
 class App extends Component {
   componentDidMount () {
@@ -25,42 +22,23 @@ class App extends Component {
   render () {
     const {
       isActive,
-      hostId,
-      userId,
-      eventName,
       beginning,
-      dispatch,
-      eventId
+      dispatch
     } = this.props
 
     return (
-        <div className='container'>
-          { !beginning &&
+      <Main>
+        {
+          !beginning &&
             <Nav showSearch={isActive}
               dispatch={dispatch} />
-          }
-          { !beginning ? (
-            <Main>
-              { !isActive
-                ? <Home {...this.props}/>
-                : hostId === userId ? 
-                  <EventHost title={eventName} /> :
-                  <EventGuest 
-                    title={eventName}
-                    dispatcher={dispatch}
-                    id={eventId}
-                    uid={userId} />
-              }
-              {
-                hostId === userId && isActive && !beginning &&
-                  <PlayControls />
-              }
-            </Main>
-          ) : (
-            <Loader first />
-          )
-          }
-        </div>
+        }
+        {
+          !beginning
+            ? <UserView {...this.props} />
+            : <Loader first />
+        }
+      </Main>
     )
   }
 }

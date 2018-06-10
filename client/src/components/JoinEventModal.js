@@ -2,14 +2,11 @@ import React, { Component } from 'react'
 import Button from './Button'
 import Loader from './Loader'
 import Modal from './Modal'
-import { 
-  sendJoinRequest, 
-  closeModal 
-} from '../actions'
+import { closeModal } from '../actions'
 import Socket from '../utils/Socket'
 
 class JoinEventModal extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.joinRequest = this.joinRequest.bind(this)
     this.cancelRequest = this.cancelRequest.bind(this)
@@ -48,7 +45,7 @@ class JoinEventModal extends Component {
             this.props.dispatch(closeModal())
             break
           default:
-            return false 
+            return false
         }
       })
     }
@@ -97,14 +94,14 @@ class JoinEventModal extends Component {
           this.props.dispatch(closeModal())
           break
         default:
-          return false 
+          return false
       }
     })
   }
 
   cancelRequest () {
     const { uid } = this.props
-    let id 
+    let id
     if (this.props.evid > -1) {
       id = this.props.evid
     } else {
@@ -119,7 +116,7 @@ class JoinEventModal extends Component {
         message_type: 'CANCEL_REQUEST'
       })
     }
-  } 
+  }
 
   componentWillUnmount () {
     const { id } = this.props
@@ -133,9 +130,6 @@ class JoinEventModal extends Component {
     const {
       name,
       dispatch,
-      id,
-      uid,
-      uname,
       pending
     } = this.props
 

@@ -12,14 +12,16 @@ const SearchResults = props => {
       ${display ? 'show' : ''}`
     }>
       {
-        events.map(event => (
-          <SearchResult
-            key={event.EvID}
-            id={event.EvID}
-            {...props}>
-            {event.EventName}
-          </SearchResult>
-        ))
+        events.length > 0 ? (
+          events.map(event => (
+            <SearchResult
+              key={event.EvID}
+              id={event.EvID}
+              {...props}>
+              {event.EventName}
+            </SearchResult>
+          ))
+        ) : null
       }
     </ul>
   )

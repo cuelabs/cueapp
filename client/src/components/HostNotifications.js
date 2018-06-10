@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { loadRequests, acceptRequest, rejectRequest } from '../actions'
 
 class HostNotifications extends Component {
@@ -25,15 +24,38 @@ class HostNotifications extends Component {
 
   render () {
     const { guests, handler } = this.props
-    const pendingGuests = guests
-      .filter(g => {
-        if (g.IsActive || g.DisplayName === '') {
-          return false
-        } else {
-          return true
-        }
-      })
+    // const pendingGuests = guests
+    //   .filter(g => {
+    //     if (g.IsActive || g.DisplayName === '') {
+    //       return false
+    //     } else {
+    //       return true
+    //     }
+    //   })
 
+    const pendingGuests = [
+      {
+        UserID: 1,
+        SUID: '123416101',
+        DisplayName: 'Matt Carpowich',
+        DisplayImage: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/32169476_10215922716037991_3090206953469640704_n.jpg?_nc_cat=0&oh=40670caaf299735497d47929a818e7c5&oe=5B81B0BD'
+      }, {
+        UserID: 2,
+        SUID: '123416101',
+        DisplayName: 'Matthew Carpowich',
+        DisplayImage: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/32169476_10215922716037991_3090206953469640704_n.jpg?_nc_cat=0&oh=40670caaf299735497d47929a818e7c5&oe=5B81B0BD'
+      }, {
+        UserID: 3,
+        SUID: '123416101',
+        DisplayName: 'Matty Carp',
+        DisplayImage: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/32169476_10215922716037991_3090206953469640704_n.jpg?_nc_cat=0&oh=40670caaf299735497d47929a818e7c5&oe=5B81B0BD'
+      }, {
+        UserID: 4,
+        SUID: '123416101',
+        DisplayName: 'Mattincredible',
+        DisplayImage: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/32169476_10215922716037991_3090206953469640704_n.jpg?_nc_cat=0&oh=40670caaf299735497d47929a818e7c5&oe=5B81B0BD'
+      }
+    ]
     return (
       <div className='view'>
         <ul className='host-view-page-list'>
@@ -41,16 +63,24 @@ class HostNotifications extends Component {
             pendingGuests.map(item => (
               <li key={item.DisplayName}
                 style={{flexDirection: `column`}}>
-                <p style={{alignSelf: `flex-start`}}>
-                  {item.DisplayName} wants to join your event!
-                </p>
+                <div className='notification-top-row'>
+                  <img src={item.DisplayImage}
+                    alt={`Display image for ${item.DisplayName}`}
+                    style={{
+                      height: 48,
+                      width: 48,
+                      borderRadius: '50%',
+                      marginRight: 12
+                    }} />
+                  <p style={{height: 48}}>
+                    {item.DisplayName} wants to join your event!
+                  </p>
+                </div>
                 <div className='host-request-options'>
-                  <button style={{padding: '2vh'}}
-                    className='button-host'
-                    onClick={() => handler(item.UserID, true)}>Accept</button>
-                  <button style={{padding: '2vh'}}
-                    className='button-host'
-                    onClick={() => handler(item.UserID, false)}>Reject</button>
+                  <button className='button-host-request'
+                    onClick={() => handler(item.UserID, true)}>ACCEPT</button>
+                  <button className='button-host-request'
+                    onClick={() => handler(item.UserID, false)}>REJECT</button>
                 </div>
               </li>
             )).reverse()
@@ -61,6 +91,4 @@ class HostNotifications extends Component {
   }
 }
 
-const mapStateToProps = state => state
-
-export default connect(mapStateToProps)(HostNotifications)
+export default HostNotifications

@@ -22,6 +22,10 @@ type User struct {
   Uid int
 }
 
+type SpotifyUser struct {
+  SUID string
+}
+
 type Guest struct {
   UserID int
   DisplayName string
