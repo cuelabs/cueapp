@@ -106,7 +106,8 @@ func Search(h *SpotifyHub) http.HandlerFunc {
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-  http.FileServer(http.Dir("./client/build"))
+  // http.FileServer(http.Dir("./client/build"))
+  http.ServeFile(w, r, "./client/build/index.html")
 }
 
 func finishLogin(w http.ResponseWriter, r *http.Request) {
