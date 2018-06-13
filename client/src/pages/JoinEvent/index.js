@@ -16,6 +16,7 @@ class JoinEvent extends Component {
       query,
       userId,
       displayName,
+      displayImage,
       dispatch,
       selectedEventId,
       selectedEventName,
@@ -45,6 +46,7 @@ class JoinEvent extends Component {
             uid={userId}
             name={selectedEventName}
             dispatch={dispatch}
+            displayImage={displayImage}
             pending={joinRequestPending}
             uname={displayName} />
         }
