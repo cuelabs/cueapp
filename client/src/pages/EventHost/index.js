@@ -30,7 +30,7 @@ class EventHost extends Component {
       switch (msg.message_type) {
         case 'JOIN_REQUEST':
           console.log('you have a message -> ', msg)
-          dispatch(incomingJoinRequest(msg.user_id, msg.display_name, eventId, (this.state.selected === 1)))
+          dispatch(incomingJoinRequest(msg.user_id, msg.display_name, msg.display_image, eventId, (this.state.selected === 1)))
           break
         case 'ACCEPT':
           dispatch(acceptRequest(msg.user_id, eventId))
@@ -75,6 +75,7 @@ class EventHost extends Component {
         host_id: -1,
         user_id: uid,
         display_name: '',
+        display_image: '',
         message_type: accept ? 'ACCEPT' : 'REJECT'
       })
     }
@@ -88,6 +89,7 @@ class EventHost extends Component {
         host_id: -1,
         user_id: -1,
         display_name: '',
+        display_image: '',
         message_type: 'END_EVENT'
       })
     }

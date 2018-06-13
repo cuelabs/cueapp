@@ -8,6 +8,7 @@ type eventMessage struct {
   HostID int `json:"host_id"`
   UserID int `json:"user_id"`
   DisplayName string `json:"display_name"`
+  DisplayImage string `json:"display_image"`
   MessageType string `json:"message_type"`
 }
 

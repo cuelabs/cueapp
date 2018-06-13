@@ -7,6 +7,7 @@ const initialState = {
   searchLoading: false,
   userId: -1,
   displayName: '',
+  displayImage: '',
   hostId: -1,
   hostView: 0,
   homeView: 'HOME',
@@ -62,6 +63,7 @@ const cueReducer = (state = initialState, action) => {
           {
             UserID: action.userId,
             DisplayName: action.username,
+            DisplayImage: action.displayImage,
             IsActive: action.isActive,
             EventID: action.eventId
           }
@@ -79,6 +81,7 @@ const cueReducer = (state = initialState, action) => {
         userId: action.id,
         suid: action.suid,
         displayName: action.username,
+        displayImage: action.displayImage,
         isActive: action.isActive,
         eventId: action.eventId,
         eventName: action.eventName,

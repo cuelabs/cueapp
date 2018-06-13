@@ -15,6 +15,14 @@ type SpotifyHub struct {
   register chan *spotifySubscription
 }
 
+type SpotifySearch struct {
+  // Spotify user ID
+  SUID string
+
+  // Search Query
+  Query string
+}
+
 func (s *SpotifyHub) run() {
   for {
     select {
