@@ -86,7 +86,7 @@ func main() {
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   http.FileServer(http.Dir("./client/build"))
   http.Handle("/", router)
-  http.Handle("/user/{suid:[0-9]+}", http.StripPrefix("/user/{suid:[0-9]+}", http.FileServer(http.Dir("./client/build"))))
+  http.Handle("/user/{suid:[a-zA-Z0-9]+}", http.StripPrefix("/user/{suid:[0-9]+}", http.FileServer(http.Dir("./client/build"))))
   handler := cors.Default().Handler(router)
   http.ListenAndServe(":" + PORT, handlers.LoggingHandler(os.Stdout, handler))
 }
