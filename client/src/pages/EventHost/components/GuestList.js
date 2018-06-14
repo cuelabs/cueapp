@@ -13,6 +13,7 @@ class GuestList extends Component {
 
   render () {
     const { guests, eventId, userId } = this.props
+    console.log('Guests in guest list: ', guests)
     const users = guests
       .filter(g => {
         if ((g.EventID === eventId) && g.IsActive && (g.UserID !== userId)) {

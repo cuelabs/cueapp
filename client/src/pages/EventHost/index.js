@@ -115,6 +115,8 @@ class EventHost extends Component {
       counter
     } = this.props
 
+    console.log('guests in event host: ', guests)
+
     const activeGuests = guests
       .filter(g => {
         if ((g.EventID === eventId) && g.IsActive && (g.UserID !== userId)) {
