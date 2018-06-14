@@ -29,6 +29,7 @@ type SpotifyUser struct {
 type Guest struct {
   UserID int
   DisplayName string
+  DisplayImage string
   IsActive bool
   EventID int 
 }

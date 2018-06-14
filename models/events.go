@@ -6,7 +6,7 @@ import (
 
 func FindUsersAtEvent(db *sql.DB, id int) (Guests, error) {
   query := `
-    SELECT uid, displayName, isActive, u_evid FROM
+    SELECT uid, displayName, displayImage, isActive, u_evid FROM
       (SELECT * FROM events_users WHERE eu_evid=$1
     ) AS e
     INNER JOIN users
@@ -24,7 +24,8 @@ func FindUsersAtEvent(db *sql.DB, id int) (Guests, error) {
   for rows.Next() {
     rows.Scan(
       &g.UserID,
-      &g.DisplayName, 
+      &g.DisplayName,
+      &g.DisplayImage, 
       &g.IsActive,
       &g.EventID)
     
