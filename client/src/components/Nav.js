@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from './Logo'
+import { handleSpotifySearch } from '../actions'
 
 const Nav = ({showSearch, handler, value, dispatch}) => (
   <nav>
@@ -11,7 +12,9 @@ const Nav = ({showSearch, handler, value, dispatch}) => (
           <input type='text'
             className='spotify-search'
             value={value}
-            onChange={handler} />
+            onChange={e => {
+              dispatch(handleSpotifySearch(e))
+            }} />
         </div>
       )
     }

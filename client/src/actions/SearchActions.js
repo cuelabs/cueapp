@@ -1,6 +1,22 @@
 import axios from 'axios'
 import { baseURL } from './index.js'
 
+//handles spotify search
+export const handleSpotifySearch = e => {
+  return dispatch => {
+    const { value } = e.target
+
+    dispatch({
+      type: 'SEARCH_SPOTIFY_REQUEST',
+      Query: value
+    })
+
+    axios.post(`${baseURL}/spotify/search`)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+  }
+}
+
 // handles event search
 export const handleEventSearch = e => {
   return dispatch => {
