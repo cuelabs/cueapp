@@ -11,7 +11,6 @@ import (
   "github.com/rs/cors"
   _ "github.com/lib/pq"
   "os"
-  "fmt"
 )
 
 // dev
@@ -74,8 +73,6 @@ func main() {
   // Auth 
   router.HandleFunc("/login", redirect(url))
   router.HandleFunc("/callback", CompleteAuth(models.DBCon))
-  // router.HandleFunc("/completeLogin/{suid:[0-9]+}", finishLogin)
-  // router.HandleFunc("/test/{suid:[0-9]+}", doTest)
 
   // User Home Page
   router.HandleFunc("/user/{suid:[a-zA-Z0-9]+}", homePage)
@@ -98,26 +95,6 @@ func redirect(url string) http.HandlerFunc {
   return fn
 }
 
-func Search(h *SpotifyHub) http.HandlerFunc {
-  fn := func(w http.ResponseWriter, r *http.Request) {
-    fmt.Println("hey")
-  }
-  return fn
-}
-
 func homePage(w http.ResponseWriter, r *http.Request) {
-  // http.FileServer(http.Dir("./client/build"))
   http.ServeFile(w, r, "./client/build/index.html")
 }
-
-// func finishLogin(w http.ResponseWriter, r *http.Request) {
-//   fmt.Printf("%+v\n", r)
-//   fmt.Printf("%+v\n", w)
-//   fmt.Println(r.Header.Get("something"))
-// }
-
-// func doTest(w http.ResponseWriter, r *http.Request) {
-//   id := mux.Vars(r)["suid"]
-//   r.Header.Set("something", "somestring")
-//   http.Redirect(w, r, "/completeLogin/" + id, 301)
-// }
