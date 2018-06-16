@@ -2,6 +2,8 @@ const initialState = {
   query: '',
   events: [],
   guests: [],
+  spotifyResults: [],
+  spotifyQuery: '',
   selectedEventId: -1,
   selectedEventName: '',
   searchLoading: false,
@@ -295,6 +297,17 @@ const cueReducer = (state = initialState, action) => {
         selectedEventId: -1,
         eventId: -1,
         joinRequestPending: false
+      }
+    case 'SEARCH_SPOTIFY_REQUEST':
+      return {
+        ...state,
+        spotifyQuery: action.value
+      }
+    case 'SEARCH_SPOTIFY_SUCCESS':
+      return {
+        ...state,
+        spotifyResults: state.spotifyQuery.length > 0 ? 
+          action.results.slice(0, 5) : []
       }
     default:
       return state

@@ -1,8 +1,9 @@
 import React from 'react'
 import Logo from './Logo'
+import SpotifyResults from './SpotifyResults'
 import { handleSpotifySearch } from '../actions'
 
-const Nav = ({showSearch, handler, value, dispatch, suid}) => (
+const Nav = ({showSearch, handler, value, dispatch, suid, results}) => (
   <nav>
     <Logo dispatch={dispatch} />
     {
@@ -17,6 +18,9 @@ const Nav = ({showSearch, handler, value, dispatch, suid}) => (
             }} />
         </div>
       )
+    }
+    {
+      results && results.length > 0 && <SpotifyResults data={results} />
     }
   </nav>
 )

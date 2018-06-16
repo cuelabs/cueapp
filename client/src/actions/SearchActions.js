@@ -8,14 +8,20 @@ export const handleSpotifySearch = (e, suid) => {
 
     dispatch({
       type: 'SEARCH_SPOTIFY_REQUEST',
-      Query: value
+      value
     })
 
     axios.post(`${baseURL}/spotify/search`, {
       SUID: suid,
       Query: value
     })
-    .then(res => console.log(res.data.items))
+    .then(res => {
+      console.log(res.data.items)
+      dispatch({
+        type: 'SEARCH_SPOTIFY_SUCCESS', 
+        results: res.data.items
+      })
+    })
     .catch(err => console.log(err))
   }
 }

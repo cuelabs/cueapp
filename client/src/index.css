@@ -205,7 +205,8 @@ input.spotify-search {
   background: #c9c9cf;
   border-radius: 16px;
   width: 220px;
-  font-size: 20px; }
+  font-size: 20px;
+  z-index: 5; }
 
 ::-webkit-input-placeholder {
   text-indent: 8px;
@@ -370,6 +371,16 @@ h2.guest-view-event-title {
   cursor: pointer;
   color: #7F1AE5;
   transition: color .2s ease; }
+
+div.spotify-results {
+  position: fixed;
+  background: #29292D;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  z-index: 4; }
 
 .event-host {
   width: 90vw; }
