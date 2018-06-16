@@ -25,8 +25,11 @@ class App extends Component {
       beginning,
       dispatch,
       suid,
-      spotifyResults
+      spotifyResults,
+      flip
     } = this.props
+
+    console.log(spotifyResults)
 
     return (
       <Main>
@@ -35,7 +38,8 @@ class App extends Component {
             <Nav showSearch={isActive}
               dispatch={dispatch}
               suid={suid}
-              results={spotifyResults} />
+              results={spotifyResults}
+              flip={flip} />
         }
         {
           !beginning

@@ -301,7 +301,8 @@ const cueReducer = (state = initialState, action) => {
     case 'SEARCH_SPOTIFY_REQUEST':
       return {
         ...state,
-        spotifyQuery: action.value
+        spotifyQuery: action.value,
+        flip: action.value && action.value.length > 0
       }
     case 'SEARCH_SPOTIFY_SUCCESS':
       return {
