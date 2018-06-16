@@ -38,11 +38,17 @@ func Search(h *SpotifyHub) http.HandlerFunc {
       fmt.Printf("%+v\n", result.Tracks)
     }
 
+    searchTracksJson, err := json.Marshal(result.Tracks)
+    if err != nil {
+      panic(err)
+    }
+
     fmt.Printf("%+v\n", result)
 
     fmt.Println("4")
     
     w.WriteHeader(http.StatusOK)
+    w.Write(searchTracksJson)
   }
   return fn
 }
