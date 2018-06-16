@@ -34,6 +34,10 @@ func Search(h *SpotifyHub) http.HandlerFunc {
       panic(err)
     }
 
+    if result.Tracks != nil {
+      fmt.Printf("%+v\n", result.Tracks)
+    }
+
     fmt.Printf("%+v\n", result)
 
     fmt.Println("4")
