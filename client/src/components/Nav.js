@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from './Logo'
 import { handleSpotifySearch } from '../actions'
 
-const Nav = ({showSearch, handler, value, dispatch}) => (
+const Nav = ({showSearch, handler, value, dispatch, suid}) => (
   <nav>
     <Logo dispatch={dispatch} />
     {
@@ -13,7 +13,7 @@ const Nav = ({showSearch, handler, value, dispatch}) => (
             className='spotify-search'
             value={value}
             onChange={e => {
-              dispatch(handleSpotifySearch(e))
+              dispatch(handleSpotifySearch(e, suid))
             }} />
         </div>
       )

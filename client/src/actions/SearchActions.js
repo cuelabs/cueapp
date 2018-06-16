@@ -2,7 +2,7 @@ import axios from 'axios'
 import { baseURL } from './index.js'
 
 //handles spotify search
-export const handleSpotifySearch = e => {
+export const handleSpotifySearch = (e, suid) => {
   return dispatch => {
     const { value } = e.target
 
@@ -12,6 +12,7 @@ export const handleSpotifySearch = e => {
     })
 
     axios.post(`${baseURL}/spotify/search`, {
+      SUID: suid,
       Query: value
     })
     .then(res => console.log(res))

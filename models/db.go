@@ -98,5 +98,6 @@ type EventIDWithCueID struct {
 }
 
 type SearchQuery struct {
+  SUID string
   Query string
 }

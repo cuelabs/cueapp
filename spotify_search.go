@@ -17,6 +17,7 @@ func Search(h *SpotifyHub) http.HandlerFunc {
       panic(err)
     }
 
+    fmt.Println(q.SUID)
     fmt.Println(q.Query)
     
     w.WriteHeader(http.StatusOK)
