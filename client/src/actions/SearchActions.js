@@ -11,7 +11,9 @@ export const handleSpotifySearch = e => {
       Query: value
     })
 
-    axios.post(`${baseURL}/spotify/search`)
+    axios.post(`${baseURL}/spotify/search`, {
+      Query: value
+    })
     .then(res => console.log(res))
     .catch(err => console.log(err))
   }
