@@ -114,7 +114,8 @@ h1 {
   font-weight: 700;
   margin: 8px;
   margin-left: 4vw;
-  color: #c9c9cf; }
+  color: #c9c9cf;
+  transition: color .3s ease; }
 
 main {
   display: flex;
@@ -125,6 +126,11 @@ main {
 
 .logo {
   font-weight: 200; }
+
+.logo.logo-flip {
+  color: #F5F5F5;
+  z-index: 10;
+  transition: color .3s ease; }
 
 .logo:hover {
   cursor: pointer; }
@@ -206,7 +212,7 @@ input.spotify-search {
   border-radius: 16px;
   width: 220px;
   font-size: 20px;
-  z-index: 5; }
+  z-index: 7; }
 
 ::-webkit-input-placeholder {
   text-indent: 8px;
@@ -378,10 +384,69 @@ div.spotify-results {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   overflow-y: scroll;
-  z-index: 4; }
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 4vh;
+  align-items: center;
+  animation-name: fader;
+  animation-duration: .3s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  opacity: 0; }
 
+div.spotify-result {
+  margin: 0 auto;
+  width: 100%;
+  height: 96px;
+  z-index: 11;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: hidden; }
+
+div.spotify-results-caption {
+  margin-left: 12px;
+  margin-right: 12px;
+  width: calc(100% - 24px);
+  height: 96px;
+  z-index: 11;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid #c9c9cf; }
+
+div.spotify-results-caption > * {
+  font-size: 16px;
+  font-family: "Tajawal", "Ubuntu", sans-serif;
+  font-weight: 300;
+  color: #c9c9cf; }
+
+div.spotify-result > h4.spotify-song-title {
+  margin-left: 12px;
+  color: #F5F5F5;
+  font-size: 16px;
+  font-family: "Helvetica", sans-serif; }
+
+div.spotify-result > h5.spotify-song-artist {
+  margin-right: 12px;
+  color: #F5F5F5;
+  font-size: 16px;
+  font-family: "Helvetica", sans-serif;
+  font-weight: 300; }
+
+@keyframes fader {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 .event-host {
   width: 90vw; }
 

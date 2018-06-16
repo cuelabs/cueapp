@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Logo = ({dispatch}) => (
+const Logo = ({dispatch, flip}) => (
   <h1 onClick={() => dispatch({
     type: 'CHANGE_HOME_VIEW',
     view: 'HOME'
-  })} className='logo'>
+  })} className={`logo ${flip ? 'logo-flip' : ''}`}>
     cue
   </h1>
 )
