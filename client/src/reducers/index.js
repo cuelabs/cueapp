@@ -9,7 +9,6 @@ const initialState = {
   displayName: '',
   displayImage: '',
   hostId: -1,
-  suid: null,
   hostView: 0,
   homeView: 'HOME',
   isActive: false,
