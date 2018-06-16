@@ -38,7 +38,8 @@ var (
 )
 
 var S = SpotifyHub{
-  clients: make(map[string]map[*spotify.Client]bool),
+  // clients: make(map[string]map[*spotify.Client]bool),
+  clients: make(map[string]*spotify.Client),
   register: make(chan *spotifySubscription),
 }
 

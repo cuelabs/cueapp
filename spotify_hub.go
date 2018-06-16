@@ -9,7 +9,8 @@ type spotifySubscription struct {
 
 type SpotifyHub struct {
   // Connected spotify clients
-  clients map[string]map[*spotify.Client]bool
+  // clients map[string]map[*spotify.Client]bool
+  clients map[string]*spotify.Client
 
   // Channel for incoming clients
   register chan *spotifySubscription
@@ -29,10 +30,11 @@ func (s *SpotifyHub) run() {
     case c := <- s.register:
       client := s.clients[c.suid]
       if client == nil {
-        client = make(map[*spotify.Client]bool)
-        s.clients[c.suid] = client
+        // client = make(map[*spotify.Client]bool)
+        // s.clients[c.suid] = client
+        s.clients[c.suid] = c.client
       }
-      client[c.client] = true
+      // client[c.client] = true
     }
   }
 }

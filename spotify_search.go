@@ -2,7 +2,7 @@ package main
 
 import (
   "github.com/mattcarpowich1/cueapp/models"
-  // "github.com/zmb3/spotify"
+  "github.com/zmb3/spotify"
   "net/http"
   "encoding/json"
   "fmt"
@@ -28,13 +28,13 @@ func Search(h *SpotifyHub) http.HandlerFunc {
 
     fmt.Println("2")
 
-    // result, err := client.Search(q.Query, SearchTypeTrack)
-    // if err != nil {
-    //   fmt.Println("3")
-    //   panic(err)
-    // }
+    result, err2 := client.Search(q.Query, spotify.SearchTypeTrack)
+    if err2 != nil {
+      fmt.Println("3")
+      panic(err)
+    }
 
-    // fmt.Printf("%+v\n", result)
+    fmt.Printf("%+v\n", result)
 
     fmt.Println("4")
     
