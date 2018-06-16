@@ -5,14 +5,12 @@ import (
   "github.com/zmb3/spotify"
   "net/http"
   "encoding/json"
-  "fmt"
 )
 
 var q models.SearchQuery
 
 func Search(h *SpotifyHub) http.HandlerFunc {
   fn := func(w http.ResponseWriter, r *http.Request) {
-    fmt.Println("hello?")
     err := json.NewDecoder(r.Body).Decode(&q)
     if err != nil {
       panic(err)

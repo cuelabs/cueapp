@@ -1,10 +1,12 @@
 import React from 'react'
 
-const SpotifyResults = ({results}) => {
+const SpotifyResults = ({data}) => {
   <div className='spotify-results'>
     {
-      results.map(item => {
-        console.log(item)
+      data && data.map(item => {
+        <p style={{color: 'white', zIndex: 8, textAlign: 'center'}}>
+          {item.name}
+        </p>
       })
     }
   </div>
