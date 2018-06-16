@@ -30,11 +30,8 @@ func (s *SpotifyHub) run() {
     case c := <- s.register:
       client := s.clients[c.suid]
       if client == nil {
-        // client = make(map[*spotify.Client]bool)
-        // s.clients[c.suid] = client
         s.clients[c.suid] = c.client
       }
-      // client[c.client] = true
     }
   }
 }

@@ -50,8 +50,6 @@ func main() {
     panic(err)
   }
 
-  // controllers.S = S
-
   Auth.SetAuthInfo(clientID, secretKey)
   url := Auth.AuthURL(State)
 

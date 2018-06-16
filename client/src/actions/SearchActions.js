@@ -15,7 +15,7 @@ export const handleSpotifySearch = (e, suid) => {
       SUID: suid,
       Query: value
     })
-    .then(res => console.log(res))
+    .then(res => console.log(res.data.items))
     .catch(err => console.log(err))
   }
 }
