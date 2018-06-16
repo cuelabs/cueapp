@@ -24,7 +24,7 @@ class App extends Component {
       isActive,
       beginning,
       dispatch,
-      suid
+      // suid
     } = this.props
 
     return (
@@ -32,8 +32,7 @@ class App extends Component {
         {
           !beginning &&
             <Nav showSearch={isActive}
-              dispatch={dispatch}
-              suid={suid} />
+              dispatch={dispatch} />
         }
         {
           !beginning
