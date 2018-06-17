@@ -16,7 +16,6 @@ export const handleSpotifySearch = (e, suid) => {
       Query: value
     })
     .then(res => {
-      console.log(res.data.items)
       dispatch({
         type: 'SEARCH_SPOTIFY_SUCCESS', 
         results: res.data.items
