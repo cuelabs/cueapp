@@ -1,7 +1,6 @@
 import React from 'react'
 
 const SpotifyResults = ({data}) => {
-  console.log('in spot: ', data)
   return (
     <div className='spotify-results'>
       {

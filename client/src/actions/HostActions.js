@@ -1,7 +1,6 @@
 // Host recieves a new request to join event
 export const incomingJoinRequest = (userId, username, displayImage, eventId, onPage) => {
   return dispatch => {
-    console.log('display image in incomingJoinRequest: ', displayImage)
     if (userId > 0) {
       dispatch({
         type: 'HOST_NEW_REQUEST',

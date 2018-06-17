@@ -30,8 +30,6 @@ class App extends Component {
       flip
     } = this.props
 
-    console.log(spotifyResults)
-
     return (
       <Main>
         {

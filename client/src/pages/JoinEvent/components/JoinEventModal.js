@@ -13,7 +13,6 @@ class JoinEventModal extends Component {
   }
 
   componentDidMount () {
-    console.log(this.props)
     if (this.props.evid !== null) {
       const ws = new Socket(this.props.evid)
       sockets[this.props.evid.toString()] = ws
@@ -23,7 +22,6 @@ class JoinEventModal extends Component {
         }
         switch (msg.message_type) {
           case 'ACCEPT':
-            console.log('You got accepted!')
             ws.destroy()
             delete sockets[this.props.evid.toString()]
             this.props.dispatch({
@@ -31,7 +29,6 @@ class JoinEventModal extends Component {
             })
             break
           case 'REJECT':
-            console.log('You were rejected, actually.')
             ws.destroy()
             delete sockets[this.props.evid.toString()]
             this.props.dispatch({
@@ -39,7 +36,6 @@ class JoinEventModal extends Component {
             })
             break
           case 'CANCEL_REQUEST':
-            console.log('yo!')
             ws.destroy()
             delete sockets[this.props.evid.toString()]
             this.props.dispatch(closeModal())
@@ -72,16 +68,13 @@ class JoinEventModal extends Component {
       }
       switch (msg.message_type) {
         case 'ACCEPT':
-          console.log('You got accepted!')
           ws.destroy()
           delete sockets[id.toString()]
           dispatch({
             type: 'GUEST_ACCEPTANCE'
           })
-          // delete sockets[id.toString()]
           break
         case 'REJECT':
-          console.log('You were rejected, actually.')
           ws.destroy()
           delete sockets[id.toString()]
           dispatch({
@@ -89,10 +82,9 @@ class JoinEventModal extends Component {
           })
           break
         case 'CANCEL_REQUEST':
-          console.log('yo!')
           ws.destroy()
           delete sockets[id.toString()]
-          this.props.dispatch(closeModal())
+          dispatch(closeModal())
           break
         default:
           return false
