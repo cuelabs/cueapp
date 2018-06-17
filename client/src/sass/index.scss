@@ -50,7 +50,6 @@ html, body {
 }
 
 nav {
-  // box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: row;
@@ -91,7 +90,6 @@ nav > div > input {
 }
 
 .fa.fa-search {
-  // transform: translateX(calc(30px + (24 - 20) * (100vw - 360px)/(960-360)));
   transform: translateX(-8px);
   font-size: 24px;
   color: $cue-black;
@@ -270,10 +268,7 @@ input {
   width: $cue-input-width;
   height: 32px;
   font-family: $cue-font-secondary;
-  // border: 1px solid $cue-white-2;
-  // border-radius: 17px;
   border: none;
-  // text-indent: 12px;
   caret-color: $cue-black;
   background-color: $cue-white-2;
   color: $cue-black;
@@ -289,7 +284,10 @@ input {
 
 input.spotify-search {
   background: $cue-black-light;
-  border-radius: 16px;
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
   width: 220px;
   font-size: 20px;
   z-index: 7;
@@ -346,14 +344,12 @@ input.spotify-search {
 
 .search-result {
   margin: 0 auto;
-  // height: $cue-input-height;
   height: 64px;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   color: $cue-black-light;
-  // padding: 0 8px;
 }
 
 .search-result:hover {
@@ -494,7 +490,6 @@ div.spotify-results {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  // margin-top: $cue-nav-height;
   align-items: center;
   animation-name: fader;
   animation-duration: .3s;
@@ -551,13 +546,6 @@ div.spotify-results-caption {
   border-bottom: 1px solid $cue-black-light;
 }
 
-// div.spotify-results-caption > div > * {
-//   font-size: 16px;
-//   font-family: $cue-font-primary;
-//   font-weight: 300;
-//   color: $cue-black-light;
-// }
-
 h4.spotify-song-title {
   margin: 0;
   color: $cue-white;
@@ -593,10 +581,10 @@ span.circle-search {
 button.add-to-cue {
   height: 32px;
   width: 32px;
-  border-radius: 16px;
+  border-radius: 50%;
   line-height: 32px;
-  margin-left: -1px;
-  margin-bottom: -1px;
+  margin-right: 4px;
+  margin-top: 4px;
 }
 
 @keyframes fader {
@@ -675,7 +663,6 @@ ul.host-view-page-list > li {
   align-items: center;
   border-top: 1px solid $cue-black-light;
   color: $cue-black;
-  // padding: 32px 0;
   padding-top: 32px;
   padding-bottom: 60px;
   padding-left: 12px;
@@ -733,7 +720,6 @@ ul.host-view-page-list > li:nth-child(1) {
 
 ul.host-view-page-list > li > div > p {
   margin: 0;
-  // margin-bottom: -7px;
   height: auto;
   display: flex;
   flex-direction: row;
@@ -857,11 +843,10 @@ button {
 .button-host-request {
   width: 72px;
   height: 28px;
-  border-radius: 14px;
+  border-radius: 1em;
   background: $cue-black-light;
   font-size: 14px;
   line-height: 28px;
-  // text-align: right;
   display: flex;
   flex-direction: row;
   justify-content: center;

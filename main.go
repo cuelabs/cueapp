@@ -28,6 +28,7 @@ var connectionString = os.Getenv("DATABASE_URL")
 //heroku
 var PORT = os.Getenv("PORT")
 
+//heroku only
 const (
   clientID  = "2a437f62902142b78efdcbaab0b95271"
   secretKey = "35e6b3b0f37846debfbf21d15ab01073"
@@ -37,6 +38,7 @@ var (
   err error
 )
 
+//heroku only
 var S = SpotifyHub{
   // clients: make(map[string]map[*spotify.Client]bool),
   clients: make(map[string]*spotify.Client),
@@ -50,10 +52,12 @@ func main() {
     panic(err)
   }
 
+  //heroku only
   Auth.SetAuthInfo(clientID, secretKey)
   url := Auth.AuthURL(State)
 
   go h.run()
+  //heroku only
   go S.run()
 
   router := mux.NewRouter()
@@ -66,10 +70,11 @@ func main() {
   router.HandleFunc("/users/create", controllers.CreateUser(models.DBCon)).Methods("POST")
   router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
 
-  // Spotify API
+  // Spotify API (heroku only)
   router.HandleFunc("/spotify/search", Search(&S)).Methods("POST")
 
   // Auth 
+  //heroku only
   router.HandleFunc("/login", redirect(url))
   router.HandleFunc("/callback", CompleteAuth(models.DBCon))
 

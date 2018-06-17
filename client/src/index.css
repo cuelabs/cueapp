@@ -212,7 +212,10 @@ input {
 
 input.spotify-search {
   background: #c9c9cf;
-  border-radius: 16px;
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
   width: 220px;
   font-size: 20px;
   z-index: 7; }
@@ -474,10 +477,10 @@ span.circle-search {
 button.add-to-cue {
   height: 32px;
   width: 32px;
-  border-radius: 16px;
+  border-radius: 50%;
   line-height: 32px;
-  margin-left: -1px;
-  margin-bottom: -1px; }
+  margin-right: 4px;
+  margin-top: 4px; }
 
 @keyframes fader {
   0% {
@@ -692,7 +695,7 @@ button {
 .button-host-request {
   width: 72px;
   height: 28px;
-  border-radius: 14px;
+  border-radius: 1em;
   background: #c9c9cf;
   font-size: 14px;
   line-height: 28px;
