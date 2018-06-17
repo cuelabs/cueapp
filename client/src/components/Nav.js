@@ -21,7 +21,7 @@ const Nav = ({showSearch, handler, value, dispatch, suid, results, flip}) => {
         )
       }
       {
-        results ? results.length > 0 && <SpotifyResults data={results} /> : null
+        value.length > 0 && <SpotifyResults data={results} /> 
       }
     </nav>
   )

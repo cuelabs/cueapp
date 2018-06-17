@@ -26,6 +26,7 @@ class App extends Component {
       dispatch,
       suid,
       spotifyResults,
+      spotifyQuery,
       flip
     } = this.props
 
@@ -39,6 +40,7 @@ class App extends Component {
               dispatch={dispatch}
               suid={suid}
               results={spotifyResults}
+              value={spotifyQuery}
               flip={flip} />
         }
         {
