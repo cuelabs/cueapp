@@ -31,12 +31,12 @@ class EventGuest extends Component {
   }
 
   leaveEvent () {
-    const { id, uid } = this.props
-    if (guestSockets.hasOwnProperty(id.toString())) {
-      guestSockets[id.toString()].sendMessage({
-        event_id: id,
+    const { eventId, userId } = this.props
+    if (guestSockets.hasOwnProperty(eventId.toString())) {
+      guestSockets[eventId.toString()].sendMessage({
+        event_id: eventId,
         host_id: -1,
-        user_id: uid,
+        user_id: userId,
         display_name: '',
         message_type: 'GUEST_LEAVE_EVENT'
       })
