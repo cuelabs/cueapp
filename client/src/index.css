@@ -423,7 +423,8 @@ div.spotify-result-left {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start; }
+  align-items: flex-start;
+  overflow-x: hidden; }
 
 div.spotify-song-info {
   display: flex;
@@ -450,7 +451,8 @@ h4.spotify-song-title {
   margin: 0;
   color: #F5F5F5;
   font-size: 16px;
-  font-family: "Helvetica", sans-serif; }
+  font-family: "Helvetica", sans-serif;
+  white-space: nowrap; }
 
 h5.spotify-song-artist {
   margin: 0;
@@ -458,14 +460,16 @@ h5.spotify-song-artist {
   color: #F5F5F5;
   font-size: 16px;
   font-family: "Helvetica", sans-serif;
-  font-weight: 300; }
+  font-weight: 300;
+  white-space: nowrap; }
 
 h5.spotify-song-album {
   margin: 0;
   color: #94949e;
   font-size: 16px;
   font-family: "Helvetica", sans-serif;
-  font-weight: 300; }
+  font-weight: 300;
+  white-space: nowrap; }
 
 span.circle-search {
   color: #c9c9cf;
@@ -477,10 +481,15 @@ span.circle-search {
 button.add-to-cue {
   height: 32px;
   width: 32px;
-  border-radius: 50%;
+  border-radius: 50% !important;
   line-height: 32px;
   margin-right: 4px;
-  margin-top: 4px; }
+  margin-top: 4px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
 
 @keyframes fader {
   0% {

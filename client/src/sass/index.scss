@@ -520,6 +520,7 @@ div.spotify-result-left {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  overflow-x: hidden;
 }
 
 div.spotify-song-info {
@@ -551,6 +552,7 @@ h4.spotify-song-title {
   color: $cue-white;
   font-size: 16px;
   font-family: $cue-font-secondary;
+  white-space: nowrap;
 }
 
 h5.spotify-song-artist {
@@ -560,6 +562,7 @@ h5.spotify-song-artist {
   font-size: 16px;
   font-family: $cue-font-secondary;
   font-weight: 300;
+  white-space: nowrap;
 }
 
 h5.spotify-song-album {
@@ -568,6 +571,7 @@ h5.spotify-song-album {
   font-size: 16px;
   font-family: $cue-font-secondary;
   font-weight: 300;
+  white-space: nowrap;
 }
 
 span.circle-search {
@@ -581,10 +585,15 @@ span.circle-search {
 button.add-to-cue {
   height: 32px;
   width: 32px;
-  border-radius: 50%;
+  border-radius: 50% !important;
   line-height: 32px;
   margin-right: 4px;
   margin-top: 4px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes fader {
