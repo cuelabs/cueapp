@@ -13,17 +13,20 @@ html, body {
   align-items: center; }
 
 nav {
-  box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  height: calc((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px);
+  height: calc($cue-nav-height + 1px);
   width: 100%;
   clear: both;
   z-index: 2; }
+
+nav.nav-flip {
+  background: #29292D;
+  transition: background .3s ease; }
 
 nav > div > input {
   margin-right: 4vw;
@@ -379,18 +382,17 @@ h2.guest-view-event-title {
   transition: color .2s ease; }
 
 div.spotify-results {
-  position: fixed;
+  position: absolute;
   background: #29292D;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 76vh;
+  height: calc(100vh - 16vh);
   overflow-y: scroll;
   z-index: 6;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 8vh;
   align-items: center;
   animation-name: fader;
   animation-duration: .3s;
@@ -401,15 +403,33 @@ div.spotify-results {
 
 div.spotify-result {
   margin: 0 auto;
-  width: 100%;
-  height: 96px;
+  width: 90vw;
+  height: 72px;
   z-index: 11;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  border-bottom: 1px solid #c9c9cf; }
+
+div.spotify-result-left {
+  width: 80%;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; }
+
+div.spotify-song-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center; }
+
+div.spotify-result:nth-child(1) {
+  margin-top: calc((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px); }
 
 div.spotify-results-caption {
   margin-left: 12px;
@@ -423,24 +443,41 @@ div.spotify-results-caption {
   align-items: flex-end;
   border-bottom: 1px solid #c9c9cf; }
 
-div.spotify-results-caption > * {
-  font-size: 16px;
-  font-family: "Tajawal", "Ubuntu", sans-serif;
-  font-weight: 300;
-  color: #c9c9cf; }
-
-div.spotify-result > h4.spotify-song-title {
-  margin-left: 12px;
+h4.spotify-song-title {
+  margin: 0;
   color: #F5F5F5;
   font-size: 16px;
   font-family: "Helvetica", sans-serif; }
 
-div.spotify-result > h5.spotify-song-artist {
-  margin-right: 12px;
+h5.spotify-song-artist {
+  margin: 0;
+  margin-right: 4px;
   color: #F5F5F5;
   font-size: 16px;
   font-family: "Helvetica", sans-serif;
   font-weight: 300; }
+
+h5.spotify-song-album {
+  margin: 0;
+  color: #94949e;
+  font-size: 16px;
+  font-family: "Helvetica", sans-serif;
+  font-weight: 300; }
+
+span.circle-search {
+  color: #c9c9cf;
+  font-size: 16px;
+  font-weight: 300;
+  font-family: "Helvetica", sans-serif;
+  margin-right: 4px; }
+
+button.add-to-cue {
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
+  line-height: 32px;
+  margin-left: -1px;
+  margin-bottom: -1px; }
 
 @keyframes fader {
   0% {

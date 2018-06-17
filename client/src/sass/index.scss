@@ -9,6 +9,7 @@ $cue-blue-darkest: #083FAA;
 $cue-black-hsl: hsl(240, 5, 17);
 $cue-black-mid: hsl(240, 5, 34);
 $cue-black-light: hsl(240, 5, 80);
+$cue-black-mid-light: hsl(240, 5, 60);
 $cue-black-gray: hsl(240, 5, 13);
 $cue-white: #F5F5F5;
 $cue-black-2: #050505;
@@ -18,6 +19,7 @@ $cue-purple: #7F1AE5;
 $cue-shadow: #222225;
 $cue-brighter: #2C2C30;
 $cue-nav-height: calc((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px);
+$cue-search-height: calc(100vh - 16vh);
 $cue-load-height: calc(50vh - ((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px) - 36px);
 $cue-main-height: calc(100vh - (((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px) * 2));
 $cue-logo-font-size: calc(56px + (56 - 24) * (100vw - 360px)/(960-360));
@@ -48,17 +50,22 @@ html, body {
 }
 
 nav {
-  box-sizing: border-box;
+  // box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  height: $cue-nav-height;
+  height: calc($cue-nav-height + 1px);
   width: 100%;
   clear: both;
   z-index: 2;
+}
+
+nav.nav-flip {
+  background: $cue-black;
+  transition: background .3s ease;
 }
 
 nav > div > input {
@@ -476,18 +483,18 @@ h2.guest-view-event-title {
 
 // SPOTIFY SEARCHHHHHHHH //////////
 div.spotify-results {
-  position: fixed;
+  position: absolute;
   background: $cue-black;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 76vh;
+  height: $cue-search-height;
   overflow-y: scroll;
   z-index: 6;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 8vh;
+  // margin-top: $cue-nav-height;
   align-items: center;
   animation-name: fader;
   animation-duration: .3s;
@@ -499,8 +506,8 @@ div.spotify-results {
 
 div.spotify-result {
   margin: 0 auto;
-  width: 100%;
-  height: 96px;
+  width: 90vw;
+  height: 72px;
   z-index: 11;
   display: flex;
   flex-direction: row;
@@ -508,6 +515,27 @@ div.spotify-result {
   align-items: center;
   flex-wrap: nowrap;
   overflow-x: hidden;
+  border-bottom: 1px solid $cue-black-light;
+}
+
+div.spotify-result-left {
+  width: 80%;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+div.spotify-song-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+div.spotify-result:nth-child(1) {
+  margin-top: $cue-nav-height;
 }
 
 div.spotify-results-caption {
@@ -523,26 +551,52 @@ div.spotify-results-caption {
   border-bottom: 1px solid $cue-black-light;
 }
 
-div.spotify-results-caption > * {
+// div.spotify-results-caption > div > * {
+//   font-size: 16px;
+//   font-family: $cue-font-primary;
+//   font-weight: 300;
+//   color: $cue-black-light;
+// }
+
+h4.spotify-song-title {
+  margin: 0;
+  color: $cue-white;
   font-size: 16px;
-  font-family: $cue-font-primary;
+  font-family: $cue-font-secondary;
+}
+
+h5.spotify-song-artist {
+  margin: 0;
+  margin-right: 4px;
+  color: $cue-white;
+  font-size: 16px;
+  font-family: $cue-font-secondary;
   font-weight: 300;
+}
+
+h5.spotify-song-album {
+  margin: 0;
+  color: $cue-black-mid-light;
+  font-size: 16px;
+  font-family: $cue-font-secondary;
+  font-weight: 300;
+}
+
+span.circle-search {
   color: $cue-black-light;
-}
-
-div.spotify-result > h4.spotify-song-title {
-  margin-left: 12px;
-  color: $cue-white;
   font-size: 16px;
-  font-family: $cue-font-secondary;
-}
-
-div.spotify-result > h5.spotify-song-artist {
-  margin-right: 12px;
-  color: $cue-white;
-  font-size: 16px;
-  font-family: $cue-font-secondary;
   font-weight: 300;
+  font-family: $cue-font-secondary;
+  margin-right: 4px;
+}
+
+button.add-to-cue {
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
+  line-height: 32px;
+  margin-left: -1px;
+  margin-bottom: -1px;
 }
 
 @keyframes fader {
