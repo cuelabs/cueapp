@@ -5,6 +5,20 @@ import (
   "fmt"
 )
 
+func UpdateToken(db *sql.DB, suid string, tok string) error {
+  query := `
+    UPDATE users SET token=$1 WHERE suid=$2
+  `
+
+  _, err := db.Query(query, tok, suid)
+
+  if err != nil {
+    return err
+  }
+
+  return nil
+}
+
 func JoinEventUser(db *sql.DB, evId int, uId int) error {
   query := `  
     INSERT INTO events_users (eu_evid, eu_uid)  
@@ -118,6 +132,7 @@ func FindUserBySUID(db *sql.DB, id string) (SpotifyUserData, error) {
       &u.DisplayName, 
       &u.DisplayImage,
       &u.IsActive,
+      &u.Token,
       &u.EventId,
       &u.CreatedAt)
   }

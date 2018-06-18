@@ -74,6 +74,7 @@ type SpotifyUserData struct {
   DisplayName string
   DisplayImage string
   IsActive bool
+  Token string
   EventId int
   CreatedAt time.Time
 }
