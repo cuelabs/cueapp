@@ -101,3 +101,13 @@ type SearchQuery struct {
   SUID string
   Query string
 }
+
+type TrackWithCueID struct {
+  SURI string
+  CueID int
+}
+
+type TrackWithID struct {
+  ID int 
+  SURI string
+}

@@ -1,4 +1,4 @@
-package main
+ package main
 
 import (
   "log"
@@ -44,13 +44,14 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
     // Check if authenticated user exists in DB
     u, err4 := models.FindUserBySUID(dbCon, user.ID)
     if err4 != nil {
-      panic(err)
+      panic(err4)
       return
     }
 
     if u.ID > 0 {
-      sub := &spotifySubscription{client: &client, suid: user.ID}
-      S.register <- sub
+      // heroku only
+      // sub := &spotifySubscription{client: &client, suid: user.ID}
+      // S.register <- sub
     }  else {
       // Insert new user in the database with the authenticated users SUID
       newUser := models.NewSpotifyUser{
@@ -67,8 +68,8 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       }
 
       // Send client to spotifyHub
-      sub := &spotifySubscription{client: &client, suid: user.ID}
-      S.register <- sub
+      // sub := &spotifySubscription{client: &client, suid: user.ID}
+      // S.register <- sub
     }
 
     http.Redirect(w, r, ("/user/" + user.ID), 301)

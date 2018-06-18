@@ -1,8 +1,8 @@
 // dev
-// export const baseURL = 'http://localhost:8080'
+export const baseURL = 'http://localhost:8080'
 
 // production
-export const baseURL = ''
+// export const baseURL = ''
 
 export * from './AuthActions.js'
 export * from './EventActions.js'
