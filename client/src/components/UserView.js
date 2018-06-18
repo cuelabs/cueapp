@@ -7,10 +7,10 @@ import PlayControls from '../components/PlayControls'
 
 class UserView extends Component {
   componentDidMount () {
-    const { dispatch, suid, userId } = this.props
-    if (userId < 0) {
-      dispatch(loadUser(suid))
-    }
+    // const { dispatch, suid, userId } = this.props
+    // if (userId < 0) {
+    //   dispatch(loadUser(suid))
+    // }
   }
 
   render () {
