@@ -16,6 +16,7 @@ CREATE TABLE users (
   displayName varchar(100) not null,
   displayImage varchar(1000) not null,
   isActive BOOLEAN DEFAULT FALSE,
+  token varchar(1000),
   u_evid INTEGER DEFAULT -1,
   createdAt TIMESTAMP DEFAULT NOW()
 );

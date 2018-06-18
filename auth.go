@@ -7,6 +7,7 @@ import (
   "github.com/mattcarpowich1/cueapp/models"
   "database/sql"
   "time"
+  "fmt"
 )
 
 const redirectURI = "https://arcane-tundra-63613.herokuapp.com/callback"
@@ -41,6 +42,9 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       return
     }
 
+    fmt.Println("token")
+    fmt.Println(tok.AccessToken)
+
     // Check if authenticated user exists in DB
     u, err4 := models.FindUserBySUID(dbCon, user.ID)
     if err4 != nil {
@@ -50,8 +54,8 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
 
     if u.ID > 0 {
       // heroku only
-      // sub := &spotifySubscription{client: &client, suid: user.ID}
-      // S.register <- sub
+      sub := &spotifySubscription{client: &client, suid: user.ID}
+      S.register <- sub
     }  else {
       // Insert new user in the database with the authenticated users SUID
       newUser := models.NewSpotifyUser{
@@ -68,8 +72,8 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       }
 
       // Send client to spotifyHub
-      // sub := &spotifySubscription{client: &client, suid: user.ID}
-      // S.register <- sub
+      sub := &spotifySubscription{client: &client, suid: user.ID}
+      S.register <- sub
     }
 
     http.Redirect(w, r, ("/user/" + user.ID), 301)
