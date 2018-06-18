@@ -4,10 +4,14 @@ import Home from '../pages/Home'
 import EventHost from '../pages/EventHost'
 import EventGuest from '../pages/EventGuest'
 import PlayControls from '../components/PlayControls'
+import axios from 'axios'
 
 class UserView extends Component {
   componentDidMount () {
     const { token } = this.props
+
+    console.log('hey')
+
     window.onSpotifyWebPlaybackSDKReady = () => {
       const accessToken = token;
       const player = new window.Spotify.Player({
