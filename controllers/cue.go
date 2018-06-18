@@ -34,19 +34,25 @@ func AddTrackToCue(dbCon *sql.DB) http.HandlerFunc {
       } 
     }
 
-    err = models.UpsertTrackInCue(dbCon, t.SURI)
+    // Add track to cues_tracks or increase number of votes
+    // for that particular track in the cue if it's already
+    // in the cue
+    err = models.UpsertTrackInCue(dbCon, track.CueID, t.ID)
+    if err != nil {
+      panic(err)
+      return
+    }
 
 
+    trackJson, err3 := json.Marshal(t)
+    if err3 != nil {
+      panic(err3)
+      return
+    }
 
-    // trackJson, err3 := json.Marshal(t)
-    // if err3 != nil {
-    //   panic(err3)
-    //   return
-    // }
-
-    // w.Header().Set("Content-Type", "application/json")
-    // w.WriteHeader(http.StatusOK)
-    // w.Write(trackJson)
+    w.Header().Set("Content-Type", "application/json")
+    w.WriteHeader(http.StatusOK)
+    w.Write(trackJson)
   }
   return fn
 }

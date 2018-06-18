@@ -42,8 +42,8 @@ CREATE TABLE tracks (
 );
 
 CREATE TABLE cues_tracks (
-  ct_cueid INTEGER REFERENCES cues(cueid),
-  ct_trackid INTEGER REFERENCES tracks(trackid),
+  ct_cueid INTEGER REFERENCES cues(cueid) NOT NULL,
+  ct_trackid INTEGER REFERENCES tracks(trackid) NOT NULL UNIQUE,
   numVotes INTEGER DEFAULT 1,
   numPlays INTEGER DEFAULT 0,
   CONSTRAINT cues_tracks_pkey PRIMARY KEY(ct_cueid, ct_trackid)

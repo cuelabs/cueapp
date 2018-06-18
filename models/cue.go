@@ -36,6 +36,17 @@ func InsertTrack(db *sql.DB, s string) (TrackWithID, error) {
   return t, nil
 }
 
-func UpsertTrackInCue(db *sql.DB, id int) error {
-  
+func UpsertTrackInCue(db *sql.DB, cid int, tid int) error {
+  query := `
+    INSERT INTO cues_tracks (ct_cueid, ct_trackid)
+    VALUES ($1, $2)
+    ON CONFLICT (ct_trackid) DO UPDATE SET numvotes=EXCLUDED.numvotes + 1
+  `
+
+  _, err := db.Exec(query, cid, tid)
+  if err != nil {
+    return err
+  }
+
+  return nil
 }
