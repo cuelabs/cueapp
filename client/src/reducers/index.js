@@ -87,6 +87,7 @@ const cueReducer = (state = initialState, action) => {
         isActive: action.isActive,
         eventId: action.eventId,
         eventName: action.eventName,
+        token: action.token,
         beginning: false,
         counter: 0
       }

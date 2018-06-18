@@ -10,6 +10,17 @@ CREATE DATABASE cuetestdb;
 
 \c cuetestdb;
 
+CREATE TABLE users (
+  uid SERIAL PRIMARY KEY,
+  suid varchar(100) not null UNIQUE,
+  displayName varchar(100) not null,
+  displayImage varchar(1000) not null,
+  isActive BOOLEAN DEFAULT FALSE,
+  token varchar(1000),
+  u_evid INTEGER DEFAULT -1,
+  createdAt TIMESTAMP DEFAULT NOW()
+);
+
 CREATE TABLE events (
   evid SERIAL PRIMARY KEY,
   hostid int not null,
@@ -25,13 +36,24 @@ CREATE TABLE cues (
   updatedAt TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE users (
-  uid SERIAL PRIMARY KEY,
-  suid varchar(100) not null UNIQUE,
-  displayName varchar(100) not null,
-  displayImage varchar(1000) not null,
-  isActive BOOLEAN DEFAULT FALSE,
-  u_evid INTEGER DEFAULT -1,
+CREATE TABLE tracks (
+  trackid SERIAL PRIMARY KEY,
+  suri VARCHAR(1000) NOT NULL UNIQUE,
+  createdAt TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE cues_tracks (
+  ct_cueid INTEGER REFERENCES cues(cueid) NOT NULL,
+  ct_trackid INTEGER REFERENCES tracks(trackid) NOT NULL UNIQUE,
+  numVotes INTEGER DEFAULT 1,
+  numPlays INTEGER DEFAULT 0,
+  CONSTRAINT cues_tracks_pkey PRIMARY KEY(ct_cueid, ct_trackid)
+);
+
+CREATE TABLE users_tracks (
+  ut_uid INTEGER REFERENCES users(uid),
+  ut_trackid INTEGER REFERENCES tracks(trackid),
+  ut_cueid INTEGER REFERENCES cues(cueid),
   createdAt TIMESTAMP DEFAULT NOW()
 );
 

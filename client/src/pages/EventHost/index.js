@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import GuestList from './components/GuestList'
 import HostNotifications from './components/HostNotifications'
 import HostSettings from './components/HostSettings'
+import Player from './components/Player'
 import {
   loadEventInfo,
   incomingJoinRequest,
@@ -150,6 +151,8 @@ class EventHost extends Component {
                 onClick={() => this.circleChange(1)} />
               <i className={`fa fa-sliders ${hostView === 2 && 'selected'}`}
                 onClick={() => this.circleChange(2)} />
+              <i className={`fa fa-users ${hostView === 3 && 'selected'}`}
+                onClick={() => this.circleChange(3)} />
             </div>
           )
         }
@@ -169,6 +172,11 @@ class EventHost extends Component {
           hostView === 2 &&
           hostId === userId &&
           <HostSettings handler={this.handleEnd} />
+        }
+        {
+          hostView === 3 &&
+          hostId === userId &&
+          <Player />
         }
         {
           hostId !== userId &&
