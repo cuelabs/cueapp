@@ -8,14 +8,18 @@ import UserView from './components/UserView'
 
 class App extends Component {
   componentDidMount () {
-    const { dispatch } = this.props
-    const token = window.localStorage.getItem('cue-access-token')
-    if (token !== null) {
-      dispatch(loadUser(token))
-    } else {
-      dispatch({
-        type: 'STOP_LOADING'
-      })
+    // const { dispatch } = this.props
+    // const token = window.localStorage.getItem('cue-access-token')
+    // if (token !== null) {
+    //   dispatch(loadUser(token))
+    // } else {
+    //   dispatch({
+    //     type: 'STOP_LOADING'
+    //   })
+    // }
+    const { dispatch, suid, userId } = this.props
+    if (userId < 0) {
+      dispatch(loadUser(suid))
     }
   }
 
