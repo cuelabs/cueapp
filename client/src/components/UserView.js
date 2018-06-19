@@ -58,6 +58,8 @@ class UserView extends Component {
       beginning
     } = this.props
 
+    // console.log('here: ', window)
+
     return (
       <div className='container'>
         {
