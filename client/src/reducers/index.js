@@ -248,6 +248,7 @@ const cueReducer = (state = initialState, action) => {
         eventName: action.name,
         eventLoading: false,
         eventId: action.eventId,
+        cueId: action.cueId,
         done: false,
         hostView: action.hostId === state.userId
           ? 0 : state.hostView

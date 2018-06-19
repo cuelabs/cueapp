@@ -1,6 +1,9 @@
 import React from 'react'
+import {
+  playNextTrack
+} from '../actions'
 
-const PlayControls = () => {
+const PlayControls = ({dispatch}) => {
   return (
     <div className='controls'>
       <div className='controls-row'>

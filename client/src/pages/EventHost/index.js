@@ -10,7 +10,8 @@ import {
   changeHostView,
   acceptRequest,
   rejectRequest,
-  endEvent
+  endEvent,
+  playNextTrack
 } from '../../actions'
 import Socket from '../../utils/Socket'
 
@@ -71,34 +72,34 @@ class EventHost extends Component {
 
   handleScriptLoad() {
 
-    const { token } = this.props
-    console.log('here is a token :', token)
+    // const { token } = this.props
+    // console.log('here is a token :', token)
 
-    const play = ({
-      spotify_uri,
-      playerInstance: {
-        _options: {
-          getOAuthToken,
-          id
-        }
-      }
-    }) => {
-      getOAuthToken(access_token => {
-        fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
-          method: 'PUT',
-          body: JSON.stringify({ uris: [spotify_uri] }),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-        });
-      });
-    };
+    // const play = ({
+    //   spotify_uri,
+    //   playerInstance: {
+    //     _options: {
+    //       getOAuthToken,
+    //       id
+    //     }
+    //   }
+    // }) => {
+    //   getOAuthToken(access_token => {
+    //     fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
+    //       method: 'PUT',
+    //       body: JSON.stringify({ uris: [spotify_uri] }),
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Bearer ${token}`
+    //       },
+    //     });
+    //   });
+    // };
 
-    play({
-      playerInstance: window.myPlayer,
-      spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
-    });
+    // play({
+    //   playerInstance: window.myPlayer,
+    //   spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
+    // });
     
     // fetch(`https://api.spotify.com/v1/me/player/play`, {
     //   method: 'PUT',
@@ -195,8 +196,6 @@ class EventHost extends Component {
                 onClick={() => this.circleChange(1)} />
               <i className={`fa fa-sliders ${hostView === 2 && 'selected'}`}
                 onClick={() => this.circleChange(2)} />
-              <i className={`fa fa-users ${hostView === 3 && 'selected'}`}
-                onClick={() => this.circleChange(3)} />
             </div>
           )
         }
@@ -229,7 +228,7 @@ class EventHost extends Component {
         <Script 
           url="https://sdk.scdn.co/spotify-player.js" 
           onError={() => console.log('oops!')} 
-          onLoad={this.handleScriptLoad}
+          onLoad={() => console.log('script loaded!')}
         />
       </div>
     ) : <div />

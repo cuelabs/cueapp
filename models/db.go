@@ -16,6 +16,7 @@ type Event struct {
   IsActive bool
   CreatedAt time.Time
   UpdatedAt time.Time
+  CueID int
 }
 
 type User struct {

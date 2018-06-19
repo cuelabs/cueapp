@@ -13,11 +13,13 @@ export const loadEventInfo = id => {
       ID: id
     })
       .then(res => {
+        console.log('rez ', res)
         dispatch({
           type: 'LOAD_EVENT_SUCCESS',
           hostId: res.data.HostID,
           name: res.data.EventName,
-          eventId: res.data.EvID
+          eventId: res.data.EvID,
+          cueId: res.data.CueID
         })
       })
       .catch(err => console.log(err))

@@ -122,7 +122,14 @@ func FindAllEvents(db *sql.DB) (Events, error) {
 }
 
 func FindOneEvent(db *sql.DB, id int) (Event, error) {
-  query := "SELECT * FROM events WHERE evid=$1"
+  // query := "SELECT * FROM events WHERE evid=$1"
+  query := `
+    SELECT * FROM (
+      SELECT * FROM events WHERE evid=$1
+    ) as e
+    INNER JOIN events_cues
+    ON e.evid=ec_evid
+  `
 
   e := Event{}
 
@@ -138,11 +145,28 @@ func FindOneEvent(db *sql.DB, id int) (Event, error) {
       &e.EventName,
       &e.IsActive,
       &e.CreatedAt, 
-      &e.UpdatedAt)
+      &e.UpdatedAt,
+      &e.CueID)
   }
 
   return e, nil
 }
+
+// func FindCueIDByEventID(db *sql.DB, id int) (int, error) {
+//   query := `
+//     SELECT ec_cueid FROM events_cues WHERE ec_evid=$1
+//   `
+//   c := 0
+
+//   err := db.QueryRow(
+//       query,   
+//       id).Scan(&c)
+//   if err != nil {
+//     return c, err
+//   }
+
+//   return c, nil
+// }
 
 func FindEventNameById(db *sql.DB, id int) (string, error) {
   query := "SELECT eventname FROM events WHERE evid=$1"
