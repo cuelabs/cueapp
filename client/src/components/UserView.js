@@ -75,6 +75,11 @@ class UserView extends Component {
           !beginning &&
           <PlayControls />
         }
+        {
+          setTimeout(() => (
+            <script src="https://sdk.scdn.co/spotify-player.js"></script>
+          ), 500)
+        }
       </div>
     )
   }
