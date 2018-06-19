@@ -16,6 +16,8 @@ const initialState = {
   isActive: false,
   eventId: null,
   eventName: '',
+  currentTrack: '',
+  playState: '',
   joinRequestPending: false,
   eventLoading: false,
   beginning: true,
@@ -312,6 +314,13 @@ const cueReducer = (state = initialState, action) => {
         spotifyResults: state.spotifyQuery.length > 0 ? 
           action.results.slice(0, 5) : []
       }
+    case 'PLAY_NEXT_TRACK_SUCCESS': {
+      return {
+        ...state,
+        currentTrack: action.SURI,
+        playState: 'PLAYING'
+      }
+    }
     default:
       return state
   }
