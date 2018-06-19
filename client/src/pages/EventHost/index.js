@@ -70,8 +70,8 @@ class EventHost extends Component {
 
   handleScriptLoad() {
 
-    // const { token } = this.props
-    // console.log('here is a token :', token)
+    const { token } = this.props
+    console.log('here is a token :', token)
     
     // fetch(`https://api.spotify.com/v1/me/player/play`, {
     //   method: 'PUT',
