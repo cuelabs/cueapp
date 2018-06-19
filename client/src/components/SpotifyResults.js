@@ -24,7 +24,7 @@ const SpotifyResults = ({data, cueId, dispatch}) => {
               </div>
             </div>
             <button className='add-to-cue'
-              onClick={() => dispatch(addTrackToCue(cueId, item.uri))}>
+              onClick={() => dispatch(addTrackToCue(item.uri, cueId))}>
               <i className="fa fa-plus"></i>
             </button>
           </div>
