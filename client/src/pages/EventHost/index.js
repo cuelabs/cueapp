@@ -91,7 +91,7 @@ class EventHost extends Component {
     };
 
     play({
-      playerInstance: new window.Spotify.Player({ name: "..." }),
+      playerInstance: window.myPlayer,
       spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
     });
   }
