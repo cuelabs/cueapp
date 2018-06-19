@@ -13,7 +13,7 @@ import (
 const redirectURI = "https://arcane-tundra-63613.herokuapp.com/callback"
 
 var (
-  Auth      = spotify.NewAuthenticator(redirectURI, spotify.ScopeUserReadPrivate)
+  Auth      = spotify.NewAuthenticator(redirectURI, spotify.ScopeUserReadPrivate, spotify.ScopeUserModifyPlaybackState)
   State     = "abc1234"
   id        models.User
   err2      error
