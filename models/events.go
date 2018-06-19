@@ -1,9 +1,6 @@
 package models
 
-import (
-  "database/sql"
-  "fmt"
-)
+import "database/sql"
 
 func FindUsersAtEvent(db *sql.DB, id int) (Guests, error) {
   query := `
@@ -123,7 +120,6 @@ func FindAllEvents(db *sql.DB) (Events, error) {
 }
 
 func FindOneEvent(db *sql.DB, id int) (Event, error) {
-  // query := "SELECT * FROM events WHERE evid=$1"
   query := `
     SELECT evid, hostid, eventname, isactive, createdat, updatedat, ec_cueid FROM (
       SELECT * FROM events WHERE evid=$1
@@ -150,26 +146,8 @@ func FindOneEvent(db *sql.DB, id int) (Event, error) {
       &e.CueID)
   }
 
-  fmt.Printf("%+v\n", e)
-
   return e, nil
 }
-
-// func FindCueIDByEventID(db *sql.DB, id int) (int, error) {
-//   query := `
-//     SELECT ec_cueid FROM events_cues WHERE ec_evid=$1
-//   `
-//   c := 0
-
-//   err := db.QueryRow(
-//       query,   
-//       id).Scan(&c)
-//   if err != nil {
-//     return c, err
-//   }
-
-//   return c, nil
-// }
 
 func FindEventNameById(db *sql.DB, id int) (string, error) {
   query := "SELECT eventname FROM events WHERE evid=$1"

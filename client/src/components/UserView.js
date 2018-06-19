@@ -9,13 +9,6 @@ import axios from 'axios'
 class UserView extends Component {
   componentDidMount () {
     const { token } = this.props
-    // window.Token = token
-
-    // console.log(token)
-
-    // setInterval(() => {
-    //   console.log(window)
-    // }, 5000)
 
     window.onSpotifyWebPlaybackSDKReady = () => {
       const accessToken = token;
@@ -58,8 +51,6 @@ class UserView extends Component {
       beginning,
       dispatch
     } = this.props
-
-    console.log('proppies: ', this.props)
 
     return (
       <div className='container'>

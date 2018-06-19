@@ -1,6 +1,9 @@
 import React from 'react'
+import {
+  addTrackToCue
+} from '../actions'
 
-const SpotifyResults = ({data}) => {
+const SpotifyResults = ({data, cueId, dispatch}) => {
   return (
     <div className='spotify-results'>
       {
@@ -20,7 +23,8 @@ const SpotifyResults = ({data}) => {
                 </h5>
               </div>
             </div>
-            <button className='add-to-cue'>
+            <button className='add-to-cue'
+              onClick={() => dispatch(addTrackToCue(cueId, item.uri))}>
               <i className="fa fa-plus"></i>
             </button>
           </div>
