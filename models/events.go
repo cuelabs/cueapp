@@ -153,6 +153,8 @@ func FindOneEvent(db *sql.DB, id int) (Event, error) {
       &e.CueID)
   }
 
+  fmt.Printf("%+v\n", e)
+
   return e, nil
 }
 
