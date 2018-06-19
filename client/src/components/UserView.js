@@ -16,35 +16,38 @@ class UserView extends Component {
     //   console.log(window)
     // }, 5000)
 
-    // window.onSpotifyWebPlaybackSDKReady = () => {
-    //   const accessToken = token;
-    //   const player = new window.Spotify.Player({
-    //     name: 'Web Playback SDK Quick Start Player',
-    //     getOAuthToken: cb => { cb(accessToken); }
-    //   });
+    document.addEventListener("DOMContentLoaded", function(event) {
 
-    //   // Error handling
-    //   player.addListener('initialization_error', ({ message }) => { console.error(message); });
-    //   player.addListener('authentication_error', ({ message }) => { console.error(message); });
-    //   player.addListener('account_error', ({ message }) => { console.error(message); });
-    //   player.addListener('playback_error', ({ message }) => { console.error(message); });
+      window.onSpotifyWebPlaybackSDKReady = () => {
+        const accessToken = token;
+        const player = new window.Spotify.Player({
+          name: 'Web Playback SDK Quick Start Player',
+          getOAuthToken: cb => { cb(accessToken); }
+        });
 
-    //   // Playback status updates
-    //   player.addListener('player_state_changed', state => { console.log(state); });
+        // Error handling
+        player.addListener('initialization_error', ({ message }) => { console.error(message); });
+        player.addListener('authentication_error', ({ message }) => { console.error(message); });
+        player.addListener('account_error', ({ message }) => { console.error(message); });
+        player.addListener('playback_error', ({ message }) => { console.error(message); });
 
-    //   // Ready
-    //   player.addListener('ready', ({ device_id }) => {
-    //     console.log('Ready with Device ID', device_id);
-    //   });
+        // Playback status updates
+        player.addListener('player_state_changed', state => { console.log(state); });
 
-    //   // Not Ready
-    //   player.addListener('not_ready', ({ device_id }) => {
-    //     console.log('Device ID has gone offline', device_id);
-    //   });
+        // Ready
+        player.addListener('ready', ({ device_id }) => {
+          console.log('Ready with Device ID', device_id);
+        });
 
-    //   // Connect to the player!
-    //   player.connect();
-    // };
+        // Not Ready
+        player.addListener('not_ready', ({ device_id }) => {
+          console.log('Device ID has gone offline', device_id);
+        });
+
+        // Connect to the player!
+        player.connect();
+      };
+    })
 
   }
 

@@ -50,9 +50,6 @@ class App extends Component {
             ? <UserView {...this.props} />
             : <Loader first />
         }
-        {
-          <script src="https://sdk.scdn.co/spotify-player.js"></script>
-        }
       </Main>
     )
   }
