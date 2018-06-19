@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Script from 'react-load-script'
 import GuestList from './components/GuestList'
 import HostNotifications from './components/HostNotifications'
 import HostSettings from './components/HostSettings'
@@ -65,6 +66,16 @@ class EventHost extends Component {
   circleChange (num) {
     const { dispatch } = this.props
     dispatch(changeHostView(num))
+  }
+
+  handleScriptLoad() {
+    const { token } = this.props
+    const player = new window.Spotify.Player({      // Spotify is not defined until 
+      name: 'Spotify Web Player',            // the script is loaded in 
+      getOAuthToken: cb => { cb(token) }
+    })
+
+    player.connect()
   }
 
   handleRequest (uid, accept) {
@@ -182,7 +193,11 @@ class EventHost extends Component {
           hostId !== userId &&
           <div>Welcome to { eventName }!</div>
         }
-        <script src="https://sdk.scdn.co/spotify-player.js"></script>
+        <Script 
+          url="https://sdk.scdn.co/spotify-player.js" 
+          onError={() => console.log('oops!')} 
+          onLoad={this.handleScriptLoad}
+        />
       </div>
     ) : <div />
   }
