@@ -2,12 +2,17 @@ import axios from 'axios'
 import { baseURL } from './index.js'
 
 export const addTrackToCue = (suri, cueid) => {
-  axios.post(`${baseURL}/cue/track/add`, {
-    SURI: suri,
-    CueID: cueid
-  })
-  .then(res => console.log('new track added: ', + res))
-  .catch(err => console.log(err))
+  return dispatch => {
+    dispatch({
+      type: 'ADD_TO_CUE_REQUEST'
+    })
+    axios.post(`${baseURL}/cue/track/add`, {
+      SURI: suri,
+      CueID: cueid
+    })
+    .then(res => console.log('new track added: ', + res))
+    .catch(err => console.log(err))
+  }
 }
 
 //handles spotify search
