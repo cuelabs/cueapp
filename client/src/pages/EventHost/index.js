@@ -74,14 +74,14 @@ class EventHost extends Component {
     const { token } = this.props
     console.log('here is a token :', token)
     
-    // fetch(`https://api.spotify.com/v1/me/player/play`, {
-    //   method: 'PUT',
-    //   body: JSON.stringify({ uris: ['spotify:track:49zD0wr2S3d0lZPib0K4e1'] }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${token}`
-    //   },
-    // });
+    fetch(`https://api.spotify.com/v1/me/player/play`, {
+      method: 'PUT',
+      body: JSON.stringify({ uris: ['spotify:track:49zD0wr2S3d0lZPib0K4e1'] }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    });
 
   }
 
