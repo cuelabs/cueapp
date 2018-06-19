@@ -20,6 +20,7 @@ export const loadUser = suid => {
             username: res.data.DisplayName,
             displayImage: res.data.DisplayImage,
             isActive: res.data.IsActive,
+            token: res.data.Token,
             eventId: res.data.EventId ? res.data.EventId : null,
             eventName: res.data.EventName ? res.data.EventName : null
           })
