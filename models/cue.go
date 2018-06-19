@@ -4,6 +4,27 @@ import (
   "database/sql"
 )
 
+func SelectOldestTrackInCue(db *sql.DB, id int) (Track, error) {
+  query := `
+    SELECT suri FROM (
+      SELECT ct_trackid FROM cues_tracks WHERE ct_cueid=$1
+    ) as cid
+    INNER JOIN tracks 
+    ON trackid=ct_trackid
+    ORDER BY createdat
+    LIMIT 1
+  `
+
+  t := Track{}
+
+  err := db.QueryRow(query, id).Scan(&t.SURI)
+  if err != nil {
+    return t, err
+  }
+
+  return t, nil
+}
+
 func FindTrackBySURI(db *sql.DB, s string) (TrackWithID, error) {
   query := "SELECT trackid, suri FROM tracks WHERE suri=$1"
   

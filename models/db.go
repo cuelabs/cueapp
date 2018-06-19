@@ -86,6 +86,10 @@ type Cue struct {
   UpdatedAt time.Time
 }
 
+type CueID struct {
+  ID int
+}
+
 type Events struct {
   Data []Event
 }
@@ -104,12 +108,16 @@ type SearchQuery struct {
   Query string
 }
 
-type TrackWithCueID struct {
+type Track struct {
   SURI string
-  CueID int
 }
 
 type TrackWithID struct {
   ID int 
   SURI string
+}
+
+type TrackWithCueID struct {
+  SURI string
+  CueID int
 }

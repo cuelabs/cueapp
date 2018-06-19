@@ -10,7 +10,7 @@ export const addTrackToCue = (suri, cueid) => {
       SURI: suri,
       CueID: cueid
     })
-    .then(res => console.log('new track added: ', + res))
+    .then(res => console.log('new track added: ', res))
     .catch(err => console.log(err))
   }
 }

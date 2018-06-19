@@ -49,7 +49,8 @@ class UserView extends Component {
       userId,
       eventName,
       beginning,
-      dispatch
+      dispatch,
+      cueId
     } = this.props
 
     return (
@@ -66,7 +67,7 @@ class UserView extends Component {
           hostId === userId &&
           isActive &&
           !beginning &&
-          <PlayControls dispatch={dispatch} />
+          <PlayControls dispatch={dispatch} cid={cueId}/>
         }
       </div>
     )

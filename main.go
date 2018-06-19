@@ -72,6 +72,7 @@ func main() {
 
   // Cue API
   router.HandleFunc("/cue/track/add", controllers.AddTrackToCue(models.DBCon)).Methods("POST")
+  router.HandleFunc("/cue/track/read", controllers.ReadNextTrackFromCue(models.DBCon)).Methods("POST")
 
   // Spotify API (heroku only)
   router.HandleFunc("/spotify/search", Search(&S)).Methods("POST")

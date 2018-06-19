@@ -9,7 +9,37 @@ import (
 
 var (
   track models.TrackWithCueID
+  suri models.Track
+  cid models.CueID
 )
+
+// currently this selects the oldest track in the cue, 
+// but will eventually integrate the Cue Selection Algorithm
+func ReadNextTrackFromCue(dbCon *sql.DB) http.HandlerFunc {
+  fn := func(w http.ResponseWriter, r *http.Request) {
+    err = json.NewDecoder(r.Body).Decode(&cid)
+    if err != nil {
+      panic(err)
+    }
+
+    suri, err = models.SelectOldestTrackInCue(dbCon, cid.ID)
+    if err != nil {
+      panic(err)
+      return
+    }
+
+    suriJson, err2 := json.Marshal(suri)
+    if err2 != nil {
+      panic(err2)
+      return
+    }
+
+    w.Header().Set("Content-Type", "application/json")
+    w.WriteHeader(http.StatusOK)
+    w.Write(suriJson)
+  }
+  return fn
+}
 
 func AddTrackToCue(dbCon *sql.DB) http.HandlerFunc {
   fn := func(w http.ResponseWriter, r *http.Request) {
