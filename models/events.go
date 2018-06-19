@@ -2,6 +2,7 @@ package models
 
 import (
   "database/sql"
+  "fmt"
 )
 
 func FindUsersAtEvent(db *sql.DB, id int) (Guests, error) {
@@ -135,8 +136,11 @@ func FindOneEvent(db *sql.DB, id int) (Event, error) {
 
   rows, err := db.Query(query, id)
   if err != nil {
+    fmt.Println("is it here")
     return e, err
   }
+
+  fmt.Println("or here")
 
   for rows.Next() {
     rows.Scan(
