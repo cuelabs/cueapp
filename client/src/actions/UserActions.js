@@ -13,6 +13,7 @@ export const loadUser = suid => {
     })
       .then(res => {
         setTimeout(() => {
+          console.log(res.data)
           dispatch({
             type: 'LOAD_USER_SUCCESS',
             id: res.data.ID,
