@@ -182,6 +182,7 @@ class EventHost extends Component {
           hostId !== userId &&
           <div>Welcome to { eventName }!</div>
         }
+        <script src="https://sdk.scdn.co/spotify-player.js"></script>
       </div>
     ) : <div />
   }
