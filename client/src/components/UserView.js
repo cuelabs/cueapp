@@ -11,7 +11,7 @@ class UserView extends Component {
     const { token } = this.props
     // window.Token = token
 
-    console.log('hey')
+    console.log(token)
 
     // setInterval(() => {
     //   console.log(window)
