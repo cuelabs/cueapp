@@ -13,7 +13,7 @@ class UserView extends Component {
     console.log('hey')
 
     setInterval(() => {
-      console.log(window.onSpotifyWebPlaybackSDKReady)
+      console.log(window)
     }, 5000)
 
     // window.onSpotifyWebPlaybackSDKReady = () => {
