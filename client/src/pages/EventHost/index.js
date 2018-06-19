@@ -23,6 +23,7 @@ class EventHost extends Component {
     this.circleChange = this.circleChange.bind(this)
     this.handleRequest = this.handleRequest.bind(this)
     this.handleEnd = this.handleEnd.bind(this)
+    this.handleScriptLoad = this.handleScriptLoad.bind(this)
   }
 
   componentDidMount () {
@@ -70,8 +71,8 @@ class EventHost extends Component {
 
   handleScriptLoad() {
 
-    // const { token } = this.props
-    // console.log('here is a token :', token)
+    const { token } = this.props
+    console.log('here is a token :', token)
     
     // fetch(`https://api.spotify.com/v1/me/player/play`, {
     //   method: 'PUT',
