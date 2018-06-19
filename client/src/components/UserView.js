@@ -59,7 +59,7 @@ class UserView extends Component {
       dispatch
     } = this.props
 
-    // console.log('here: ', window)
+    console.log('proppies: ', this.props)
 
     return (
       <div className='container'>
