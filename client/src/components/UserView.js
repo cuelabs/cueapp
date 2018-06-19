@@ -12,9 +12,9 @@ class UserView extends Component {
 
     console.log('hey')
 
-    setInterval(() => {
-      console.log(window)
-    }, 5000)
+    // setInterval(() => {
+    //   console.log(window)
+    // }, 5000)
 
     // window.onSpotifyWebPlaybackSDKReady = () => {
     //   const accessToken = token;
@@ -56,6 +56,8 @@ class UserView extends Component {
       eventName,
       beginning
     } = this.props
+
+    console.log('here: ', window)
 
     return (
       <div className='container'>
