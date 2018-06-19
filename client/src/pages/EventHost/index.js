@@ -69,13 +69,7 @@ class EventHost extends Component {
   }
 
   handleScriptLoad() {
-    const { token } = this.props
-    const player = new window.Spotify.Player({      // Spotify is not defined until 
-      name: 'Spotify Web Player',            // the script is loaded in 
-      getOAuthToken: cb => { cb(token) }
-    })
-
-    player.connect()
+    console.log('hello there my good friend')
   }
 
   handleRequest (uid, accept) {
