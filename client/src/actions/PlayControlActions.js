@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { baseURL } from './index.js'
 
+// reads next song from cue and plays it
 export const playNextTrack = (cid, token) => {
   return dispatch => {
     dispatch({
