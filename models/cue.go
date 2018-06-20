@@ -10,7 +10,7 @@ func UpdateSelectedTrack(db *sql.DB, tid int, cid int) error {
     WHERE ct_cueid=$1 AND ct_trackid=$2
   `
 
-  _, err := db.Exec(query, tid, cid)
+  _, err := db.Exec(query, cid, tid)
   if err != nil {
     return err
   }

@@ -146,9 +146,14 @@ nav > div > input {
   text-align: center;
 }
 
-.controls-row > i.fa-play,
-.controls-row > i.fa-pause {
+.controls-row > i.fa-play {
   transform: translateX(calc(3px - .09vw));
+  z-index: 100;
+  color: $cue-white-2;
+}
+
+.controls-row > i.fa-pause {
+  transform: translateX(calc(1px - .09vw));
   z-index: 100;
   color: $cue-white-2;
 }

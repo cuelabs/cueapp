@@ -5,6 +5,7 @@ import (
   "database/sql"
   "github.com/mattcarpowich1/cueapp/models"
   "encoding/json"
+  "fmt"
 )
 
 var (
@@ -27,6 +28,11 @@ func ReadNextTrackFromCue(dbCon *sql.DB) http.HandlerFunc {
       panic(err)
       return
     }
+
+    fmt.Println("cue id")
+    fmt.Println(cid.ID)
+    fmt.Println("track id")
+    fmt.Println(trackWithID.ID)
 
     err = models.UpdateSelectedTrack(dbCon, trackWithID.ID, cid.ID)
     if err != nil {
