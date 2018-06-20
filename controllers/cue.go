@@ -9,7 +9,7 @@ import (
 
 var (
   track models.TrackWithCueID
-  suri models.Track
+  trackWithID models.TrackWithID
   cid models.CueID
 )
 
@@ -22,13 +22,19 @@ func ReadNextTrackFromCue(dbCon *sql.DB) http.HandlerFunc {
       panic(err)
     }
 
-    suri, err = models.SelectOldestTrackInCue(dbCon, cid.ID)
+    trackWithID, err = models.SelectOldestTrackInCue(dbCon, cid.ID)
     if err != nil {
       panic(err)
       return
     }
 
-    suriJson, err2 := json.Marshal(suri)
+    err = models.UpdateSelectedTrack(dbCon, trackWithID.ID, cid.ID)
+    if err != nil {
+      panic(err)
+      return
+    }
+
+    trackJson, err2 := json.Marshal(trackWithID)
     if err2 != nil {
       panic(err2)
       return
@@ -36,7 +42,7 @@ func ReadNextTrackFromCue(dbCon *sql.DB) http.HandlerFunc {
 
     w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
-    w.Write(suriJson)
+    w.Write(trackJson)
   }
   return fn
 }

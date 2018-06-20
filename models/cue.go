@@ -4,10 +4,24 @@ import (
   "database/sql"
 )
 
-func SelectOldestTrackInCue(db *sql.DB, id int) (Track, error) {
+func UpdateSelectedTrack(db *sql.DB, tid int, cid int) error {
   query := `
-    SELECT suri FROM (
-      SELECT ct_trackid FROM cues_tracks WHERE ct_cueid=$1
+    UPDATE cues_tracks SET numvotes=0 
+    WHERE ct_cueid=$1 AND ct_trackid=$2
+  `
+
+  _, err := db.Exec(query, tid, cid)
+  if err != nil {
+    return err
+  }
+
+  return nil
+}
+
+func SelectOldestTrackInCue(db *sql.DB, id int) (TrackWithID, error) {
+  query := `
+    SELECT trackid, suri FROM (
+      SELECT ct_trackid FROM cues_tracks WHERE ct_cueid=$1 AND numvotes>0
     ) as cid
     INNER JOIN tracks 
     ON trackid=ct_trackid
@@ -15,9 +29,9 @@ func SelectOldestTrackInCue(db *sql.DB, id int) (Track, error) {
     LIMIT 1
   `
 
-  t := Track{}
+  t := TrackWithID{}
 
-  err := db.QueryRow(query, id).Scan(&t.SURI)
+  err := db.QueryRow(query, id).Scan(&t.ID, &t.SURI)
   if err != nil {
     return t, err
   }
