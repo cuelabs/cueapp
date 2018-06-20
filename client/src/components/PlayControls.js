@@ -23,7 +23,7 @@ const PlayControls = ({dispatch, cid, token, playState}) => {
 
         }
         <i className='fa fa-step-forward' 
-          onClick={() => dispatch(playNextTrack())}/>
+          onClick={() => dispatch(playNextTrack(cid, token))}/>
       </div>
     </div>
   )

@@ -13,6 +13,7 @@ export const playNextTrack = (cid, token) => {
     })
     .then(res => {
       const { SURI } = res.data
+      console.log(SURI)
 
       const play = ({
         spotify_uri,
