@@ -95,7 +95,8 @@ nav > div > input {
   color: #FAFAFA;
   text-align: center; }
 
-.controls-row > i.fa-play {
+.controls-row > i.fa-play,
+.controls-row > i.fa-pause {
   transform: translateX(calc(3px - .09vw));
   z-index: 100;
   color: #FAFAFA; }

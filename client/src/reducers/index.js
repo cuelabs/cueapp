@@ -17,7 +17,7 @@ const initialState = {
   eventId: null,
   eventName: '',
   currentTrack: '',
-  playState: '',
+  playState: 'STOPPED',
   joinRequestPending: false,
   eventLoading: false,
   beginning: true,
@@ -314,13 +314,22 @@ const cueReducer = (state = initialState, action) => {
         spotifyResults: state.spotifyQuery.length > 0 ? 
           action.results.slice(0, 5) : []
       }
-    case 'PLAY_NEXT_TRACK_SUCCESS': {
+    case 'PLAY_NEXT_TRACK_SUCCESS': 
       return {
         ...state,
         currentTrack: action.SURI,
         playState: 'PLAYING'
       }
-    }
+    case 'RESUME_CURRENT_TRACK': 
+      return {
+        ...state,
+        playState: 'PLAYING'
+      }
+    case 'PAUSE_CURRENT_TRACK': 
+      return {
+        ...state,
+        playState: 'PAUSED'
+      }
     default:
       return state
   }

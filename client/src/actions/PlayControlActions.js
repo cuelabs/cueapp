@@ -48,3 +48,23 @@ export const playNextTrack = (cid, token) => {
     .catch(err => console.log(err))
   }
 }
+
+export const resumePlaying = () => {
+  return dispatch => {
+    window.myPlayer.resume().then(() => {
+      dispatch({
+        type: 'RESUME_CURRENT_TRACK'
+      })
+    });
+  }
+}
+
+export const pause = () => {
+  return dispatch => {
+    window.myPlayer.pause().then(() => {
+      dispatch({
+        type: 'PAUSE_CURRENT_TRACK'
+      })
+    });
+  }
+}
