@@ -60,12 +60,24 @@ func AddTrackToCue(dbCon *sql.DB) http.HandlerFunc {
       panic(err)
     }
 
+    // Debuggin' (TrackWithCueID)
+    fmt.Println("track.SURI")
+    fmt.Println(track.SURI)
+    fmt.Println("track.CueID")
+    fmt.Println(track.CueID)
+
     // Find track if it's already there (t is TrackWithID)
     t, err2 := models.FindTrackBySURI(dbCon, track.SURI)
     if err2 != nil {
       panic(err2)
       return
     }
+
+    // More Debuggin' (TrackWithID)
+    fmt.Println("t.ID")
+    fmt.Println(t.ID)
+    fmt.Println("t.SURI")
+    fmt.Println(t.SURI)
 
     // If track not in DB, insert new row (t is TrackWithID)
     if t.ID <= 0 {
@@ -85,7 +97,7 @@ func AddTrackToCue(dbCon *sql.DB) http.HandlerFunc {
       return
     }
 
-
+    // Send TrackWithID JSON back to client (ID probably isn't necessary)
     trackJson, err3 := json.Marshal(t)
     if err3 != nil {
       panic(err3)
