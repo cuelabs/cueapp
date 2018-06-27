@@ -53,8 +53,6 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
     }
 
     if u.ID > 0 {
-      // heroku only
-
       err2 = models.UpdateToken(dbCon, user.ID, tok.AccessToken)
       if err2 != nil {
         panic(err2)

@@ -40,7 +40,6 @@ var (
 
 //heroku only
 var S = SpotifyHub{
-  // clients: make(map[string]map[*spotify.Client]bool),
   clients: make(map[string]*spotify.Client),
   register: make(chan *spotifySubscription),
 }
@@ -63,16 +62,16 @@ func main() {
   router := mux.NewRouter()
   
   // Events API 
-  router.HandleFunc("/events/read/all", controllers.ReadAllEvents(models.DBCon)).Methods("GET")
-  router.HandleFunc("/events/read/one", controllers.ReadOneEvent(models.DBCon)).Methods("POST")
-  router.HandleFunc("/events/create", controllers.CreateEvent(models.DBCon)).Methods("POST")
-  router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent(models.DBCon)).Methods("POST")
-  router.HandleFunc("/users/create", controllers.CreateUser(models.DBCon)).Methods("POST")
-  router.HandleFunc("/users/load", controllers.LoadUser(models.DBCon)).Methods("POST")
+  router.HandleFunc("/events/read/all", controllers.ReadAllEvents).Methods("GET")
+  router.HandleFunc("/events/read/one", controllers.ReadOneEvent).Methods("POST")
+  router.HandleFunc("/events/create", controllers.CreateEvent).Methods("POST")
+  router.HandleFunc("/events/guests", controllers.ReadAllUsersEvent).Methods("POST")
+  router.HandleFunc("/users/create", controllers.CreateUser).Methods("POST")
+  router.HandleFunc("/users/load", controllers.LoadUser).Methods("POST")
 
   // Cue API
-  router.HandleFunc("/cue/track/add", controllers.AddTrackToCue(models.DBCon)).Methods("POST")
-  router.HandleFunc("/cue/track/read", controllers.ReadNextTrackFromCue(models.DBCon)).Methods("POST")
+  router.HandleFunc("/cue/track/add", controllers.AddTrackToCue).Methods("POST")
+  router.HandleFunc("/cue/track/read", controllers.ReadNextTrackFromCue).Methods("POST")
 
   // Spotify API (heroku only)
   router.HandleFunc("/spotify/search", Search(&S)).Methods("POST")
@@ -86,7 +85,7 @@ func main() {
   router.HandleFunc("/user/{suid:[a-zA-Z0-9]+}", homePage)
 
   // Websocket
-  router.HandleFunc("/ws", serveWs(models.DBCon))
+  router.HandleFunc("/ws", serveWs)
 
   router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/build")))
   http.FileServer(http.Dir("./client/build"))
