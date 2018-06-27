@@ -30,7 +30,8 @@ class App extends Component {
       <Main>
         {
           !beginning &&
-            <Nav showSearch={isActive}
+            <Nav 
+              showSearch={isActive}
               dispatch={dispatch}
               suid={suid}
               results={spotifyResults}
