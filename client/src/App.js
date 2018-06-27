@@ -26,6 +26,8 @@ class App extends Component {
       cueId
     } = this.props
 
+    console.log(suid)
+
     return (
       <Main>
         {
