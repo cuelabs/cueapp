@@ -4,7 +4,6 @@ import (
   "net/http"
   "github.com/mattcarpowich1/cueapp/models"
   "encoding/json"
-  "fmt"
 )
 
 // currently this selects the oldest track in the cue, 
@@ -21,11 +20,6 @@ func ReadNextTrackFromCue(w http.ResponseWriter, r *http.Request) {
     panic(err)
     return
   }
-
-  fmt.Println("cue id")
-  fmt.Println(cid.ID)
-  fmt.Println("track id")
-  fmt.Println(trackWithID.ID)
 
   err = models.UpdateSelectedTrack(dbCon, trackWithID.ID, cid.ID)
   if err != nil {
@@ -51,24 +45,12 @@ func AddTrackToCue(w http.ResponseWriter, r *http.Request) {
     panic(err)
   }
 
-  // Debuggin' (TrackWithCueID)
-  fmt.Println("track.SURI")
-  fmt.Println(track.SURI)
-  fmt.Println("track.CueID")
-  fmt.Println(track.CueID)
-
   // Find track if it's already there (t is TrackWithID)
   t, err2 := models.FindTrackBySURI(dbCon, track.SURI)
   if err2 != nil {
     panic(err2)
     return
   }
-
-  // More Debuggin' (TrackWithID)
-  fmt.Println("t.ID")
-  fmt.Println(t.ID)
-  fmt.Println("t.SURI")
-  fmt.Println(t.SURI)
 
   // If track not in DB, insert new row (t is TrackWithID)
   if t.ID <= 0 {
