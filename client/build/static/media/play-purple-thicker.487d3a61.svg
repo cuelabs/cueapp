@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 689.56 689.56">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #8876cf;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #8876cf;
+        stroke-miterlimit: 10;
+        stroke-width: 18px;
+      }
+    </style>
+  </defs>
+  <title>play-purple-thicker</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <polygon class="cls-1" points="514 345.25 264.44 525.56 264.44 164.93 514 345.25"/>
+      <circle class="cls-2" cx="344.78" cy="344.78" r="335.78"/>
+    </g>
+  </g>
+</svg>

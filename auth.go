@@ -59,8 +59,8 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
         return
       } 
 
-      // sub := &spotifySubscription{client: &client, suid: user.ID}
-      // S.register <- sub
+      sub := &spotifySubscription{client: &client, suid: user.ID}
+      S.register <- sub
     }  else {
       // Insert new user in the database with the authenticated users SUID
       newUser := models.NewSpotifyUser{
@@ -83,8 +83,8 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       } 
 
       // Send client to spotifyHub
-      // sub := &spotifySubscription{client: &client, suid: user.ID}
-      // S.register <- sub
+      sub := &spotifySubscription{client: &client, suid: user.ID}
+      S.register <- sub
     }
 
     http.Redirect(w, r, ("/user/" + user.ID), 301)
