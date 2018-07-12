@@ -4,15 +4,16 @@ import {
   resumePlaying,
   pause
 } from '../actions'
+import playPurple from '../images/play-purple-thicker.svg'
 
 const PlayControls = ({dispatch, cid, token, playState}) => {
   return (
     <div className='controls'>
       <div className='controls-row'>
         <i className='fa fa-step-backward' />
-        <div className='center-circle' />
         { playState === 'STOPPED' || playState === 'PAUSED' 
-          ? <i className='fa fa-play'
+          ? <img src={playPurple}
+              height={56}
               onClick={() => {
                 playState === 'STOPPED' 
                 ? dispatch(playNextTrack(cid, token))

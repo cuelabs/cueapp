@@ -1,28 +1,24 @@
 $cue-font-primary: 'Tajawal', 'Ubuntu', sans-serif;
 $cue-font-secondary: 'Helvetica', sans-serif;
+$cue-font-ternary: 'Ubuntu', sans-serif;
 $cue-black: #29292D;
-$cue-blue: #2E6DE9;
-$cue-blue-lighter: #5487EC;
-$cue-blue-lightest: #7EA4F0;
-$cue-blue-darker: #1057E3;
 $cue-blue-darkest: #083FAA; 
 $cue-black-hsl: hsl(240, 5, 17);
 $cue-black-mid: hsl(240, 5, 34);
-$cue-black-light: hsl(240, 5, 80);
+$cue-black-light: hsl(240, 5, 75);
 $cue-black-mid-light: hsl(240, 5, 60);
 $cue-black-gray: hsl(240, 5, 13);
 $cue-white: #F5F5F5;
 $cue-black-2: #050505;
 $cue-white-2: #FAFAFA;
-$cue-white-3: #FCFCFC;
-$cue-purple: #7F1AE5;
 $cue-shadow: #222225;
 $cue-brighter: #2C2C30;
-$cue-nav-height: calc((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px);
+$cue-pink: #de3c56;
+$cue-red: #a42538;
+$cue-purple: #8876cf;
+$cue-light-purple: #AEA1E5;
 $cue-search-height: calc(100vh - 16vh);
-$cue-load-height: calc(50vh - ((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px) - 36px);
 $cue-main-height: calc(100vh - (((56px + (56 - 24) * (100vw - 360px)/(960-360)) + 16px) * 2));
-$cue-logo-font-size: calc(56px + (56 - 24) * (100vw - 360px)/(960-360));
 $cue-event-font-size: calc(36px + (24 - 16) * (100vw - 360px)/(960-360));
 $cue-button-font-size: calc(32px + (32 - 16) * (100vw - 360px)/(960-360));
 $cue-button-width: calc(296px + (592 - 296) * (100vw - 360px)/(960-360));
@@ -30,8 +26,35 @@ $cue-input-width: calc(256px + (480 - 256) * (100vw - 360px)/(960-360));
 $cue-input-height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
 $negative-cue-input-height: calc((32px + (56 - 32) * (100vw - 360px)/(960-360)) * -1);
 $cue-input-font-size: calc(16px + (40 - 20) * (100vw - 360px)/(960-360));
-$cue-logo-offset-left: 1.3vw;
-$cue-logo-offset-top: 1.3vw;
+$total-height: calc(100vh - 32px);
+$standard-height: calc(100vh - 104px);
+
+// Inheritance Classes
+%flexStartColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+%flexCenterColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+%flexRowCenterAlign {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+%marginWidth {
+  margin: 0 auto;
+  width: 100%;
+}
 
 html, body {
   margin: 0;
@@ -40,31 +63,25 @@ html, body {
   background: $cue-white-2;
   -webkit-font-smoothing: antialiased;
   width: 100vw;
+  min-height: 100vh;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  @extend %flexStartColumn;
+  @extend %marginWidth;
   align-items: center;
+  // height: $standard-height;
 }
 
 nav {
   position: relative;
-  display: flex;
-  flex-direction: row;
+  @extend %flexRowCenterAlign;
   justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  height: calc($cue-nav-height + 1px);
-  width: 100%;
+  @extend %marginWidth;
+  height: 72px;
   clear: both;
   z-index: 2;
-}
-
-nav.nav-flip {
   background: $cue-black;
-  transition: background .3s ease;
 }
 
 nav > div > input {
@@ -72,10 +89,21 @@ nav > div > input {
   text-indent: calc(28px + (24 - 20) * (100vw - 360px)/(960-360));
 }
 
+div.login-page {
+  @extend %flexRowCenterAlign;
+  @extend %marginWidth;
+  height: $standard-height;
+}
+
+div.login-inner-large {
+  @extend %flexCenterColumn;
+  margin: 0 auto;
+  width: 50%;
+  height: $standard-height;
+}
+
 .search {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  @extend %flexRowCenterAlign;
 }
 
 .search-icon {
@@ -98,19 +126,23 @@ nav > div > input {
 
 .fa-search.search-nav {
   transform: translateX(calc(28px + (22 - 20) * (100vw - 360px)/(960-360)));
-  background: $cue-black-light;
+  background: $cue-white-2;
   padding-left: 4px;
   border-radius: 24px;
   width: 24px;
 }
 
-.fa-users, .fa-envelope, .fa-sliders {
+.host-circles > .fa-users, .fa-envelope, .fa-sliders {
   font-size: 32px;
   transition: all .1s ease;
   color: $cue-black-light;
 }
 
-.fa-users:hover, .fa-envelope:hover, .fa-sliders:hover {
+.fa-users:hover, 
+.fa-envelope:hover, 
+.fa-sliders:hover,
+.logo:hover,
+.circle:hover {
   cursor: pointer;
 }
 
@@ -123,39 +155,39 @@ nav > div > input {
   position: fixed;
   height: 16vh;
   background-color: $cue-black;
+  // border-top: 1px solid #eee;
   width: 100vw;
   bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @extend %flexCenterColumn;
 }
 
 .controls-row {
-  display: flex;
-  flex-direction: row;
+  @extend %flexRowCenterAlign;
   justify-content: space-between;
   flex-wrap: no-wrap;
-  align-items: center;
   width: 142px;
 }
 
 .controls-row > i {
   font-size: 24px; 
-  color: $cue-white-2;
+  color: $cue-purple;
   text-align: center;
 }
 
+.controls-row > img:hover {
+  cursor: pointer;
+}
+
 .controls-row > i.fa-play {
-  transform: translateX(calc(3px - .09vw));
+  transform: translateX(calc(4px - .09vw));
   z-index: 100;
-  color: $cue-white-2;
+  color: $cue-purple;
 }
 
 .controls-row > i.fa-pause {
   transform: translateX(calc(1px - .09vw));
   z-index: 100;
-  color: $cue-white-2;
+  color: $cue-purple;
 }
 
 .center-circle {
@@ -163,61 +195,122 @@ nav > div > input {
   height: 48px;
   width: 48px;
   border-radius: 25px;
-  border: 1px solid $cue-white-2;
+  border: 2px solid $cue-purple;
   position: absolute;
   top: calc(8vh - 25px);
   left: calc(50vw - 25px);
 }
 
-h1 {
+div.login-content {
+  margin-top: -72px;
+  width: 72%;
+}
+
+div.login-content .fa {
+  margin-right: 24px;
+}
+
+div.login-content > p:nth-child(2) > .fa {
+  margin-right: 20px;
+}
+
+div.login-page > div:nth-child(2) {
+  background-color: $cue-black;
+  background-image: url('./images/purply.svg');
+  background-repeat:no-repeat;
+  background-position: 50% 60%;
+  background-size: 700%;
+}
+
+div.login-page > div:nth-child(2) > div {
+  margin-left: 7%;
+}
+
+div.login-content > h2 {
+  @extend %flexCenterColumn;
+  align-items: flex-start;
+  font-family: $cue-font-ternary;
+  font-size: 48px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: $cue-black;
+}
+
+div.login-content > p.login-phrase {
+  font-family: $cue-font-ternary;
+  color: $cue-black;
+  font-size: 24px;
+  margin-bottom: 80px;
+}
+
+div.login-inner-large:nth-child(2) > div.login-content > p {
+  font-family: $cue-font-ternary;
+  color: $cue-white-2;
+  font-size: 28px;
+  margin-bottom: 16px;
+  // text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+}
+
+div.login-content > button {
+  width: 100%;
+  background: $cue-purple;
+  font-family: $cue-font-ternary;
+  font-size: 20px;
+  font-weight: 600;
+  color: $cue-white-2;
+  height: 44px;
+  line-height: 42px;
+  border: none;
   box-sizing: border-box;
-  font-size: $cue-logo-font-size;
-  font-family: $cue-font-primary;
-  font-weight: 700;
-  margin: 8px;
+}
+
+div.login-content > button:hover {
+  cursor: pointer;
+  background-color: $cue-light-purple;
+  transition: background-color .2s ease;
+}
+
+h1 {
+  line-height: 1;
+  padding-bottom: 16px;
+  font-size: 49px;
+  font-family: $cue-font-ternary;
+  margin: 0;
   margin-left: 4vw;
-  color: $cue-black-light;
+  color: $cue-purple;
   transition: color .3s ease;
+  @extend %flexCenterColumn;
 }
 
 main {
-  display: flex;
-  flex-direction: column;
+  @extend %flexCenterColumn;
   justify-content: space-around;
-  align-items: center;
   z-index: 5;
 }
 
 .logo {
-  font-weight: 200;
+  font-weight: 400;
 }
 
 .logo.logo-flip {
-  color: $cue-white;
   z-index: 10;
-  transition: color .3s ease;
-}
-
-.logo:hover {
-  cursor: pointer;
 }
 
 .page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @extend %flexCenterColumn;
+  justify-content: flex-start;
+  height: calc(84vh - 72px);
 }
 
 .view {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @extend %flexCenterColumn;
+  justify-content: flex-start;
 }
 
 .inner-right-column {
-  margin: 0 auto;
-  width: 100%;
+  @extend %marginWidth;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
@@ -229,8 +322,12 @@ main {
 }
 
 .page.home {
-  justify-content: space-around;
-  height: $cue-main-height;
+  justify-content: center;
+  height: calc(100vh - 72px);
+}
+
+.page.home > button:nth-child(1) {
+  margin-bottom: 192px;
 }
 
 .page.join {
@@ -242,15 +339,8 @@ a {
   color: $cue-black;
 }
 
-h1 > a {
-  color: $cue-purple;
-}
-
 form {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  @extend %flexStartColumn;
   height: 100%;
 }
 
@@ -289,7 +379,11 @@ input {
 }
 
 input.spotify-search {
-  background: $cue-black-light;
+  background: $cue-white-2;
+  background-image: url('./images/cool-search-3.svg');
+  background-size: 18px;
+  background-repeat: no-repeat;
+  background-position: 3.2% center;
   border-top-left-radius: 1em;
   border-bottom-left-radius: 1em;
   border-top-right-radius: 1em;
@@ -299,39 +393,33 @@ input.spotify-search {
   z-index: 7;
 }
 
+%placeHolderProps {
+  text-indent: 8px;
+  color: $cue-black-light;
+  font-family: $cue-font-secondary;
+  font-size: 32px;
+}
+
 ::-webkit-input-placeholder {
-   text-indent: 8px;
-   color: $cue-black-light;
-   font-family: $cue-font-secondary;
-   font-size: 32px;
+  @extend %placeHolderProps;
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   text-indent: 8px;
-   color: $cue-black-light;  
-   font-family: $cue-font-secondary;
-   font-size: 32px;
+  @extend %placeHolderProps;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   text-indent: 8px;
-   color: $cue-black-light; 
-   font-family: $cue-font-secondary; 
-   font-size: 32px;
+  @extend %placeHolderProps;
 }
 
 :-ms-input-placeholder {  
-   text-indent: 8px;
-   color: $cue-black-light; 
-   font-family: $cue-font-secondary;
-   font-size: 32px;
+  @extend %placeHolderProps;
 }
 
 .search-results {
   transform: translateY($negative-cue-input-height);
   height: $cue-input-height;
-  margin: 0 auto;
-  width: 100%;
+  @extend %marginWidth;
   background: $cue-white-2;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
@@ -349,12 +437,9 @@ input.spotify-search {
 }
 
 .search-result {
-  margin: 0 auto;
+  @extend %marginWidth;
   height: 64px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  @extend %flexRowCenterAlign;
   color: $cue-black-light;
 }
 
@@ -371,12 +456,10 @@ input.spotify-search {
 
 .modal {
   position: fixed;
-  display: flex;
-  flex-direction: column;
+  @extend %flexCenterColumn;
   justify-content: space-around;
-  align-items: center;
   width: 80vw;
-  top: $cue-nav-height;
+  top: 72px;
   left: 10vw;
   height: 300px;
   background-color: $cue-white-2;
@@ -419,9 +502,8 @@ small.small-cancel:hover {
 
 .modal-inner {
   width: 100%;
-  display: flex;
+  @extend %flexRowCenterAlign;
   justify-content: space-around;
-  align-items: center;
 }
 
 .first {
@@ -456,20 +538,6 @@ small.small-cancel:hover {
 }
 
 //GUEST VIEW
-.event-guest {
-  width: 90vw;
-}
-
-h2.guest-view-event-title {
-  text-align: right;
-  color: $cue-blue-darkest;
-  font-size: $cue-event-font-size;
-  padding-bottom: 8px;
-  width: 100%;
-  margin: 0;
-  margin-top: 8px;
-}
-
 .event-guest small {
   align-self: flex-end;
   color: $cue-black-light;
@@ -479,7 +547,7 @@ h2.guest-view-event-title {
 
 .event-guest small:hover {
   cursor: pointer;
-  color: $cue-purple;
+  color: $cue-black;
   transition: color .2s ease;
 }
 
@@ -487,15 +555,13 @@ h2.guest-view-event-title {
 div.spotify-results {
   position: absolute;
   background: $cue-black;
-  top: 0;
+  top: 1px;
   left: 0;
   width: 100vw;
   height: $cue-search-height;
   overflow-y: scroll;
   z-index: 6;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  @extend %flexStartColumn;
   align-items: center;
   animation-name: fader;
   animation-duration: .3s;
@@ -510,10 +576,8 @@ div.spotify-result {
   width: 90vw;
   height: 72px;
   z-index: 11;
-  display: flex;
-  flex-direction: row;
+  @extend %flexRowCenterAlign;
   justify-content: space-between;
-  align-items: center;
   flex-wrap: nowrap;
   overflow-x: hidden;
   border-bottom: 1px solid $cue-black-light;
@@ -522,22 +586,17 @@ div.spotify-result {
 div.spotify-result-left {
   width: 80%;
   height: 72px;
-  display: flex;
-  flex-direction: column;
+  @extend %flexStartColumn;
   justify-content: center;
-  align-items: flex-start;
   overflow-x: hidden;
 }
 
 div.spotify-song-info {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  @extend %flexRowCenterAlign;
 }
 
 div.spotify-result:nth-child(1) {
-  margin-top: $cue-nav-height;
+  margin-top: 72px;
 }
 
 div.spotify-results-caption {
@@ -596,10 +655,7 @@ button.add-to-cue {
   margin-right: 4px;
   margin-top: 4px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @extend %flexCenterColumn;
 }
 
 @keyframes fader {
@@ -613,7 +669,8 @@ button.add-to-cue {
 }
 
 // HOST VIEW
-.event-host {
+.event-host,
+.event-guest {
   width: 90vw;
 }
 
@@ -621,10 +678,9 @@ h2.host-view-event-title {
   text-align: right;
   color: $cue-black-light;
   font-size: $cue-event-font-size;
-  padding-bottom: 8px;
   width: 100%;
-  margin: 0;
-  margin-top: 8px;
+  margin: 8px 0px;
+  margin-top: 16px;
 }
 
 h2.guest-view-event-title {
@@ -647,44 +703,34 @@ h3.host-view-page-title {
   padding-top: 8px;
 }
 
-h3.host-view-page-title.host-indicator {
-  color: $cue-purple;
-  margin-bottom: 24px;
-  margin-top: -13px;
-  font-size: 16px;
-  align-self: flex-end;
-}
-
 .host-view-page-list {
   margin: 0;
   padding: 0;
   list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  @extend %flexStartColumn;
   width: 100%;
   flex-wrap: nowrap;
   overflow-y: scroll;
   max-height: 50vh;
 }
 
+%fadeInAnimation {
+  animation-name: elEye;
+  animation-duration: .4s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+
 ul.host-view-page-list > li {
   margin: 0;
   width: calc(100% - 12px);
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  @extend %flexRowCenterAlign;
   border-top: 1px solid $cue-black-light;
   color: $cue-black;
   padding-top: 32px;
   padding-bottom: 60px;
   padding-left: 12px;
-  animation-name: elEye;
-  animation-duration: .4s;
-  animation-timing-function: ease;
-  animation-iteration-count: 1;
+  @extend %fadeInAnimation;
   height: 64px;
 }
 
@@ -700,10 +746,7 @@ ul.host-view-page-list > li > img {
 }
 
 .please-fade {
-  animation-name: elEye;
-  animation-duration: .4s;
-  animation-timing-function: ease;
-  animation-iteration-count: 1;
+  @extend %fadeInAnimation;
 }
 
 @keyframes elEye {
@@ -722,10 +765,8 @@ ul.host-view-page-list > li:nth-child(1) {
 .host-request-options {
   align-self: flex-end;
   margin-top: 32px;
-  display: flex;
-  flex-direction: row;
+  @extend %flexRowCenterAlign;
   justify-content: space-between;
-  align-items: center;
   transform: translateX(-12px);
 }
 
@@ -736,17 +777,12 @@ ul.host-view-page-list > li:nth-child(1) {
 ul.host-view-page-list > li > div > p {
   margin: 0;
   height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  @extend %flexRowCenterAlign;
   align-items: flex-start;
 }
 
 .notification-top-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  @extend %flexRowCenterAlign;
   width: 100%;
 }
 
@@ -764,15 +800,11 @@ div.guest-photo {
 
 .host-circles {
   position: relative;
-  display: flex;
-  flex-direction: row;
+  @extend %flexRowCenterAlign;
   justify-content: space-around;
-  align-items: center;
   align-self: flex-start;
   width: 120px;
-  margin-bottom: 0px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin: 8px 0px;
 }
 
 .host-circles > .notifications {
@@ -789,10 +821,7 @@ div.guest-photo {
   height: 20px;
   width: 20px;
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @extend %flexCenterColumn;
 }
 
 @keyframes notify {
@@ -814,10 +843,6 @@ div.guest-photo {
 
 .circle.circle-selected {
   background-color: $cue-black-light;
-}
-
-.circle:hover {
-  cursor: pointer;
 }
 
 //////////////////////////////
@@ -862,10 +887,7 @@ button {
   background: $cue-black-light;
   font-size: 14px;
   line-height: 28px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  @extend %flexCenterColumn;
   color: $cue-black;
   border: 1px solid $cue-black-light;
   font-weight: 400;
@@ -914,10 +936,7 @@ button {
   width: 96px;
   font-size: 16px;
   height: $cue-input-height;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @extend %flexCenterColumn;
 }
 
 .btn-submit {
@@ -1052,6 +1071,90 @@ button:active {
   } 40% {
     -webkit-transform: scale(1);
             transform: scale(1);
+  }
+}
+
+#root > div > div:not(main) {
+  height: calc(100vh - 32px);
+  margin-bottom: -32px; 
+}
+
+#root > div > div:after {
+  content: "";
+  display: block;
+}
+
+footer, #root > div > div:after {
+  height: 32px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+footer {
+  border-top: 1px solid #eee;
+  color: $cue-black;
+  font-size: 16px;
+  width: 100vw;
+  text-align: center;
+  @extend %flexRowCenterAlign;
+  justify-content: center;
+  font-family: $cue-font-secondary;
+}
+
+footer > span {
+  font-size: 20px;
+  margin-right: 2px;
+}
+
+@media screen and (max-width: 768px) {
+  div.login-inner-large {
+    display: none;
+  }
+
+  div.login-inner-large:nth-child(1) {
+    display: flex;
+    width: 100%;
+    // background-color: $cue-purple;
+  }
+
+  div.login-content {
+    width: 78%;
+  }
+
+  div.login-content > button {
+    width: 100%;
+    // background: $cue-black;
+    font-family: $cue-font-ternary;
+    // font-size: 16px;
+    font-weight: 600;
+    color: $cue-white-2;
+    height: 44px;
+    line-height: 42px;
+    border: none;
+    box-sizing: border-box;
+  }
+
+  div.login-content > button:hover {
+    background: $cue-black-mid;
+  }
+
+  div.login-content > h2.login-phrase {
+    align-items: center;
+    text-align: center;
+    font-family: $cue-font-ternary;
+    // color: $cue-white-2;
+    font-size: 48px;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  div.login-content > p.login-phrase {
+    font-family: $cue-font-ternary;
+    text-align: center;
+    // color: $cue-white-2;
+    font-size: 24px;
+    margin-bottom: 16px;
   }
 }
 

@@ -6,7 +6,7 @@ import (
   "github.com/mattcarpowich1/cueapp/controllers"
   "github.com/mattcarpowich1/cueapp/models"
   "github.com/gorilla/handlers"
-  "github.com/zmb3/spotify"
+  // "github.com/zmb3/spotify"
   "github.com/gorilla/mux"
   "github.com/rs/cors"
   _ "github.com/lib/pq"
@@ -14,35 +14,35 @@ import (
 )
 
 // dev
-// const connectionString = `
-//   user=matthewcarpowich
-//   dbname=cuetestdb
-//   sslmode=disable`
+const connectionString = `
+  user=matthewcarpowich
+  dbname=cuetestdb
+  sslmode=disable`
 
 // heroku
-var connectionString = os.Getenv("DATABASE_URL")
+// var connectionString = os.Getenv("DATABASE_URL")
 
 //dev
-// const PORT = "8080"
+const PORT = "8080"
 
 //heroku
-var PORT = os.Getenv("PORT")
+// var PORT = os.Getenv("PORT")
 
 //heroku only
-const (
-  clientID  = "2a437f62902142b78efdcbaab0b95271"
-  secretKey = "35e6b3b0f37846debfbf21d15ab01073"
-)
+// const (
+//   clientID  = "2a437f62902142b78efdcbaab0b95271"
+//   secretKey = "35e6b3b0f37846debfbf21d15ab01073"
+// )
 
 var (
   err error
 )
 
 //heroku only
-var S = SpotifyHub{
-  clients: make(map[string]*spotify.Client),
-  register: make(chan *spotifySubscription),
-}
+// var S = SpotifyHub{
+//   clients: make(map[string]*spotify.Client),
+//   register: make(chan *spotifySubscription),
+// }
 
 
 func main() {
@@ -52,12 +52,12 @@ func main() {
   }
 
   //heroku only
-  Auth.SetAuthInfo(clientID, secretKey)
-  url := Auth.AuthURL(State)
+  // Auth.SetAuthInfo(clientID, secretKey)
+  // url := Auth.AuthURL(State)
 
   go h.run()
   //heroku only
-  go S.run()
+  // go S.run()
 
   router := mux.NewRouter()
   
@@ -74,12 +74,12 @@ func main() {
   router.HandleFunc("/cue/track/read", controllers.ReadNextTrackFromCue).Methods("POST")
 
   // Spotify API (heroku only)
-  router.HandleFunc("/spotify/search", Search(&S)).Methods("POST")
+  // router.HandleFunc("/spotify/search", Search(&S)).Methods("POST")
 
   // Auth 
   //heroku only
-  router.HandleFunc("/login", redirect(url))
-  router.HandleFunc("/callback", CompleteAuth(models.DBCon))
+  // router.HandleFunc("/login", redirect(url))
+  // router.HandleFunc("/callback", CompleteAuth(models.DBCon))
 
   // User Home Page
   router.HandleFunc("/user/{suid:[a-zA-Z0-9]+}", homePage)

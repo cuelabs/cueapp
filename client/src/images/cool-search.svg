@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 535.02 667.25">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #29292d;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 37px;
+      }
+
+      .cls-2 {
+        fill: #29292d;
+      }
+    </style>
+  </defs>
+  <title>cool-search</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <circle class="cls-1" cx="181.94" cy="181.94" r="163.42"/>
+      <path class="cls-2" d="M282.4,319.69,530.09,630.54a22.61,22.61,0,1,1-35.37,28.18l-.53-.68L258.58,337.93a15,15,0,0,1,23.82-18.24Z"/>
+    </g>
+  </g>
+</svg>
