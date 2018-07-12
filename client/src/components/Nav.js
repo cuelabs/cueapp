@@ -19,7 +19,6 @@ const Nav = ({
       {
         showSearch && (
           <div className='search'>
-            <i className='fa fa-search search-nav' aria-hidden='true' />
             <input type='text'
               className='spotify-search'
               value={value}

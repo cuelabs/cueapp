@@ -67,12 +67,12 @@ class HostNotifications extends Component {
                   <img src={item.DisplayImage}
                     alt={`Display image for ${item.DisplayName}`}
                     style={{
-                      height: 48,
-                      width: 48,
+                      height: 40,
+                      width: 40,
                       borderRadius: '50%',
                       marginRight: 12
                     }} />
-                  <p style={{height: 48}}>
+                  <p style={{height: 40}}>
                     {item.DisplayName} wants to join your event!
                   </p>
                 </div>

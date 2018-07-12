@@ -51,11 +51,11 @@ class EventGuest extends Component {
   }
 
   render () {
-    const { title } = this.props
+    const { eventName } = this.props
     return (
       <div className='page event-guest'>
         <h2 className='guest-view-event-title'>
-          {title}
+          {eventName}
         </h2>
         <small onClick={this.leaveEvent}>LEAVE EVENT</small>
       </div>

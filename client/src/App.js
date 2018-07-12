@@ -29,24 +29,24 @@ class App extends Component {
     console.log(suid)
 
     return (
-      <Main>
-        {
-          !beginning &&
-            <Nav 
-              showSearch={isActive}
-              dispatch={dispatch}
-              suid={suid}
-              results={spotifyResults}
-              value={spotifyQuery}
-              flip={flip}
-              cueId={cueId} />
-        }
-        {
-          !beginning
-            ? <UserView {...this.props} />
-            : <Loader first />
-        }
-      </Main>
+        <Main>
+          {
+            !beginning &&
+              <Nav 
+                showSearch={isActive}
+                dispatch={dispatch}
+                suid={suid}
+                results={spotifyResults}
+                value={spotifyQuery}
+                flip={flip}
+                cueId={cueId} />
+          }
+          {
+            !beginning
+              ? <UserView {...this.props} />
+              : <Loader first />
+          }
+        </Main>
     )
   }
 }
