@@ -64,11 +64,15 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
     }  else {
       fmt.Println("image situation")
       fmt.Println(user.Images)
+      var imgUrl = ""
+      if len(user.Images) > 0 {
+        imgUrl = user.Images[0].URL
+      } 
       // Insert new user in the database with the authenticated users SUID
       newUser := models.NewSpotifyUser{
         SUID: user.ID,
         DisplayName: user.DisplayName,
-        DisplayImage: user.Images[0].URL,
+        DisplayImage: imgUrl,
         CreatedAt: time.Now(),
       }
 
