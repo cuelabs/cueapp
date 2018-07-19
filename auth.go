@@ -62,6 +62,8 @@ func CompleteAuth(dbCon *sql.DB) http.HandlerFunc {
       sub := &spotifySubscription{client: &client, suid: user.ID}
       S.register <- sub
     }  else {
+      fmt.Println("image situation")
+      fmt.Println(user.Images)
       // Insert new user in the database with the authenticated users SUID
       newUser := models.NewSpotifyUser{
         SUID: user.ID,
