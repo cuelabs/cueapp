@@ -44,6 +44,11 @@ class CreateEvent extends Component {
   }
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = state => {
+  return {
+    ...state.cueReducer,
+    ...state.views
+  }
+}
 
 export default connect(mapStateToProps)(CreateEvent)
