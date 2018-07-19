@@ -11,8 +11,6 @@ const initialState = {
   displayName: '',
   displayImage: '',
   hostId: -1,
-  hostView: 0,
-  homeView: 'HOME',
   isActive: false,
   eventId: null,
   eventName: '',
@@ -31,16 +29,6 @@ const cueReducer = (state = initialState, action) => {
       return {
         ...state,
         beginning: false
-      }
-    case 'CHANGE_HOST_VIEW':
-      return {
-        ...state,
-        hostView: action.num
-      }
-    case 'CHANGE_HOME_VIEW':
-      return {
-        ...state,
-        homeView: action.view
       }
     case 'TEMP_LOGIN_REQUEST':
       return {
@@ -61,7 +49,7 @@ const cueReducer = (state = initialState, action) => {
     case 'HOST_NEW_REQUEST': {
       return {
         ...state,
-        done: true,
+        // done: true,
         guests: [
           ...guests,
           {
@@ -93,11 +81,11 @@ const cueReducer = (state = initialState, action) => {
         beginning: false,
         counter: 0
       }
-    case 'DONE':
-      return {
-        ...state,
-        done: true
-      }
+    // case 'DONE':
+    //   return {
+    //     ...state,
+    //     done: true
+    //   }
     case 'RESUME_PENDING':
       return {
         ...state,
@@ -114,7 +102,7 @@ const cueReducer = (state = initialState, action) => {
       return {
         ...state,
         counter: 0,
-        done: true,
+        // done: true,
         guests: guests
           .map(g => {
             if (g.UserID === action.id) {
@@ -132,7 +120,7 @@ const cueReducer = (state = initialState, action) => {
       return {
         ...state,
         counter: 0,
-        done: true,
+        // done: true,
         guests: guests
           .filter(g => {
             if (g.UserID === action.id) {
@@ -146,7 +134,7 @@ const cueReducer = (state = initialState, action) => {
     case 'GUEST_ACCEPTANCE':
       return {
         ...state,
-        done: false,
+        // done: false,
         joinRequestPending: false,
         eventId: state.selectedEventId,
         eventName: state.selectedEventName,
@@ -155,7 +143,7 @@ const cueReducer = (state = initialState, action) => {
     case 'GUEST_REJECTION':
       return {
         ...state,
-        done: true,
+        // done: true,
         joinRequestPending: false,
         selectedEventName: '',
         selectedEventId: -1,
@@ -200,7 +188,7 @@ const cueReducer = (state = initialState, action) => {
     case 'USER_REMOVED_FROM_EVENT':
       return {
         ...state,
-        done: false,
+        // done: false,
         isActive: false,
         hostId: -1,
         eventName: '',
@@ -213,7 +201,7 @@ const cueReducer = (state = initialState, action) => {
     case 'HOST_END_EVENT':
       return {
         ...state,
-        done: true,
+        // done: true,
         isActive: false,
         isHost: false,
         hostId: -1,
@@ -222,8 +210,7 @@ const cueReducer = (state = initialState, action) => {
         selectedEventName: '',
         selectedEventId: -1,
         beginning: false,
-        counter: 0,
-        homeView: 'HOME'
+        counter: 0
       }
     case 'LOAD_REQUESTS_SUCCESS':
       return {
@@ -251,9 +238,7 @@ const cueReducer = (state = initialState, action) => {
         eventLoading: false,
         eventId: action.eventId,
         cueId: action.cueId,
-        done: false,
-        hostView: action.hostId === state.userId
-          ? 0 : state.hostView
+        // done: false
       }
     case 'SEARCH_EVENTS_REQUEST':
       return {
@@ -290,7 +275,7 @@ const cueReducer = (state = initialState, action) => {
     case 'EVENT_END_SUCCESS': {
       return {
         ...state,
-        done: true,
+        // done: true,
         beginning: false
       }
     }

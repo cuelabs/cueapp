@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 584.52 584.52">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #aea1e5;
+        stroke-miterlimit: 10;
+        stroke-width: 41px;
+      }
+
+      .cls-2 {
+        fill: #aea1e5;
+      }
+    </style>
+  </defs>
+  <title>pause-purple-big</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <g id="Layer_2-2" data-name="Layer 2">
+        <g id="Layer_1-2-2" data-name="Layer 1-2">
+          <circle class="cls-1" cx="292.26" cy="292.26" r="271.76"/>
+        </g>
+      </g>
+      <rect class="cls-2" x="230.13" y="206.27" width="48.26" height="172"/>
+      <rect class="cls-2" x="306.13" y="206.27" width="48.26" height="172"/>
+    </g>
+  </g>
+</svg>

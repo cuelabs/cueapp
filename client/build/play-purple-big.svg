@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 584.53 584.53">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #aea1e5;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #aea1e5;
+        stroke-miterlimit: 10;
+        stroke-width: 41px;
+      }
+    </style>
+  </defs>
+  <title>play-purple-big</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <polygon class="cls-1" points="406.56 292.21 234.16 378.63 234.16 205.78 406.56 292.21"/>
+      <circle class="cls-2" cx="292.26" cy="292.26" r="271.76"/>
+    </g>
+  </g>
+</svg>

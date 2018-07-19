@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 712.56 712.56">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fafafa;
+        stroke-miterlimit: 10;
+        stroke-width: 41px;
+      }
+
+      .cls-2 {
+        fill: #fafafa;
+      }
+    </style>
+  </defs>
+  <title>pause-white</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <circle class="cls-1" cx="356.28" cy="356.28" r="335.78"/>
+      <rect class="cls-2" x="251.7" y="235.52" width="80" height="242"/>
+      <rect class="cls-2" x="381.7" y="235.52" width="80" height="242"/>
+    </g>
+  </g>
+</svg>

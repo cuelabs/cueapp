@@ -63,6 +63,10 @@ class EventHost extends Component {
     })
     sockets[eventId.toString()] = ws
     dispatch(loadEventInfo(eventId))
+    dispatch({
+      type: 'CHANGE_HOST_VIEW',
+      num: 0
+    })
   }
 
   circleChange (num) {
