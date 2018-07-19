@@ -11,6 +11,14 @@ class Home extends Component {
     this.joinEvent = this.joinEvent.bind(this)
   }
 
+  componentDidMount () {
+    const { dispatch } = this.props
+    dispatch({
+      type: 'CHANGE_HOME_VIEW',
+      view: 'HOME'
+    })
+  }
+
   joinEvent () {
     const { dispatch } = this.props
     dispatch({

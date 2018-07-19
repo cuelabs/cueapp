@@ -26,8 +26,6 @@ class App extends Component {
       cueId
     } = this.props
 
-    console.log(suid)
-
     return (
         <Main>
           {
@@ -51,6 +49,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = state => {
+  return {
+    ...state.cueReducer,
+    ...state.views
+  }
+}
 
 export default connect(mapStateToProps)(App)

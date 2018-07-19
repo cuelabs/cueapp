@@ -1,16 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import thunk from 'redux-thunk'
 import cueReducer from './reducers'
+import views from './reducers/views'
 import App from './App'
 import Login from './pages/Login'
 import './index.css'
 
-const cueStore = createStore(
+const rootReducer = combineReducers({
   cueReducer,
+  views
+})
+
+const cueStore = createStore(
+  rootReducer,
   applyMiddleware(thunk)
 )
 

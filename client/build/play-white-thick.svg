@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 712.56 712.56">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fafafa;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fafafa;
+        stroke-miterlimit: 10;
+        stroke-width: 41px;
+      }
+    </style>
+  </defs>
+  <title>play-white-thick</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <polygon class="cls-1" points="520.7 356.2 272.7 480.52 272.7 231.88 520.7 356.2"/>
+      <circle class="cls-2" cx="356.28" cy="356.28" r="335.78"/>
+    </g>
+  </g>
+</svg>
