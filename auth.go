@@ -10,7 +10,7 @@ import (
   "fmt"
 )
 
-const redirectURI = "https://arcane-tundra-63613.herokuapp.com/callback"
+const redirectURI = "https://cueapp2.herokuapp.com/callback"
 
 var (
   Auth      = spotify.NewAuthenticator(redirectURI, "user-read-private", "user-read-birthdate", "user-modify-playback-state", "streaming", "user-read-birthdate", "user-read-email")
