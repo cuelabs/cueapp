@@ -1,14 +1,14 @@
 $cue-font-primary: 'Tajawal', 'Ubuntu', sans-serif;
 $cue-font-secondary: 'Helvetica', sans-serif;
 $cue-font-ternary: 'Ubuntu', sans-serif;
-$cue-black: #29292D;
+$cue-black: #000000;
 $cue-blue-darkest: #083FAA; 
 $cue-black-hsl: hsl(240, 5, 17);
 $cue-black-mid: hsl(240, 5, 34);
 $cue-black-light: hsl(240, 5, 75);
 $cue-black-mid-light: hsl(240, 5, 60);
 $cue-black-gray: hsl(240, 5, 13);
-$cue-white: #F5F5F5;
+$cue-white: #FAFAFA;
 $cue-black-2: #050505;
 $cue-white-2: #FAFAFA;
 $cue-shadow: #222225;
@@ -104,6 +104,10 @@ div.login-inner-large {
 
 .search {
   @extend %flexRowCenterAlign;
+}
+
+.page.join .search {
+  margin-top: 120px;
 }
 
 .search-icon {
@@ -278,7 +282,7 @@ h1 {
   font-family: $cue-font-ternary;
   margin: 0;
   margin-left: 4vw;
-  color: $cue-purple;
+  color: $cue-white;
   transition: color .3s ease;
   @extend %flexCenterColumn;
 }
@@ -324,14 +328,12 @@ main {
 .page.home {
   justify-content: center;
   height: calc(100vh - 72px);
-}
-
-.page.home > button:nth-child(1) {
-  margin-bottom: 192px;
+  width: 100%;
 }
 
 .page.join {
   justify-content: flex-start;
+  width: 100%;
 }
 
 a {
@@ -376,6 +378,11 @@ input {
 .page.create form input {
   border-bottom: 1px solid $cue-black-light;
   padding-bottom: 16px;
+}
+
+.page.create form {
+  height: auto;
+  margin-top: 120px;
 }
 
 input.spotify-search {
@@ -902,9 +909,31 @@ button {
 }
 
 .btn-home {
-  font-size: 32px;
-  width: $cue-button-width;
-  padding: 2.7vh 0;
+  // font-size: 32px;
+  // width: $cue-button-width;
+  // padding: 2.7vh 0;
+  height: calc(50vh - 36px);
+  min-height: 120px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 0;
+  border: none;
+  font-size: 38px;
+  letter-spacing: .08em;
+  font-weight: 600;
+}
+
+.btn-home:nth-child(1) {
+  background-color: #1fc8db;
+  background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+}
+
+.btn-home:nth-child(2) {
+  background: rgb(0,212,255);
+  background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(121,11,9,1) 50%, rgba(2,0,36,1) 100%);
 }
 
 .btn-small {
@@ -950,13 +979,13 @@ button {
   line-height: 32px;
 }
 
-button.btn-home:nth-child(1) {
-  margin-bottom: -4vh;
-}
+// button.btn-home:nth-child(1) {
+//   margin-bottom: -4vh;
+// }
 
-button.btn-home:nth-child(2) {
-  margin-top: -4vh;
-}
+// button.btn-home:nth-child(2) {
+//   margin-top: -4vh;
+// }
 
 button:hover {
   cursor: pointer;
