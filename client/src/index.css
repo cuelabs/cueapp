@@ -44,7 +44,7 @@ nav {
   height: 72px;
   clear: both;
   z-index: 2;
-  background: #29292D;
+  background: #000000;
 }
 
 nav > div > input {
@@ -62,6 +62,10 @@ div.login-inner-large {
   height: calc(100vh - 104px);
 }
 
+.page.join .search {
+  margin-top: 120px;
+}
+
 .search-icon {
   transform: translateX(calc(26px + (22 - 20) * (100vw - 360px)/(960-360)));
   height: 18px;
@@ -76,7 +80,7 @@ div.login-inner-large {
 .fa.fa-search {
   transform: translateX(-8px);
   font-size: 24px;
-  color: #29292D;
+  color: #000000;
   z-index: 10;
 }
 
@@ -103,14 +107,14 @@ div.login-inner-large {
 }
 
 .fa.selected {
-  color: #29292D;
+  color: #000000;
   transition: all 0.1s ease;
 }
 
 .controls {
   position: fixed;
   height: 16vh;
-  background-color: #29292D;
+  background-color: #000000;
   width: 100vw;
   bottom: 0;
 }
@@ -168,7 +172,7 @@ div.login-content > p:nth-child(2) > .fa {
 }
 
 div.login-page > div:nth-child(2) {
-  background-color: #29292D;
+  background-color: #000000;
   background-image: url("./images/purply.svg");
   background-repeat: no-repeat;
   background-position: 50% 60%;
@@ -185,12 +189,12 @@ div.login-content > h2 {
   font-size: 48px;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #29292D;
+  color: #000000;
 }
 
 div.login-content > p.login-phrase {
   font-family: "Ubuntu", sans-serif;
-  color: #29292D;
+  color: #000000;
   font-size: 24px;
   margin-bottom: 80px;
 }
@@ -229,7 +233,7 @@ h1 {
   font-family: "Ubuntu", sans-serif;
   margin: 0;
   margin-left: 4vw;
-  color: #8876cf;
+  color: #FAFAFA;
   transition: color 0.3s ease;
 }
 
@@ -270,19 +274,17 @@ main {
 .page.home {
   justify-content: center;
   height: calc(100vh - 72px);
-}
-
-.page.home > button:nth-child(1) {
-  margin-bottom: 192px;
+  width: 100%;
 }
 
 .page.join {
   justify-content: flex-start;
+  width: 100%;
 }
 
 a {
   text-decoration: none;
-  color: #29292D;
+  color: #000000;
 }
 
 form {
@@ -290,7 +292,7 @@ form {
 }
 
 form > label {
-  color: #29292D;
+  color: #000000;
 }
 
 .page.create form a {
@@ -310,9 +312,9 @@ input {
   height: 32px;
   font-family: "Helvetica", sans-serif;
   border: none;
-  caret-color: #29292D;
+  caret-color: #000000;
   background-color: #FAFAFA;
-  color: #29292D;
+  color: #000000;
   font-size: 28px;
   outline: none;
   z-index: 7;
@@ -321,6 +323,11 @@ input {
 .page.create form input {
   border-bottom: 1px solid #bcbcc2;
   padding-bottom: 16px;
+}
+
+.page.create form {
+  height: auto;
+  margin-top: 120px;
 }
 
 input.spotify-search {
@@ -378,7 +385,7 @@ input.spotify-search {
 }
 
 .search-result:hover {
-  color: #29292D;
+  color: #000000;
   cursor: pointer;
   transition: all 0.18s ease;
 }
@@ -403,20 +410,20 @@ input.spotify-search {
   animation-timing-function: easeInOutCubic;
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.09);
   border-radius: 4px;
-  border: 1px solid #F5F5F5;
+  border: 1px solid #FAFAFA;
   max-height: 66vh;
 }
 
 .modal p {
   text-align: center;
   font-size: 24px;
-  color: #29292D;
+  color: #000000;
 }
 
 .modal small {
   position: absolute;
   top: 24px;
-  color: #29292D;
+  color: #000000;
   text-align: center;
   width: 72vw;
   left: 4vw;
@@ -480,13 +487,13 @@ small.small-cancel:hover {
 
 .event-guest small:hover {
   cursor: pointer;
-  color: #29292D;
+  color: #000000;
   transition: color 0.2s ease;
 }
 
 div.spotify-results {
   position: absolute;
-  background: #29292D;
+  background: #000000;
   top: 1px;
   left: 0;
   width: 100vw;
@@ -539,7 +546,7 @@ div.spotify-results-caption {
 
 h4.spotify-song-title {
   margin: 0;
-  color: #F5F5F5;
+  color: #FAFAFA;
   font-size: 16px;
   font-family: "Helvetica", sans-serif;
   white-space: nowrap;
@@ -548,7 +555,7 @@ h4.spotify-song-title {
 h5.spotify-song-artist {
   margin: 0;
   margin-right: 4px;
-  color: #F5F5F5;
+  color: #FAFAFA;
   font-size: 16px;
   font-family: "Helvetica", sans-serif;
   font-weight: 300;
@@ -615,7 +622,7 @@ h2.guest-view-event-title {
 }
 
 h3.host-view-page-title {
-  color: #29292D;
+  color: #000000;
   align-self: flex-start;
   margin: 0;
   font-size: 24px;
@@ -645,7 +652,7 @@ ul.host-view-page-list > li {
   margin: 0;
   width: calc(100% - 12px);
   border-top: 1px solid #bcbcc2;
-  color: #29292D;
+  color: #000000;
   padding-top: 32px;
   padding-bottom: 60px;
   padding-left: 12px;
@@ -703,7 +710,7 @@ div.guest-photo {
   height: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
   width: calc(32px + (56 - 32) * (100vw - 360px)/(960-360));
   border-radius: 50%;
-  background-color: #F5F5F5;
+  background-color: #FAFAFA;
   background-position: center;
   background-size: cover;
 }
@@ -763,7 +770,7 @@ div.guest-photo {
   }
 }
 button {
-  background: #29292D;
+  background: #000000;
   font-family: "Tajawal", "Ubuntu", sans-serif;
   color: #FAFAFA;
   height: 64px;
@@ -780,7 +787,7 @@ button {
   width: 96px;
   background: none;
   text-align: right;
-  color: #29292D;
+  color: #000000;
   border: none;
 }
 
@@ -791,7 +798,7 @@ button {
   background: #bcbcc2;
   font-size: 14px;
   line-height: 28px;
-  color: #29292D;
+  color: #000000;
   border: 1px solid #bcbcc2;
   font-weight: 400;
 }
@@ -805,16 +812,35 @@ button {
 }
 
 .btn-home {
-  font-size: 32px;
-  width: calc(296px + (592 - 296) * (100vw - 360px)/(960-360));
-  padding: 2.7vh 0;
+  height: calc(50vh - 36px);
+  min-height: 120px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 0;
+  border: none;
+  font-size: 38px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.btn-home:nth-child(1) {
+  background-color: #1fc8db;
+  background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+}
+
+.btn-home:nth-child(2) {
+  background: #00d4ff;
+  background: linear-gradient(90deg, #00d4ff 0%, #790b09 50%, #020024 100%);
 }
 
 .btn-small {
   font-size: 18px;
   width: 128px;
   background: none;
-  color: #29292D;
+  color: #000000;
   border: none;
   box-sizing: border-box;
 }
@@ -850,14 +876,6 @@ button {
   margin-top: 12px;
   width: 80px;
   line-height: 32px;
-}
-
-button.btn-home:nth-child(1) {
-  margin-bottom: -4vh;
-}
-
-button.btn-home:nth-child(2) {
-  margin-top: -4vh;
 }
 
 button:hover {
@@ -1038,7 +1056,7 @@ footer, #root > div > div:after {
 
 footer {
   border-top: 1px solid #eee;
-  color: #29292D;
+  color: #000000;
   font-size: 16px;
   width: 100vw;
   text-align: center;
